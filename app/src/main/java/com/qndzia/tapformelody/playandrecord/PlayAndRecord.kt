@@ -54,12 +54,12 @@ class PlayAndRecord : Fragment() {
 
         viewModel.noteListSize.observe(viewLifecycleOwner,
             Observer {
-                if (it == 14 && viewModel.isRecording.value == true) {
-                    Toast.makeText(context, "You can record only 1 note more!!!", Toast.LENGTH_LONG)
-                        .show()
-                }else if (it == 15){
-
-                }
+                if (it == 14 && viewModel.isRecording.value == true) Toast.makeText(
+                    context,
+                    "You can record only 1 note more!!!",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
             })
 
         return binding.root

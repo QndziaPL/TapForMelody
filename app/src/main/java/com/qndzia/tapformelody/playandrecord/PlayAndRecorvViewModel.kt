@@ -13,9 +13,6 @@ import com.qndzia.tapformelody.notes.Note
 
 class PlayAndRecordViewModel(application: Application) : AndroidViewModel(application) {
 
-
-
-
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
 
@@ -25,12 +22,9 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     private var _noteListSize = MutableLiveData<Int>()
     val noteListSize: LiveData<Int> = _noteListSize
 
+    private val noteList = mutableListOf<Note>()
 
-
-
-    val noteList = mutableListOf<Note>()
-
-    var blockAdding = true
+    private var blockAdding = true
 
 
     fun cKeyPressed() {
@@ -86,7 +80,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     }
 
     private fun keyPressed(note: Note) {
-        var mediaPlayer = MediaPlayer.create(getApplication(), note.sound)
+        val mediaPlayer = MediaPlayer.create(getApplication(), note.sound)
         mediaPlayer.start()
         Handler().postDelayed({
             mediaPlayer.release()
@@ -103,12 +97,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
                     _isRecording.value = false
                     blockAdding = true
                 }
-
             }
-//            else {
-//                _isRecording.value = false
-//                blockAdding = true
-//            }
         }
     }
 
@@ -126,22 +115,18 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun onPlayPressed() {
-        if (noteList.isNotEmpty())
-        {
+        if (noteList.isNotEmpty()) {
             noteList.forEach {
-
                 Thread.sleep(300)
-                var mediaPlayer = MediaPlayer.create(getApplication(), it.sound)
+                val mediaPlayer = MediaPlayer.create(getApplication(), it.sound)
                 mediaPlayer.start()
                 Handler().postDelayed({
                     mediaPlayer.release()
                 }, 300)
             }
-        }else{
+        } else {
             Toast.makeText(getApplication(), "Record something first :)", Toast.LENGTH_LONG).show()
         }
-
-
     }
 
     init {
@@ -149,7 +134,6 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         _myMelody.value = ""
 
     }
-
 
 
 }

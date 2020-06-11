@@ -2,11 +2,6 @@ package com.qndzia.tapformelody.notes
 
 import com.qndzia.tapformelody.R
 
-//data class Note (
-//    val name: String,
-//    val sound: Int
-//)
-
 enum class Note(val noteName: String, val sound: Int) {
 
     C("C", R.raw.c),
