@@ -11,25 +11,25 @@ enum class Note(val noteName: String, val sound: Int) {
 
     C("C", R.raw.c),
 
-    Csharp("Csharp", R.raw.csharp),
+    Csharp("C#", R.raw.csharp),
 
     D("D", R.raw.d),
 
-    Dsharp("Dsharp", R.raw.dsharp),
+    Dsharp("D#", R.raw.dsharp),
 
     E("E", R.raw.e),
 
     F("F", R.raw.f),
 
-    Fsharp("Fsharp", R.raw.fsharp),
+    Fsharp("F#", R.raw.fsharp),
 
     G("G", R.raw.g),
 
-    Gsharp("Gsharp", R.raw.gsharp),
+    Gsharp("G#", R.raw.gsharp),
 
     A("A", R.raw.a),
 
-    Asharp("Asharp", R.raw.asharp),
+    Asharp("A#", R.raw.asharp),
 
     H("H", R.raw.h),
 
