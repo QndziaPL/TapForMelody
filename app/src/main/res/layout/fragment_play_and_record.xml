@@ -1,14 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".playandrecord.PlayAndRecord">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.qndzia.tapformelody.playandrecord.PlayAndRecordViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".MainActivity">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/whiteKeysLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/keyC"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.cKeyPressed()}"
+                android:text="C"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyD"
+                app:layout_constraintEnd_toStartOf="@+id/keyD"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/keyD"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.dKeyPressed()}"
+                android:text="D"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyE"
+                app:layout_constraintEnd_toStartOf="@+id/keyE"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyC" />
+
+            <Button
+                android:id="@+id/keyE"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.eKeyPressed()}"
+                android:text="E"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyF"
+                app:layout_constraintEnd_toStartOf="@+id/keyF"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyD" />
+
+            <Button
+                android:id="@+id/keyF"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.fKeyPressed()}"
+                android:text="F"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyG"
+                app:layout_constraintEnd_toStartOf="@+id/keyG"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyE" />
+
+            <Button
+                android:id="@+id/keyG"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.gKeyPressed()}"
+                android:text="G"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyA"
+                app:layout_constraintEnd_toStartOf="@+id/keyA"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyF" />
+
+            <Button
+                android:id="@+id/keyA"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.aKeyPressed()}"
+                android:text="A"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyH"
+                app:layout_constraintEnd_toStartOf="@+id/keyH"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyG" />
+
+            <Button
+                android:id="@+id/keyH"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.hKeyPressed()}"
+                android:text="H/B"
+                app:layout_constraintBaseline_toBaselineOf="@+id/keyC2"
+                app:layout_constraintEnd_toStartOf="@+id/keyC2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyA" />
+
+            <Button
+                android:id="@+id/keyC2"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:onClick="@{() -> viewModel.c2KeyPressed()}"
+                android:text="C"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/keyH" />
+
+            <Button
+                android:id="@+id/keyCsharp"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:backgroundTint="#000000"
+                android:onClick="@{() -> viewModel.cSharpKeyPressed()}"
+                android:text="C#"
+                android:textColor="#B3B3B3"
+                app:layout_constraintEnd_toEndOf="@+id/keyD"
+                app:layout_constraintStart_toStartOf="@+id/keyC"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/keyDsharp"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:backgroundTint="#000000"
+                android:onClick="@{() -> viewModel.dSharpKeyPressed()}"
+                android:text="D#"
+                android:textColor="#B3B3B3"
+                app:layout_constraintEnd_toEndOf="@+id/keyE"
+                app:layout_constraintStart_toEndOf="@+id/keyC"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/keyFsharp"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:backgroundTint="#000000"
+                android:onClick="@{() -> viewModel.fSharpKeyPressed()}"
+                android:text="F#"
+                android:textColor="#B3B3B3"
+                app:layout_constraintEnd_toEndOf="@+id/keyG"
+                app:layout_constraintStart_toEndOf="@+id/keyE"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/keyGsharp"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:backgroundTint="#000000"
+                android:onClick="@{() -> viewModel.gSharpKeyPressed()}"
+                android:text="G#"
+                android:textColor="#B3B3B3"
+                app:layout_constraintEnd_toEndOf="@+id/keyA"
+                app:layout_constraintStart_toEndOf="@+id/keyF"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/keyAsharp"
+                android:layout_width="70dp"
+                android:layout_height="100dp"
+                android:backgroundTint="#000000"
+                android:onClick="@{() -> viewModel.aSharpKeyPressed()}"
+                android:text="A#"
+                android:textColor="#B3B3B3"
+                app:layout_constraintEnd_toEndOf="@+id/keyH"
+                app:layout_constraintStart_toEndOf="@+id/keyG"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
