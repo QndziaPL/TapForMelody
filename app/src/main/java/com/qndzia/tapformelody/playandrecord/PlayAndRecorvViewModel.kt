@@ -1,10 +1,8 @@
 package com.qndzia.tapformelody.playandrecord
 
 import android.app.Application
-import android.content.Context
 import android.media.MediaPlayer
 import android.os.Handler
-import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,6 +15,11 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
 
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
+
+    private var _myMelody = MutableLiveData<String>()
+    val myMelody:  LiveData<String> = _myMelody
+
+
 
 
 
@@ -67,13 +70,27 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
             mediaPlayer.release()
         }, 1000)
 
+        _myMelody.value = _myMelody.value + note.noteName + " "
+
+//        while(_isRecording.value == true) {
+//            _myMelody.value?.apply { add(note) }
+//        }
+
+    }
+
+    fun onRecordPressed() {
+        _isRecording.value = _isRecording.value == false
+
     }
 
 
-    val myMelody = mutableListOf<Note>()
+
+
+
 
     init {
         _isRecording.value = false
+        _myMelody.value = ""
     }
 
 }
