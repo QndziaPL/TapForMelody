@@ -14,6 +14,8 @@ import com.qndzia.tapformelody.notes.Note
 class PlayAndRecordViewModel(application: Application) : AndroidViewModel(application) {
 
 
+
+
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
 
@@ -22,6 +24,8 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
 
     private var _noteListSize = MutableLiveData<Int>()
     val noteListSize: LiveData<Int> = _noteListSize
+
+
 
 
     val noteList = mutableListOf<Note>()
@@ -89,19 +93,23 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         }, 1000)
 
         if (!blockAdding) {
-            _myMelody.value = _myMelody.value + note.noteName + " "
-            _noteListSize.value = noteList.size
 
             if (noteList.size < 15) {
                 noteList.add(note)
+                _myMelody.value = _myMelody.value + note.noteName + " "
+                _noteListSize.value = noteList.size
 
-            } else {
-                _isRecording.value = false
+                if (_noteListSize.value == 15) {
+                    _isRecording.value = false
+                    blockAdding = true
+                }
+
             }
+//            else {
+//                _isRecording.value = false
+//                blockAdding = true
+//            }
         }
-
-
-
     }
 
     fun onRecordPressed() {
@@ -118,8 +126,8 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun onPlayPressed() {
-        if (noteList.isNotEmpty()){
-
+        if (noteList.isNotEmpty())
+        {
             noteList.forEach {
 
                 Thread.sleep(300)
@@ -141,5 +149,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         _myMelody.value = ""
 
     }
+
+
 
 }

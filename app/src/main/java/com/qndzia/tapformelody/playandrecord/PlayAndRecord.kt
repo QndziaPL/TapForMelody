@@ -57,6 +57,8 @@ class PlayAndRecord : Fragment() {
                 if (it == 14 && viewModel.isRecording.value == true) {
                     Toast.makeText(context, "You can record only 1 note more!!!", Toast.LENGTH_LONG)
                         .show()
+                }else if (it == 15){
+
                 }
             })
 
