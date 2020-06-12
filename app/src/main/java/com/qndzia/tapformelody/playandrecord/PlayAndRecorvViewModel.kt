@@ -1,16 +1,21 @@
 package com.qndzia.tapformelody.playandrecord
 
 import android.app.Application
+import android.media.AudioAttributes
+import android.media.AudioManager
 import android.media.MediaPlayer
+import android.media.SoundPool
 import android.os.Handler
 import android.view.Gravity
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.qndzia.tapformelody.R
 
 import com.qndzia.tapformelody.notes.Note
 
+//lateinit var soundPool: SoundPool
 
 class PlayAndRecordViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -30,65 +35,128 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     private var _showSaveDialog = MutableLiveData<Boolean>()
     val showSaveDialog: LiveData<Boolean> = _showSaveDialog
 
+    var soundC: Int
+    var soundCsharp: Int
+    var soundD: Int
+    var soundDsharp: Int
+    var soundE: Int
+    var soundF: Int
+    var soundFsharp: Int
+    var soundG: Int
+    var soundGsharp: Int
+    var soundA: Int
+    var soundAsharp: Int
+    var soundH: Int
+    var soundC2: Int
+
+    init {
+        _isRecording.value = false
+        _myMelody.value = ""
+        _showSaveDialog.value = false
+
+        soundC = soundPool.load(getApplication(), R.raw.c, 1)
+        soundCsharp = soundPool.load(getApplication(),R.raw.csharp, 1)
+        soundD = soundPool.load(getApplication(),R.raw.d, 1)
+        soundDsharp = soundPool.load(getApplication(),R.raw.dsharp, 1)
+        soundE = soundPool.load(getApplication(),R.raw.e, 1)
+        soundF = soundPool.load(getApplication(),R.raw.f, 1)
+        soundFsharp = soundPool.load(getApplication(),R.raw.fsharp, 1)
+        soundG = soundPool.load(getApplication(),R.raw.g, 1)
+        soundGsharp = soundPool.load(getApplication(),R.raw.gsharp, 1)
+        soundA = soundPool.load(getApplication(),R.raw.a, 1)
+        soundAsharp = soundPool.load(getApplication(),R.raw.asharp, 1)
+        soundH = soundPool.load(getApplication(),R.raw.h, 1)
+        soundC2 = soundPool.load(getApplication(),R.raw.c2, 1)
+
+
+
+
+
+
+
+
+    }
+
+    companion object {
+        var audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .build()
+
+        var soundPool = SoundPool.Builder()
+            .setMaxStreams(20)
+            .setAudioAttributes(audioAttributes)
+            .build()
+
+
+
+    }
+
 
     fun cKeyPressed() {
-        keyPressed(Note.C)
+        keyPressed(Note.C, soundC)
     }
 
     fun cSharpKeyPressed() {
-        keyPressed(Note.Csharp)
+        keyPressed(Note.Csharp, soundCsharp)
     }
 
     fun dKeyPressed() {
-        keyPressed(Note.D)
+        keyPressed(Note.D, soundD)
     }
 
     fun dSharpKeyPressed() {
-        keyPressed(Note.Dsharp)
+        keyPressed(Note.Dsharp, soundDsharp)
     }
 
     fun eKeyPressed() {
-        keyPressed(Note.E)
+        keyPressed(Note.E, soundE)
     }
 
     fun fKeyPressed() {
-        keyPressed(Note.F)
+        keyPressed(Note.F, soundF)
     }
 
     fun fSharpKeyPressed() {
-        keyPressed(Note.Fsharp)
+        keyPressed(Note.Fsharp, soundFsharp)
     }
 
     fun gKeyPressed() {
-        keyPressed(Note.G)
+        keyPressed(Note.G, soundG)
     }
 
     fun gSharpKeyPressed() {
-        keyPressed(Note.Gsharp)
+        keyPressed(Note.Gsharp, soundGsharp)
     }
 
     fun aKeyPressed() {
-        keyPressed(Note.A)
+        keyPressed(Note.A, soundA)
     }
 
     fun aSharpKeyPressed() {
-        keyPressed(Note.Asharp)
+        keyPressed(Note.Asharp, soundAsharp)
     }
 
     fun hKeyPressed() {
-        keyPressed(Note.H)
+        keyPressed(Note.H, soundH)
     }
 
     fun c2KeyPressed() {
-        keyPressed(Note.C2)
+        keyPressed(Note.C2, soundC2)
     }
 
-    private fun keyPressed(note: Note) {
-        val mediaPlayer = MediaPlayer.create(getApplication(), note.sound)
-        mediaPlayer.start()
-        Handler().postDelayed({
-            mediaPlayer.release()
-        }, 1000)
+    private fun keyPressed(note: Note, sound: Int) {
+
+        soundPool.play(sound, 1F, 1F, 1, 0, 1F)
+
+
+//        val mediaPlayer = MediaPlayer.create(getApplication(), note.sound)
+//        mediaPlayer.start()
+//        Handler().postDelayed({
+//            mediaPlayer.release()
+//        }, 1000)
+
+
 
         if (!blockAdding) {
 
@@ -170,12 +238,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     }
 
 
-    init {
-        _isRecording.value = false
-        _myMelody.value = ""
-        _showSaveDialog.value = false
 
-    }
 
 
 }
