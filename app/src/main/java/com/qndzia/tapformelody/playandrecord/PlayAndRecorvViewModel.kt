@@ -3,6 +3,7 @@ package com.qndzia.tapformelody.playandrecord
 import android.app.Application
 import android.media.MediaPlayer
 import android.os.Handler
+import android.view.Gravity
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -25,6 +26,9 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     private val noteList = mutableListOf<Note>()
 
     private var blockAdding = true
+
+    private var _showSaveDialog = MutableLiveData<Boolean>()
+    val showSaveDialog: LiveData<Boolean> = _showSaveDialog
 
 
     fun cKeyPressed() {
@@ -96,6 +100,12 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
                 if (_noteListSize.value == 15) {
                     _isRecording.value = false
                     blockAdding = true
+                    val toast = Toast.makeText(
+                        getApplication(), "REC is OFF",
+                        Toast.LENGTH_SHORT
+                    )
+                    toast.setGravity(Gravity.TOP, 0, 80)
+                    toast.show()
                 }
             }
         }
@@ -106,7 +116,20 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         if (_isRecording.value == true) {
             _isRecording.value = false
             blockAdding = true
+            val toast = Toast.makeText(
+                getApplication(), "REC is OFF",
+                Toast.LENGTH_SHORT
+            )
+            toast.setGravity(Gravity.TOP, 0, 80)
+            toast.show()
         } else {
+            val toast = Toast.makeText(
+                getApplication(), "REC is ON!!!",
+                Toast.LENGTH_SHORT
+            )
+            toast.setGravity(Gravity.TOP, 0, 80)
+            toast.show()
+
             _isRecording.value = true
             _myMelody.value = ""
             noteList.clear()
@@ -114,8 +137,11 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
+    // trzeba bęedzie rozwiązać problem z nowymi instancjami mediaPlayera
+    // podobnie z opcją samego grania, nie tylko z zapisem
     fun onPlayPressed() {
         if (noteList.isNotEmpty()) {
+            Toast.makeText(getApplication(), "Your melody is playing", Toast.LENGTH_SHORT).show()
             noteList.forEach {
                 Thread.sleep(300)
                 val mediaPlayer = MediaPlayer.create(getApplication(), it.sound)
@@ -125,13 +151,29 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
                 }, 300)
             }
         } else {
-            Toast.makeText(getApplication(), "Record something first :)", Toast.LENGTH_LONG).show()
+            Toast.makeText(getApplication(), "Record something first", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun onSavePressed() {
+        if (noteList.isNotEmpty() && isRecording.value == false) {
+            _showSaveDialog.value = true
+        } else if (isRecording.value == true) {
+            Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun hideSaveDialog() {
+        _showSaveDialog.value = false
+    }
+
 
     init {
         _isRecording.value = false
         _myMelody.value = ""
+        _showSaveDialog.value = false
 
     }
 
