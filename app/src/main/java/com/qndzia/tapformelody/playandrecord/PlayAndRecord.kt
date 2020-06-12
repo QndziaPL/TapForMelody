@@ -51,6 +51,7 @@ class PlayAndRecord : Fragment() {
                     menuButton.visibility = View.INVISIBLE
                     searchButton.visibility = View.INVISIBLE
 
+
                 } else {
                     recordButton.text = ""
                     notesPlayed.setTextColor(Color.BLACK)
@@ -58,6 +59,11 @@ class PlayAndRecord : Fragment() {
                     saveButton.visibility = View.VISIBLE
                     menuButton.visibility = View.VISIBLE
                     searchButton.visibility = View.VISIBLE
+                    if (viewModel.noteListSize.value == 0) {
+                        searchButton.visibility = View.INVISIBLE
+
+                    }
+
 
                 }
             })
@@ -67,12 +73,22 @@ class PlayAndRecord : Fragment() {
 
         viewModel.noteListSize.observe(viewLifecycleOwner,
             Observer {
-                if (it == 14 && viewModel.isRecording.value == true) Toast.makeText(
-                    context,
-                    "You can record only 1 note more!!!",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                if (it == 14 && viewModel.isRecording.value == true) {
+                    Toast.makeText(
+                        context,
+                        "You can record only 1 note more!!!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else if (it == 0) {
+                    searchButton.visibility = View.INVISIBLE
+
+                } else {
+                    if (viewModel.isRecording.value == false) {
+                        searchButton.visibility = View.VISIBLE
+
+                    }
+                }
+
             })
 
         viewModel.showSaveDialog.observe(viewLifecycleOwner,
@@ -88,14 +104,5 @@ class PlayAndRecord : Fragment() {
 
         return binding.root
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        saveButton.setOnClickListener {
-
-//        }
-//    }
-
 
 }

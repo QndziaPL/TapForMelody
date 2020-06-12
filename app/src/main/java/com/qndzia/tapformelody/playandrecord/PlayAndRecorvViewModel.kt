@@ -53,6 +53,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         _isRecording.value = false
         _myMelody.value = ""
         _showSaveDialog.value = false
+        _noteListSize.value = 0
 
         soundC = soundPool.load(getApplication(), R.raw.c, 1)
         soundCsharp = soundPool.load(getApplication(),R.raw.csharp, 1)
@@ -201,6 +202,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
             _isRecording.value = true
             _myMelody.value = ""
             noteList.clear()
+            _noteListSize.value = noteList.size
             blockAdding = false
         }
     }
