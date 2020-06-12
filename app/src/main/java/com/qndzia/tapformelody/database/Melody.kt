@@ -16,9 +16,9 @@ data class Melody(
     @ColumnInfo(name = "time_of_record")
     val timeOfRecord: Long = System.currentTimeMillis()
 
-//    ,
-//    @ColumnInfo(name = "melody")
-//    val melody: List<Note>
+    ,
+    @ColumnInfo(name = "melody")
+    val melody: List<Note>
 
 
     )

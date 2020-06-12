@@ -28,5 +28,6 @@ enum class Note(val noteName: String, val sound: Int) {
 
     H("H", R.raw.h),
 
-    C2("C2", R.raw.c2),
+    C2("C2", R.raw.c2)
+
 }
