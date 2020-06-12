@@ -68,6 +68,26 @@ class PlayAndRecord : Fragment() {
                 }
             })
 
+        viewModel.isPlaying.observe(viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    playButton.isClickable = false
+                    menuButton.isClickable = false
+                    saveButton.isClickable = false
+                    recordButton.isClickable = false
+                    searchButton.isClickable = false
+                } else {
+                    playButton.isClickable = true
+                    menuButton.isClickable = true
+                    saveButton.isClickable = true
+                    recordButton.isClickable = true
+                    searchButton.isClickable = true
+
+                }
+            })
+
+
+
         viewModel.myMelody.observe(viewLifecycleOwner,
             Observer { notesPlayed.text = viewModel.myMelody.value })
 

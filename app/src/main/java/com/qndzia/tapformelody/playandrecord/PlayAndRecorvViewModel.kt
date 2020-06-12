@@ -14,13 +14,21 @@ import androidx.lifecycle.MutableLiveData
 import com.qndzia.tapformelody.R
 
 import com.qndzia.tapformelody.notes.Note
+import kotlinx.coroutines.*
 
 //lateinit var soundPool: SoundPool
 
 class PlayAndRecordViewModel(application: Application) : AndroidViewModel(application) {
 
+    private var viewModelJob = Job()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
+
+    private var _isPlaying = MutableLiveData<Boolean>()
+    val isPlaying: LiveData<Boolean> = _isPlaying
 
     private var _myMelody = MutableLiveData<String>()
     val myMelody: LiveData<String> = _myMelody
@@ -49,6 +57,9 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     var soundH: Int
     var soundC2: Int
 
+
+    val listOfPoolSounds = mutableListOf<Int>()
+
     init {
         _isRecording.value = false
         _myMelody.value = ""
@@ -56,24 +67,25 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         _noteListSize.value = 0
 
         soundC = soundPool.load(getApplication(), R.raw.c, 1)
-        soundCsharp = soundPool.load(getApplication(),R.raw.csharp, 1)
-        soundD = soundPool.load(getApplication(),R.raw.d, 1)
-        soundDsharp = soundPool.load(getApplication(),R.raw.dsharp, 1)
-        soundE = soundPool.load(getApplication(),R.raw.e, 1)
-        soundF = soundPool.load(getApplication(),R.raw.f, 1)
-        soundFsharp = soundPool.load(getApplication(),R.raw.fsharp, 1)
-        soundG = soundPool.load(getApplication(),R.raw.g, 1)
-        soundGsharp = soundPool.load(getApplication(),R.raw.gsharp, 1)
-        soundA = soundPool.load(getApplication(),R.raw.a, 1)
-        soundAsharp = soundPool.load(getApplication(),R.raw.asharp, 1)
-        soundH = soundPool.load(getApplication(),R.raw.h, 1)
-        soundC2 = soundPool.load(getApplication(),R.raw.c2, 1)
+        soundCsharp = soundPool.load(getApplication(), R.raw.csharp, 1)
+        soundD = soundPool.load(getApplication(), R.raw.d, 1)
+        soundDsharp = soundPool.load(getApplication(), R.raw.dsharp, 1)
+        soundE = soundPool.load(getApplication(), R.raw.e, 1)
+        soundF = soundPool.load(getApplication(), R.raw.f, 1)
+        soundFsharp = soundPool.load(getApplication(), R.raw.fsharp, 1)
+        soundG = soundPool.load(getApplication(), R.raw.g, 1)
+        soundGsharp = soundPool.load(getApplication(), R.raw.gsharp, 1)
+        soundA = soundPool.load(getApplication(), R.raw.a, 1)
+        soundAsharp = soundPool.load(getApplication(), R.raw.asharp, 1)
+        soundH = soundPool.load(getApplication(), R.raw.h, 1)
+        soundC2 = soundPool.load(getApplication(), R.raw.c2, 1)
 
-
-
-
-
-
+        listOfPoolSounds.addAll(
+            0, listOf(
+                soundC, soundCsharp, soundD, soundDsharp, soundE,
+                soundF, soundFsharp, soundG, soundGsharp, soundA, soundAsharp, soundH, soundC2
+            )
+        )
 
 
     }
@@ -88,7 +100,6 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
             .setMaxStreams(20)
             .setAudioAttributes(audioAttributes)
             .build()
-
 
 
     }
@@ -148,15 +159,9 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
 
     private fun keyPressed(note: Note, sound: Int) {
 
-        soundPool.play(sound, 1F, 1F, 1, 0, 1F)
-
-
-//        val mediaPlayer = MediaPlayer.create(getApplication(), note.sound)
-//        mediaPlayer.start()
-//        Handler().postDelayed({
-//            mediaPlayer.release()
-//        }, 1000)
-
+        uiScope.launch {
+            soundPool.play(sound, 1F, 1F, 1, 0, 1F)
+        }
 
 
         if (!blockAdding) {
@@ -212,14 +217,18 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     fun onPlayPressed() {
         if (noteList.isNotEmpty()) {
             Toast.makeText(getApplication(), "Your melody is playing", Toast.LENGTH_SHORT).show()
-            noteList.forEach {
-                Thread.sleep(300)
-                val mediaPlayer = MediaPlayer.create(getApplication(), it.sound)
-                mediaPlayer.start()
-                Handler().postDelayed({
-                    mediaPlayer.release()
-                }, 300)
-            }
+            uiScope.launch {
+                noteList.forEach {
+
+                    delay(300)
+                    val sound = listOfPoolSounds[(it.id - 1)]
+                    soundPool.play(sound, 1F, 1F, 1, 0, 1F)
+
+                }
+            }.apply { _isPlaying.value = isActive }
+                .invokeOnCompletion { _isPlaying.value = false }
+
+
         } else {
             Toast.makeText(getApplication(), "Record something first", Toast.LENGTH_SHORT).show()
         }
@@ -238,9 +247,6 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     fun hideSaveDialog() {
         _showSaveDialog.value = false
     }
-
-
-
 
 
 }

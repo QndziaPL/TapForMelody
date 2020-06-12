@@ -5,9 +5,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.*
 import com.qndzia.tapformelody.notes.Note
-import java.lang.Exception
-import java.lang.RuntimeException
-import java.util.*
 
 @Database(entities = [Melody::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
@@ -42,15 +39,25 @@ abstract class MelodyDatabase : RoomDatabase() {
 
 class Converters {
     @TypeConverter
-    fun fromNote(value: Note): String? {
-
-        return value.noteName
+    fun fromNote(value: Note): Int {
+        return value.id
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     @TypeConverter
-    fun fromString(date: String): Note? {
-        return Arrays.stream(Note.values()).filter { it.noteName == date }
-            .findAny().orElseThrow { RuntimeException("enum not found") }
+    fun toNote(value: Int): Note {
+        val filter = listOf(
+            Note.C, Note.Csharp, Note.D, Note.Dsharp,
+            Note.E, Note.F, Note.Fsharp, Note.G, Note.Gsharp, Note.A,
+            Note.Asharp, Note.H, Note.C2
+        ).filter { it.id == value }
+        return filter[0]
+    }
+}
+
+class ListOfNoteSConverters{
+    @TypeConverter
+    fun fromList(){
+
     }
 }

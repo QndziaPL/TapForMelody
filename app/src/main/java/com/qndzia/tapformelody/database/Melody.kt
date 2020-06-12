@@ -3,6 +3,7 @@ package com.qndzia.tapformelody.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.qndzia.tapformelody.notes.Note
 
 @Entity(tableName = "recorded_melody_table")
@@ -16,9 +17,10 @@ data class Melody(
     @ColumnInfo(name = "time_of_record")
     val timeOfRecord: Long = System.currentTimeMillis()
 
-    ,
-    @ColumnInfo(name = "melody")
-    val melody: List<Note>
+//    ,
+//    @TypeConverters(Converters::class)
+//    @ColumnInfo(name = "melody")
+//    val melody: List<Note>
 
 
     )
