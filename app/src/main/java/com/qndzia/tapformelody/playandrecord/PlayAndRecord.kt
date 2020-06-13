@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_play_and_record.*
 
 class PlayAndRecord : Fragment() {
 
-    lateinit var viewModel: PlayAndRecordViewModel
+//    lateinit var viewModel: PlayAndRecordViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +34,15 @@ class PlayAndRecord : Fragment() {
 
         val binding = FragmentPlayAndRecordBinding.inflate(inflater)
 
-//        val application = requireNotNull(this.activity).application
-//
-//        val dataSource = MelodyDatabase.getInstance(application).melodyDao
+        val application = requireNotNull(this.activity).application
 
-        viewModel = ViewModelProvider(requireActivity()).get(PlayAndRecordViewModel::class.java)
+        val dataSource = MelodyDatabase.getInstance(application).melodyDao
+
+        val viewModelFactory = PlayAndRecordViewModelFactory(dataSource, application)
+
+        val viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(PlayAndRecordViewModel::class.java)
+
+//        viewModel = ViewModelProvider(requireActivity()).get(PlayAndRecordViewModel::class.java)
         binding.viewModel = viewModel
 
         viewModel.isRecording.observe(viewLifecycleOwner,
@@ -119,6 +123,9 @@ class PlayAndRecord : Fragment() {
                     viewModel.hideSaveDialog()
                 }
             })
+
+        viewModel.savedMelodies.observe(viewLifecycleOwner,
+        Observer { Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show() })
 
 
 

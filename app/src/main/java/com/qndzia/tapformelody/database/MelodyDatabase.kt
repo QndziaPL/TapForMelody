@@ -4,10 +4,12 @@ import android.content.Context
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.room.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.qndzia.tapformelody.notes.Note
 
 @Database(entities = [Melody::class], version = 1, exportSchema = false)
-@TypeConverters(Converters::class)
+@TypeConverters(NoteListConverter::class)
 abstract class MelodyDatabase : RoomDatabase() {
 
     abstract val melodyDao: MelodyDao
@@ -37,27 +39,48 @@ abstract class MelodyDatabase : RoomDatabase() {
     }
 }
 
-class Converters {
+class NoteListConverter {
+
     @TypeConverter
-    fun fromNote(value: Note): Int {
-        return value.id
+    fun fromNoteList(value: List<Note>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Note>>() {}.type
+        return gson.toJson(value, type)
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     @TypeConverter
-    fun toNote(value: Int): Note {
-        val filter = listOf(
-            Note.C, Note.Csharp, Note.D, Note.Dsharp,
-            Note.E, Note.F, Note.Fsharp, Note.G, Note.Gsharp, Note.A,
-            Note.Asharp, Note.H, Note.C2
-        ).filter { it.id == value }
-        return filter[0]
-    }
-}
-
-class ListOfNoteSConverters{
-    @TypeConverter
-    fun fromList(){
-
+    fun toNoteList(value: String): List<Note> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Note>>() {}.type
+        return gson.fromJson(value, type)
     }
 }
+
+//class Converters {
+//    @TypeConverter
+//    fun fromNote(value: Note): Int {
+//        return value.id
+//    }
+//
+//    @RequiresApi(Build.VERSION_CODES.N)
+//    @TypeConverter
+//    fun toNote(value: Int): Note {
+//        val filter = listOf(
+//            Note.C, Note.Csharp, Note.D, Note.Dsharp,
+//            Note.E, Note.F, Note.Fsharp, Note.G, Note.Gsharp, Note.A,
+//            Note.Asharp, Note.H, Note.C2
+//        ).filter { it.id == value }
+//        return filter[0]
+//    }
+//}
+//
+//class ListOfNoteSConverters{
+//    @TypeConverter
+//    fun fromList(list: List<Note>) : {
+//        val newList = list.map { it.id }
+//        return newList
+//
+//
+//    }
+//}
+

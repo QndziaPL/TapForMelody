@@ -15,12 +15,15 @@ data class Melody(
     var title: String,
 
     @ColumnInfo(name = "time_of_record")
-    val timeOfRecord: Long = System.currentTimeMillis()
+    var timeOfRecord: Long = System.currentTimeMillis()
 
-//    ,
-//    @TypeConverters(Converters::class)
-//    @ColumnInfo(name = "melody")
-//    val melody: List<Note>
+    ,
+//    @TypeConverters(NoteListConverter::class)
+    @ColumnInfo(name = "melody")
+    var melody: List<Note>)
+{
+    override fun toString(): String {
+        return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
+    }
+}
 
-
-    )

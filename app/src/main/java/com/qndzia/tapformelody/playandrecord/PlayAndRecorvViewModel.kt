@@ -2,27 +2,36 @@ package com.qndzia.tapformelody.playandrecord
 
 import android.app.Application
 import android.media.AudioAttributes
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.media.SoundPool
-import android.os.Handler
+import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.qndzia.tapformelody.R
-
+import com.qndzia.tapformelody.database.Melody
+import com.qndzia.tapformelody.database.MelodyDao
+import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.notes.Note
+
 import kotlinx.coroutines.*
+import kotlin.math.E
 
 //lateinit var soundPool: SoundPool
 
-class PlayAndRecordViewModel(application: Application) : AndroidViewModel(application) {
+
+class PlayAndRecordViewModel(
+    val database: MelodyDao, application: Application
+) : AndroidViewModel(application) {
+
+
 
     private var viewModelJob = Job()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    private val dbScope = CoroutineScope(Dispatchers.Default + viewModelJob)
 
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
@@ -43,22 +52,25 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     private var _showSaveDialog = MutableLiveData<Boolean>()
     val showSaveDialog: LiveData<Boolean> = _showSaveDialog
 
-    var soundC: Int
-    var soundCsharp: Int
-    var soundD: Int
-    var soundDsharp: Int
-    var soundE: Int
-    var soundF: Int
-    var soundFsharp: Int
-    var soundG: Int
-    var soundGsharp: Int
-    var soundA: Int
-    var soundAsharp: Int
-    var soundH: Int
-    var soundC2: Int
 
+    //live data z listą melodii z rooma
+    val savedMelodies = database.getAll()
 
-    val listOfPoolSounds = mutableListOf<Int>()
+    private var soundC: Int
+    private var soundCsharp: Int
+    private var soundD: Int
+    private var soundDsharp: Int
+    private var soundE: Int
+    private var soundF: Int
+    private var soundFsharp: Int
+    private var soundG: Int
+    private var soundGsharp: Int
+    private var soundA: Int
+    private var soundAsharp: Int
+    private var soundH: Int
+    private var soundC2: Int
+
+    private val listOfPoolSounds = mutableListOf<Int>()
 
     init {
         _isRecording.value = false
@@ -86,6 +98,8 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
                 soundF, soundFsharp, soundG, soundGsharp, soundA, soundAsharp, soundH, soundC2
             )
         )
+
+
 
 
     }
@@ -157,6 +171,24 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         keyPressed(Note.C2, soundC2)
     }
 
+    private fun saveMelody(){
+        dbScope.launch {
+            val melody: Melody = Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E, Note.D, Note.C))
+            val melody2: Melody = Melody(title = "kupa", melody = listOf(Note.G, Note.A, Note.H, Note.D, Note.G))
+            database.insert(melody)
+            database.insert(melody2)
+            Log.d("savemelody", melody.toString())
+            Log.d("listInDb", savedMelodies.value.toString())
+        }
+    }
+
+    private fun deleteAll(){
+        dbScope.launch {
+            database.clear()
+        }
+    }
+
+
     private fun keyPressed(note: Note, sound: Int) {
 
         uiScope.launch {
@@ -186,6 +218,8 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun onRecordPressed() {
+        deleteAll()
+        saveMelody()
 
         if (_isRecording.value == true) {
             _isRecording.value = false
@@ -212,8 +246,7 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
-    // trzeba bęedzie rozwiązać problem z nowymi instancjami mediaPlayera
-    // podobnie z opcją samego grania, nie tylko z zapisem
+
     fun onPlayPressed() {
         if (noteList.isNotEmpty()) {
             Toast.makeText(getApplication(), "Your melody is playing", Toast.LENGTH_SHORT).show()
