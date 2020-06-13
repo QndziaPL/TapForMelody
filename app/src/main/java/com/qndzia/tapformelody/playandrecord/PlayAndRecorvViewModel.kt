@@ -14,6 +14,8 @@ import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.notes.Note
+import com.qndzia.tapformelody.songlist.Song
+import com.qndzia.tapformelody.songlist.defaultSongList
 
 import kotlinx.coroutines.*
 import kotlin.math.E
@@ -24,7 +26,6 @@ import kotlin.math.E
 class PlayAndRecordViewModel(
     val database: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
-
 
 
     private var viewModelJob = Job()
@@ -46,6 +47,10 @@ class PlayAndRecordViewModel(
     val noteListSize: LiveData<Int> = _noteListSize
 
     private val noteList = mutableListOf<Note>()
+
+    // melody you will record, compare and potentially save in room if u want
+    private var _mySuperMelody = MutableLiveData<Melody>()
+    val mySuperMelody: LiveData<Melody> = _mySuperMelody
 
     private var blockAdding = true
 
@@ -94,11 +99,8 @@ class PlayAndRecordViewModel(
 
         listOfPoolSounds.addAll(
             0, listOf(
-                soundC, soundCsharp, soundD, soundDsharp, soundE,
-                soundF, soundFsharp, soundG, soundGsharp, soundA, soundAsharp, soundH, soundC2
-            )
-        )
-
+                soundC, soundCsharp, soundD, soundDsharp, soundE, soundF, soundFsharp, soundG,
+                soundGsharp, soundA, soundAsharp, soundH, soundC2))
 
 
 
@@ -171,10 +173,12 @@ class PlayAndRecordViewModel(
         keyPressed(Note.C2, soundC2)
     }
 
-    private fun saveMelody(){
+    private fun saveMelody() {
         dbScope.launch {
-            val melody: Melody = Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E, Note.D, Note.C))
-            val melody2: Melody = Melody(title = "kupa", melody = listOf(Note.G, Note.A, Note.H, Note.D, Note.G))
+            val melody: Melody =
+                Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E, Note.D, Note.C))
+            val melody2: Melody =
+                Melody(title = "kupa", melody = listOf(Note.G, Note.A, Note.H, Note.D, Note.G))
             database.insert(melody)
             database.insert(melody2)
             Log.d("savemelody", melody.toString())
@@ -182,11 +186,12 @@ class PlayAndRecordViewModel(
         }
     }
 
-    private fun deleteAll(){
+    private fun deleteAll() {
         dbScope.launch {
             database.clear()
         }
     }
+
 
 
     private fun keyPressed(note: Note, sound: Int) {
@@ -224,6 +229,8 @@ class PlayAndRecordViewModel(
         if (_isRecording.value == true) {
             _isRecording.value = false
             blockAdding = true
+
+
             val toast = Toast.makeText(
                 getApplication(), "REC is OFF",
                 Toast.LENGTH_SHORT
@@ -231,6 +238,14 @@ class PlayAndRecordViewModel(
             toast.setGravity(Gravity.TOP, 0, 80)
             toast.show()
         } else {
+            _isRecording.value = true
+            _myMelody.value = ""
+            noteList.clear()
+            _noteListSize.value = noteList.size
+            blockAdding = false
+            //creating melody to save and compare
+            _mySuperMelody.value = Melody(melody = listOf())
+
             val toast = Toast.makeText(
                 getApplication(), "REC is ON!!!",
                 Toast.LENGTH_SHORT
@@ -238,12 +253,18 @@ class PlayAndRecordViewModel(
             toast.setGravity(Gravity.TOP, 0, 80)
             toast.show()
 
-            _isRecording.value = true
-            _myMelody.value = ""
-            noteList.clear()
-            _noteListSize.value = noteList.size
-            blockAdding = false
         }
+    }
+
+    fun onMelodyFinishedRecording() {
+        //assigns played notes to your Melody object
+        _mySuperMelody.value = Melody(melody = noteList)
+
+    }
+
+    fun onMelodyStartedRecording() {
+        //clear previous record
+        _mySuperMelody.value = Melody(melody = listOf())
     }
 
 
@@ -267,7 +288,23 @@ class PlayAndRecordViewModel(
         }
     }
 
+    fun onSearchPressed() {
+        val osp = matchSongs(mySuperMelody.value, defaultSongList)
+        Log.d("onsearchpressed", osp.toString())
+        Toast.makeText(getApplication(), "Your melody matches ${osp.size} songs.\n" +
+                "List: $osp", Toast.LENGTH_LONG).show()
+
+    }
+
     fun onSavePressed() {
+
+        val test = isSongMatched(
+            Melody(title = "dupa", melody = listOf(Note.D, Note.A, Note.C, Note.C, Note.C)),
+            defaultSongList[0].melody
+        )
+        Log.d("test", test.toString())
+
+
         if (noteList.isNotEmpty() && isRecording.value == false) {
             _showSaveDialog.value = true
         } else if (isRecording.value == true) {
@@ -279,6 +316,34 @@ class PlayAndRecordViewModel(
 
     fun hideSaveDialog() {
         _showSaveDialog.value = false
+    }
+
+    fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
+
+        var yourStringMelody = ""
+        yourMelody?.melody?.forEach {
+            yourStringMelody += it.toStringFromList()
+        }
+
+        var libraryStringMelody = ""
+        libraryMelody.melody.forEach {
+            libraryStringMelody += it.toStringFromList()
+        }
+
+        Log.d("toStringMatchingResults", "your: $yourStringMelody libr: $libraryStringMelody")
+        return libraryStringMelody.contains(yourStringMelody)
+    }
+
+    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
+        var matchList = mutableListOf<Song>()
+        library.forEach {
+            if (isSongMatched(yourMelody, it.melody)) {
+                Log.d("match", "${it.title} matches!!!")
+                matchList.add(it)
+            }
+
+        }
+        return matchList
     }
 
 

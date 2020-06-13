@@ -12,7 +12,7 @@ data class Melody(
     var melodyId: Long = 0L,
 
     @ColumnInfo(name = "title")
-    var title: String,
+    var title: String = "title",
 
     @ColumnInfo(name = "time_of_record")
     var timeOfRecord: Long = System.currentTimeMillis()

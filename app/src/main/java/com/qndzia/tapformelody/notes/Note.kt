@@ -1,5 +1,6 @@
 package com.qndzia.tapformelody.notes
 
+import android.util.Log
 import androidx.room.TypeConverters
 import com.qndzia.tapformelody.R
 
@@ -37,12 +38,12 @@ import com.qndzia.tapformelody.R
 //}
 
 //@TypeConverters(Converters::class)
-class Note(
+data class Note(
     val noteName: String, val sound: Int, val id: Int
 //                , val soundPool: Int
 ) {
 
-    companion object{
+    companion object {
         val C = Note("C", R.raw.c, 1)
         val Csharp = Note("C#", R.raw.csharp, 2)
         val D = Note("D", R.raw.d, 3)
@@ -55,13 +56,16 @@ class Note(
         val A = Note("A", R.raw.a, 10)
         val Asharp = Note("A#", R.raw.asharp, 11)
         val H = Note("H", R.raw.h, 12)
-        val C2 = Note("C2", R.raw.c2, 13)
+        val C2 = Note("C", R.raw.c2, 13)
     }
 
     override fun toString(): String {
         return "Note(noteName='$noteName', sound=$sound, id=$id)"
     }
 
+    fun toStringFromList(): String {
+        return noteName
+    }
 
 
 }

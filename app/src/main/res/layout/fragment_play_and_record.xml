@@ -103,6 +103,7 @@
                     android:drawableRight="@drawable/ic_search"
                     android:paddingRight="8dp"
                     android:text="search"
+                    android:onClick="@{() -> viewModel.onSearchPressed()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recordButton"
                     app:layout_constraintStart_toStartOf="@+id/playButton"

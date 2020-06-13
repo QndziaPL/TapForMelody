@@ -24,7 +24,6 @@ import kotlinx.android.synthetic.main.fragment_play_and_record.*
 
 class PlayAndRecord : Fragment() {
 
-//    lateinit var viewModel: PlayAndRecordViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +47,7 @@ class PlayAndRecord : Fragment() {
         viewModel.isRecording.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
+                    viewModel.onMelodyStartedRecording()
                     recordButton.text = "Rec"
                     notesPlayed.setTextColor(Color.RED)
                     playButton.visibility = View.INVISIBLE
@@ -56,7 +56,9 @@ class PlayAndRecord : Fragment() {
                     searchButton.visibility = View.INVISIBLE
 
 
+
                 } else {
+                    viewModel.onMelodyFinishedRecording()
                     recordButton.text = ""
                     notesPlayed.setTextColor(Color.BLACK)
                     playButton.visibility = View.VISIBLE
@@ -125,7 +127,9 @@ class PlayAndRecord : Fragment() {
             })
 
         viewModel.savedMelodies.observe(viewLifecycleOwner,
-        Observer { Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show() })
+        Observer {
+//            Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
+        })
 
 
 
