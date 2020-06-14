@@ -55,6 +55,7 @@
                     android:background="@drawable/ic_menu"
                     app:layout_constraintBottom_toBottomOf="@+id/saveButton"
                     app:layout_constraintEnd_toStartOf="@+id/saveButton"
+                    android:onClick="@{() -> viewModel.onMenuPressed()}"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/saveButton" />
@@ -101,9 +102,9 @@
                     android:layout_height="40dp"
                     android:background="@drawable/search_button_background"
                     android:drawableRight="@drawable/ic_search"
+                    android:onClick="@{() -> viewModel.onSearchPressed()}"
                     android:paddingRight="8dp"
                     android:text="search"
-                    android:onClick="@{() -> viewModel.onSearchPressed()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recordButton"
                     app:layout_constraintStart_toStartOf="@+id/playButton"
@@ -138,8 +139,9 @@
                 android:id="@+id/keyCLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
                 android:text="C"
-                android:textSize="80sp"
+                android:textColor="@color/colorWhiteKeysLabel"
                 app:layout_constraintBottom_toBottomOf="@id/keyC"
                 app:layout_constraintEnd_toEndOf="@+id/keyC"
                 app:layout_constraintStart_toStartOf="@id/keyC" />
@@ -162,8 +164,9 @@
                 android:id="@+id/keyDLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="C"
-                android:textSize="80sp"
+                android:layout_marginBottom="30dp"
+                android:text="D"
+                android:textColor="@color/colorWhiteKeysLabel"
                 app:layout_constraintBottom_toBottomOf="@id/keyD"
                 app:layout_constraintEnd_toEndOf="@+id/keyD"
                 app:layout_constraintStart_toStartOf="@id/keyD" />
@@ -182,6 +185,17 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/keyD" />
 
+            <TextView
+                android:id="@+id/keyELabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="E"
+                android:textColor="@color/colorWhiteKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyE"
+                app:layout_constraintEnd_toEndOf="@+id/keyE"
+                app:layout_constraintStart_toStartOf="@id/keyE" />
+
             <ImageView
                 android:id="@+id/keyF"
                 android:layout_width="0dp"
@@ -195,6 +209,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/keyG"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/keyE" />
+
+            <TextView
+                android:id="@+id/keyFLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="F"
+                android:textColor="@color/colorWhiteKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyF"
+                app:layout_constraintEnd_toEndOf="@+id/keyF"
+                app:layout_constraintStart_toStartOf="@id/keyF" />
 
             <ImageView
                 android:id="@+id/keyG"
@@ -210,6 +235,17 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/keyF" />
 
+            <TextView
+                android:id="@+id/keyGLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="G"
+                android:textColor="@color/colorWhiteKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyG"
+                app:layout_constraintEnd_toEndOf="@+id/keyG"
+                app:layout_constraintStart_toStartOf="@id/keyG" />
+
             <ImageView
                 android:id="@+id/keyA"
                 android:layout_width="0dp"
@@ -223,6 +259,17 @@
                 app:layout_constraintEnd_toStartOf="@+id/keyH"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/keyG" />
+
+            <TextView
+                android:id="@+id/keyALabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="A"
+                android:textColor="@color/colorWhiteKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyA"
+                app:layout_constraintEnd_toEndOf="@+id/keyA"
+                app:layout_constraintStart_toStartOf="@id/keyA" />
 
             <ImageView
                 android:id="@+id/keyH"
@@ -238,6 +285,17 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/keyA" />
 
+            <TextView
+                android:id="@+id/keyHLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="H"
+                android:textColor="@color/colorWhiteKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyH"
+                app:layout_constraintEnd_toEndOf="@+id/keyH"
+                app:layout_constraintStart_toStartOf="@id/keyH" />
+
             <ImageView
                 android:id="@+id/keyC2"
                 android:layout_width="0dp"
@@ -251,6 +309,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/keyH" />
+
+            <TextView
+                android:id="@+id/keyC2Label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="C"
+                android:textColor="@color/colorWhiteKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyC2"
+                app:layout_constraintEnd_toEndOf="@+id/keyC2"
+                app:layout_constraintStart_toStartOf="@id/keyC2" />
 
             <ImageView
                 android:id="@+id/keyCsharp"
@@ -266,6 +335,17 @@
                 app:layout_constraintStart_toStartOf="@+id/keyC"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/keyCsharpLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="C#"
+                android:textColor="@color/colorBlackKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyCsharp"
+                app:layout_constraintLeft_toLeftOf="@id/keyCsharp"
+                app:layout_constraintRight_toRightOf="@id/keyCsharp" />
+
             <ImageView
                 android:id="@+id/keyDsharp"
                 android:layout_width="70dp"
@@ -279,6 +359,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/keyE"
                 app:layout_constraintStart_toEndOf="@+id/keyC"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/keyDsharpLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="D#"
+                android:textColor="@color/colorBlackKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyDsharp"
+                app:layout_constraintLeft_toLeftOf="@id/keyDsharp"
+                app:layout_constraintRight_toRightOf="@id/keyDsharp" />
 
             <ImageView
                 android:id="@+id/keyFsharp"
@@ -294,6 +385,17 @@
                 app:layout_constraintStart_toEndOf="@+id/keyE"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/keyFsharpLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="F#"
+                android:textColor="@color/colorBlackKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyFsharp"
+                app:layout_constraintLeft_toLeftOf="@id/keyFsharp"
+                app:layout_constraintRight_toRightOf="@id/keyFsharp" />
+
             <ImageView
                 android:id="@+id/keyGsharp"
                 android:layout_width="70dp"
@@ -308,6 +410,17 @@
                 app:layout_constraintStart_toEndOf="@+id/keyF"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/keyGsharpLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="G#"
+                android:textColor="@color/colorBlackKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyGsharp"
+                app:layout_constraintLeft_toLeftOf="@id/keyGsharp"
+                app:layout_constraintRight_toRightOf="@id/keyGsharp" />
+
             <ImageView
                 android:id="@+id/keyAsharp"
                 android:layout_width="70dp"
@@ -321,6 +434,18 @@
                 app:layout_constraintEnd_toEndOf="@+id/keyH"
                 app:layout_constraintStart_toEndOf="@+id/keyG"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/keyAsharpLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="30dp"
+                android:text="A#"
+                android:textColor="@color/colorBlackKeysLabel"
+                app:layout_constraintBottom_toBottomOf="@id/keyAsharp"
+                app:layout_constraintLeft_toLeftOf="@id/keyAsharp"
+                app:layout_constraintRight_toRightOf="@id/keyAsharp" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

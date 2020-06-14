@@ -1,26 +1,25 @@
 package com.qndzia.tapformelody.playandrecord
 
 import android.graphics.Color
-import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
+import android.view.*
+import android.widget.AdapterView
+import android.widget.CheckBox
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.qndzia.tapformelody.MenuDialogFragment
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.SaveMelodyDialogFragment
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentPlayAndRecordBinding
 import kotlinx.android.synthetic.main.fragment_play_and_record.*
 
+
+private lateinit var viewModel: PlayAndRecordViewModel
 
 class PlayAndRecord : Fragment() {
 
@@ -37,12 +36,20 @@ class PlayAndRecord : Fragment() {
 
         val dataSource = MelodyDatabase.getInstance(application).melodyDao
 
-        val viewModelFactory = PlayAndRecordViewModelFactory(dataSource, application)
+        val arguments = PlayAndRecordArgs.fromBundle(requireArguments())
 
-        val viewModel = ViewModelProvider(requireActivity(), viewModelFactory).get(PlayAndRecordViewModel::class.java)
+        val viewModelFactory =
+            PlayAndRecordViewModelFactory(arguments.labelsOn, dataSource, application)
+
+        viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        ).get(PlayAndRecordViewModel::class.java)
 
 //        viewModel = ViewModelProvider(requireActivity()).get(PlayAndRecordViewModel::class.java)
         binding.viewModel = viewModel
+
+
 
         viewModel.isRecording.observe(viewLifecycleOwner,
             Observer {
@@ -54,7 +61,6 @@ class PlayAndRecord : Fragment() {
                     saveButton.visibility = View.INVISIBLE
                     menuButton.visibility = View.INVISIBLE
                     searchButton.visibility = View.INVISIBLE
-
 
 
                 } else {
@@ -127,13 +133,99 @@ class PlayAndRecord : Fragment() {
             })
 
         viewModel.savedMelodies.observe(viewLifecycleOwner,
-        Observer {
+            Observer {
 //            Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
-        })
+            })
+
+        viewModel.showMenu.observe(viewLifecycleOwner,
+            Observer {
+                if (it) {
+
+                    val popup = PopupMenu(activity, menuButton)
+                    val inflater: MenuInflater = popup.menuInflater
+                    inflater.inflate(R.menu.main_menu, popup.menu)
+                    popup.show()
+
+                    popup.setOnMenuItemClickListener {item ->
+                        when(item.itemId) {
+                            R.id.labelsOn -> {
+                                viewModel.labelsOnOff()
+                            }
+                        }
+                        true
+                    }
+
+                    popup.setOnDismissListener{
+                        viewModel.turnOffMenuNavigation()
+                    }
+
+                }
+            })
+
+        viewModel.labelsOnLiveData.observe(viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    keyCLabel.visibility = View.VISIBLE
+                    keyCsharpLabel.visibility = View.VISIBLE
+                    keyDLabel.visibility = View.VISIBLE
+                    keyDsharpLabel.visibility = View.VISIBLE
+                    keyELabel.visibility = View.VISIBLE
+                    keyFLabel.visibility = View.VISIBLE
+                    keyFsharpLabel.visibility = View.VISIBLE
+                    keyGLabel.visibility = View.VISIBLE
+                    keyGsharpLabel.visibility = View.VISIBLE
+                    keyALabel.visibility = View.VISIBLE
+                    keyAsharpLabel.visibility = View.VISIBLE
+                    keyHLabel.visibility = View.VISIBLE
+                    keyC2Label.visibility = View.VISIBLE
+
+                } else {
+                    keyCLabel.visibility = View.GONE
+                    keyCsharpLabel.visibility = View.GONE
+                    keyDLabel.visibility = View.GONE
+                    keyDsharpLabel.visibility = View.GONE
+                    keyELabel.visibility = View.GONE
+                    keyFLabel.visibility = View.GONE
+                    keyFsharpLabel.visibility = View.GONE
+                    keyGLabel.visibility = View.GONE
+                    keyGsharpLabel.visibility = View.GONE
+                    keyALabel.visibility = View.GONE
+                    keyAsharpLabel.visibility = View.GONE
+                    keyHLabel.visibility = View.GONE
+                    keyC2Label.visibility = View.GONE
+
+                }
+            })
+
 
 
 
         return binding.root
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        val inflater = MenuInflater(context)
+        inflater.inflate(R.menu.main_menu, menu)
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+        return when (item.itemId) {
+            R.id.labelsOn -> {
+                viewModel.labelsOnOff()
+                Log.d("labelsclicked", "menuclicked")
+
+                true
+            }
+
+            else -> super.onContextItemSelected(item)
+        }
+
     }
 
 }

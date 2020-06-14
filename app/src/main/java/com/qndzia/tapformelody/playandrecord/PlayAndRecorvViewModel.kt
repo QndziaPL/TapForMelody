@@ -24,9 +24,12 @@ import kotlin.math.E
 
 
 class PlayAndRecordViewModel(
+    private val labelsOn: Boolean,
     val database: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
 
+    private var _labelsOnLiveData = MutableLiveData<Boolean>()
+    val labelsOnLiveData: LiveData<Boolean> = _labelsOnLiveData
 
     private var viewModelJob = Job()
 
@@ -56,6 +59,9 @@ class PlayAndRecordViewModel(
 
     private var _showSaveDialog = MutableLiveData<Boolean>()
     val showSaveDialog: LiveData<Boolean> = _showSaveDialog
+
+    private var _showMenu = MutableLiveData<Boolean>()
+    val showMenu: LiveData<Boolean> = _showMenu
 
 
     //live data z listą melodii z rooma
@@ -100,9 +106,11 @@ class PlayAndRecordViewModel(
         listOfPoolSounds.addAll(
             0, listOf(
                 soundC, soundCsharp, soundD, soundDsharp, soundE, soundF, soundFsharp, soundG,
-                soundGsharp, soundA, soundAsharp, soundH, soundC2))
+                soundGsharp, soundA, soundAsharp, soundH, soundC2
+            )
+        )
 
-
+        _labelsOnLiveData.value = labelsOn
 
     }
 
@@ -171,6 +179,7 @@ class PlayAndRecordViewModel(
 
     fun c2KeyPressed() {
         keyPressed(Note.C2, soundC2)
+//        Toast.makeText(getApplication(), "status klawiszy: ${labelsOnLiveData.value}", Toast.LENGTH_LONG).show()
     }
 
     private fun saveMelody() {
@@ -191,7 +200,6 @@ class PlayAndRecordViewModel(
             database.clear()
         }
     }
-
 
 
     private fun keyPressed(note: Note, sound: Int) {
@@ -291,10 +299,29 @@ class PlayAndRecordViewModel(
     fun onSearchPressed() {
         val osp = matchSongs(mySuperMelody.value, defaultSongList)
         Log.d("onsearchpressed", osp.toString())
-        Toast.makeText(getApplication(), "Your melody matches ${osp.size} songs.\n" +
-                "List: $osp", Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            getApplication(), "Your melody matches ${osp.size} songs.\n" +
+                    "List: $osp", Toast.LENGTH_LONG
+        ).show()
 
     }
+
+    fun onMenuPressed() {
+        _showMenu.value = true
+        Log.d("showmenu", "onMenuPressed: ${showMenu.value}")
+
+    }
+
+    fun turnOffMenuNavigation() {
+        _showMenu.value = false
+        Log.d("showmenu", "turnOffMenuNavigation: ${showMenu.value}")
+
+    }
+
+    fun labelsOnOff() {
+        _labelsOnLiveData.value = _labelsOnLiveData.value != true
+    }
+
 
     fun onSavePressed() {
 
