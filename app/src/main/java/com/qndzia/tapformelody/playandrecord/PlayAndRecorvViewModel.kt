@@ -1,11 +1,14 @@
 package com.qndzia.tapformelody.playandrecord
 
 import android.app.Application
+import android.content.res.AssetManager
+import android.content.res.Resources
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,6 +21,7 @@ import com.qndzia.tapformelody.songlist.Song
 import com.qndzia.tapformelody.songlist.defaultSongList
 
 import kotlinx.coroutines.*
+import java.io.InputStream
 import kotlin.math.E
 
 //lateinit var soundPool: SoundPool
@@ -63,6 +67,7 @@ class PlayAndRecordViewModel(
     private var _showMenu = MutableLiveData<Boolean>()
     val showMenu: LiveData<Boolean> = _showMenu
 
+//    val assetManager = AssetManager.AssetInputStream()
 
     //live data z listą melodii z rooma
     val savedMelodies = database.getAll()
@@ -88,6 +93,8 @@ class PlayAndRecordViewModel(
         _myMelody.value = ""
         _showSaveDialog.value = false
         _noteListSize.value = 0
+
+
 
         soundC = soundPool.load(getApplication(), R.raw.c, 1)
         soundCsharp = soundPool.load(getApplication(), R.raw.csharp, 1)
