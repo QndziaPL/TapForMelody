@@ -184,14 +184,14 @@ class PlayAndRecordViewModel(
 
     private fun saveMelody() {
         dbScope.launch {
-            val melody: Melody =
-                Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E, Note.D, Note.C))
-            val melody2: Melody =
-                Melody(title = "kupa", melody = listOf(Note.G, Note.A, Note.H, Note.D, Note.G))
-            database.insert(melody)
-            database.insert(melody2)
-            Log.d("savemelody", melody.toString())
-            Log.d("listInDb", savedMelodies.value.toString())
+//            val melody: Melody =
+//                Melody(title = "test1", melody = listOf(Note.C, Note.D, Note.E, Note.D, Note.C))
+//            val melody2: Melody =
+//                Melody(title = "test2", melody = listOf(Note.G, Note.A, Note.H, Note.D, Note.G))
+//            database.insert(melody)
+//            database.insert(melody2)
+//            Log.d("savemelody", melody.toString())
+//            Log.d("listInDb", savedMelodies.value.toString())
         }
     }
 

@@ -7,4 +7,7 @@
         android:checkable="false"
         android:title="Show/hide key labels"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/songLibrary"
+        android:title="Open Song Library" />
 </menu>

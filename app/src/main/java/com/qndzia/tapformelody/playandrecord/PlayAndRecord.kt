@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
-import android.widget.CheckBox
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.qndzia.tapformelody.MenuDialogFragment
+import androidx.navigation.fragment.findNavController
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.SaveMelodyDialogFragment
 import com.qndzia.tapformelody.database.MelodyDatabase
@@ -150,6 +149,11 @@ class PlayAndRecord : Fragment() {
                         when(item.itemId) {
                             R.id.labelsOn -> {
                                 viewModel.labelsOnOff()
+                            }
+                            R.id.songLibrary -> {
+                                findNavController().navigate(
+                                    PlayAndRecordDirections.actionPlayAndRecordToSongListFragment()
+                                )
                             }
                         }
                         true

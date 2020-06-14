@@ -71,7 +71,16 @@ val defaultSongList = mutableListOf(
     Melody(melody = listOf(Note.C, Note.Asharp, Note.Gsharp, Note.G, Note.F, Note.Dsharp, Note.F, Note.G, Note.C,
     Note.C, Note.C, Note.Dsharp, Note.F, Note.Asharp, Note.C, Note.Csharp, Note.C, Note.Asharp, Note.Gsharp, Note.F)),
     link = "https://www.youtube.com/watch?v=bluD4WhrffU"
+    ),
+
+    Song("Twinkle Twinkle Little Star", "Mozart",
+    Melody(melody = listOf(Note.C, Note.C, Note.G, Note.G, Note.A, Note.A, Note.G, Note.F, Note.F, Note.E, Note.E,
+    Note.D, Note.D, Note.C, Note.G, Note.G, Note.F, Note.F, Note.E, Note.E, Note.D, Note.G, Note.G, Note.F,
+        Note.F, Note.E, Note.E, Note.D, Note.C, Note.C, Note.G, Note.G, Note.A, Note.A, Note.G, Note.F, Note.F,
+    Note.E, Note.E, Note.D, Note.D, Note.C)),
+    link = "https://www.youtube.com/watch?v=zE0Fwm7gv1c"
     )
+
 
 
 )
