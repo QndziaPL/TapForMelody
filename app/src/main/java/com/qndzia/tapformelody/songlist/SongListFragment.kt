@@ -10,10 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.qndzia.tapformelody.R
 
-/**
- * A simple [Fragment] subclass.
- */
-
 
 class SongListFragment : Fragment() {
         private lateinit var recyclerView: RecyclerView
@@ -25,12 +21,6 @@ class SongListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
-
-
-
-
-
 
         return inflater.inflate(R.layout.fragment_song_list, container, false)
     }

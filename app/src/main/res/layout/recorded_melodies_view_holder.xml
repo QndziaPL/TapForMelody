@@ -18,7 +18,7 @@
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Song title" />
+        tools:text="Melody Title" />
 
     <TextView
         android:id="@+id/melodyRecordTime"
@@ -27,24 +27,16 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="@+id/recMelodyTitle"
         app:layout_constraintTop_toBottomOf="@+id/recMelodyTitle"
-        tools:text="song author" />
+        tools:text="13 546 34" />
 
     <Button
-        android:id="@+id/playMelody"
+        android:id="@+id/deleteButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/ic_play"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="@+id/melodyRecordTime"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/recMelodyTitle" />
 
-    <Button
-        android:id="@+id/playYoutube"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/youtube_icon"
-        app:layout_constraintEnd_toStartOf="@+id/playMelody"
-        app:layout_constraintTop_toTopOf="@+id/playMelody" />
 </androidx.constraintlayout.widget.ConstraintLayout>

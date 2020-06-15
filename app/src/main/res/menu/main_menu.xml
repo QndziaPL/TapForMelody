@@ -10,4 +10,7 @@
     <item
         android:id="@+id/songLibrary"
         android:title="Open Song Library" />
+    <item
+        android:id="@+id/recordedMelodies"
+        android:title="Recorded Melodies" />
 </menu>

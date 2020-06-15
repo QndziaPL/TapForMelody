@@ -1,0 +1,20 @@
+package com.qndzia.tapformelody.recordermelodies
+
+import android.app.Application
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.qndzia.tapformelody.database.MelodyDao
+
+class RecordedMelodiesViewModelFactory(
+    private val dataSource: MelodyDao,
+    private val application: Application
+) : ViewModelProvider.Factory {
+    @Suppress("unchecked_cast")
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(RecordedMelodiesViewModel::class.java)) {
+            return RecordedMelodiesViewModel(dataSource, application) as T
+
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}

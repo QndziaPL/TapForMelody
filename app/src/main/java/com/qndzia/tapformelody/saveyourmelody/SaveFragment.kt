@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
-import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentSaveBinding
 import kotlinx.android.synthetic.main.fragment_save.*
@@ -46,16 +46,17 @@ class SaveFragment : Fragment() {
 
         viewModel.onSavePressed.observe(viewLifecycleOwner, Observer {
             if (it) {
-                viewModel.saveInDb(melodyTitle.text.toString())
+                viewModel.saveInDb(recMelodyTitle.text.toString())
                 viewModel.doneSaving()
+                findNavController().navigate(SaveFragmentDirections.actionSaveFragmentToPlayAndRecord())
 
             }
         })
 
-        viewModel.dblist.observe(viewLifecycleOwner,
-        Observer {
-            texttestdbsize.text = viewModel.dblist.value.toString()
-        })
+//        viewModel.dblist.observe(viewLifecycleOwner,
+//        Observer {
+//            texttestdbsize.text = viewModel.dblist.value.toString()
+//        })
 
 
 

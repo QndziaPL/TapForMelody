@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_playAndRecord_to_saveFragment"
             app:destination="@id/saveFragment" />
+        <action
+            android:id="@+id/action_playAndRecord_to_recordedMelodiesFragment"
+            app:destination="@id/recordedMelodiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/songListFragment"
@@ -42,6 +45,13 @@
         <argument
             android:name="myMelody"
             app:argType="com.qndzia.tapformelody.database.Melody" />
+        <action
+            android:id="@+id/action_saveFragment_to_playAndRecord"
+            app:destination="@id/playAndRecord" />
 
     </fragment>
+    <fragment
+        android:id="@+id/recordedMelodiesFragment"
+        android:name="com.qndzia.tapformelody.recordermelodies.RecordedMelodiesFragment"
+        android:label="RecordedMelodiesFragment" />
 </navigation>

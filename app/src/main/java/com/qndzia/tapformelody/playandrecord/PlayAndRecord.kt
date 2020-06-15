@@ -157,6 +157,11 @@ class PlayAndRecord : Fragment() {
                                     PlayAndRecordDirections.actionPlayAndRecordToSongListFragment()
                                 )
                             }
+                            R.id.recordedMelodies -> {
+                                findNavController().navigate(
+                                    PlayAndRecordDirections.actionPlayAndRecordToRecordedMelodiesFragment()
+                                )
+                            }
                         }
                         true
                     }

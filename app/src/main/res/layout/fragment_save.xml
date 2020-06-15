@@ -20,7 +20,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/melodyTitle"
+                android:id="@+id/recMelodyTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -40,8 +40,8 @@
                 android:layout_marginTop="32dp"
                 android:onClick="@{() -> viewModel.onSavePressed()}"
                 android:background="@drawable/ic_save"
-                app:layout_constraintEnd_toEndOf="@+id/melodyTitle"
-                app:layout_constraintTop_toBottomOf="@+id/melodyTitle" />
+                app:layout_constraintEnd_toEndOf="@+id/recMelodyTitle"
+                app:layout_constraintTop_toBottomOf="@+id/recMelodyTitle" />
 
             <TextView
                 android:id="@+id/yourMelody"
@@ -56,7 +56,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/melodyTitle"
+                app:layout_constraintBottom_toTopOf="@+id/recMelodyTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -66,11 +66,11 @@
                 android:id="@+id/texttestdbsize"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/melodyTitle"
+                app:layout_constraintEnd_toStartOf="@+id/recMelodyTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/yourMelody" />
+                app:layout_constraintTop_toBottomOf="@+id/yourMelody"
+                tools:text="list of db elements" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

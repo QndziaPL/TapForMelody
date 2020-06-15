@@ -1,6 +1,5 @@
 package com.qndzia.tapformelody.songlist
 
-import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.media.MediaPlayer
@@ -12,9 +11,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.qndzia.tapformelody.MainActivity
 import com.qndzia.tapformelody.R
-import kotlinx.coroutines.withContext
 
 class SongListAdapter(private val librarySongList: List<Song>) :
     RecyclerView.Adapter<SongListAdapter.SongListViewHolder>() {
@@ -22,28 +19,10 @@ class SongListAdapter(private val librarySongList: List<Song>) :
     class SongListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         RecyclerView.ViewHolder(inflater.inflate(R.layout.song_viewholder, parent, false)) {
 
-//        private var songTitle: TextView? = null
-//        private var songAuthor: TextView? = null
-//        private var playMelody: Button? = null
-//        private var playYoutube: Button? = null
-//
-//        init {
-//            songTitle = itemView.findViewById(R.id.songTitle)
-//            songAuthor = itemView.findViewById(R.id.songAuthor)
-//            playMelody = itemView.findViewById(R.id.playMelody)
-//            playYoutube = itemView.findViewById(R.id.playYoutube)
-//        }
-//
-//        fun bind(song: Song) {
-//            songTitle?.text = song.title
-//            songAuthor?.text = song.author
-//        }
-
-        val songTitle: TextView = itemView.findViewById(R.id.songTitle)
-        val songAuthor: TextView = itemView.findViewById(R.id.songAuthor)
+        val songTitle: TextView = itemView.findViewById(R.id.recMelodyTitle)
+        val songAuthor: TextView = itemView.findViewById(R.id.melodyRecordTime)
         val playMelody: Button = itemView.findViewById(R.id.playMelody)
         val playYoutube: Button = itemView.findViewById(R.id.playYoutube)
-
 
     }
 
@@ -54,7 +33,6 @@ class SongListAdapter(private val librarySongList: List<Song>) :
         val inflater = LayoutInflater.from(parent.context)
         return SongListViewHolder(inflater, parent)
     }
-
 
 
     override fun onBindViewHolder(holder: SongListViewHolder, position: Int) {
@@ -88,7 +66,6 @@ class SongListAdapter(private val librarySongList: List<Song>) :
             }
         }
     }
-
 
     override fun getItemCount() = librarySongList.size
 }
