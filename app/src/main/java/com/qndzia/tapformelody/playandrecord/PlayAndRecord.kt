@@ -122,12 +122,14 @@ class PlayAndRecord : Fragment() {
 
             })
 
-        viewModel.showSaveDialog.observe(viewLifecycleOwner,
+        viewModel.navigateToSaveFragment.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
-                    val dialogPopup = SaveMelodyDialogFragment()
-                    dialogPopup.show(parentFragmentManager, "save_dialog")
-                    viewModel.hideSaveDialog()
+                    findNavController().navigate(PlayAndRecordDirections.actionPlayAndRecordToSaveFragment(
+                        viewModel.myMelody.value!!,
+                        viewModel.mySuperMelody.value!!
+                    ))
+                    viewModel.onNavigatingToSaveFragmentFinished()
                 }
             })
 
@@ -145,8 +147,8 @@ class PlayAndRecord : Fragment() {
                     inflater.inflate(R.menu.main_menu, popup.menu)
                     popup.show()
 
-                    popup.setOnMenuItemClickListener {item ->
-                        when(item.itemId) {
+                    popup.setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
                             R.id.labelsOn -> {
                                 viewModel.labelsOnOff()
                             }
@@ -159,7 +161,7 @@ class PlayAndRecord : Fragment() {
                         true
                     }
 
-                    popup.setOnDismissListener{
+                    popup.setOnDismissListener {
                         viewModel.turnOffMenuNavigation()
                     }
 
@@ -197,6 +199,15 @@ class PlayAndRecord : Fragment() {
                     keyAsharpLabel.visibility = View.GONE
                     keyHLabel.visibility = View.GONE
                     keyC2Label.visibility = View.GONE
+
+                }
+            })
+
+        viewModel.saveToDbProcessOn.observe(viewLifecycleOwner,
+            Observer {
+                if (it) {
+                    viewModel.saveInDb(arguments.melodyTitle)
+                    viewModel.turnOffSaving()
 
                 }
             })

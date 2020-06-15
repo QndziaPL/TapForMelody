@@ -3,6 +3,7 @@ package com.qndzia.tapformelody.songlist
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
@@ -54,15 +55,22 @@ class SongListAdapter(private val librarySongList: List<Song>) :
         return SongListViewHolder(inflater, parent)
     }
 
+
+
     override fun onBindViewHolder(holder: SongListViewHolder, position: Int) {
         val song: Song = librarySongList[position]
-//        holder.bind(song)
         holder.songTitle.text = song.title
         holder.songAuthor.text = song.author
+
+        val mediaPlayer = MediaPlayer.create(holder.songAuthor.context, song.mp3)
+
         holder.playMelody.setOnClickListener {
+
+            mediaPlayer.start()
+
             Toast.makeText(
                 holder.songAuthor.context,
-                "Not recorded yet. Work in progress!!!",
+                "Not everything recorder yet. Work in progress!!!",
                 Toast.LENGTH_LONG
             ).show()
         }

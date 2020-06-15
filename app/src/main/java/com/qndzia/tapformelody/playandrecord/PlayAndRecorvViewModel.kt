@@ -1,28 +1,22 @@
 package com.qndzia.tapformelody.playandrecord
 
 import android.app.Application
-import android.content.res.AssetManager
-import android.content.res.Resources
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.util.Log
 import android.view.Gravity
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
-import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.notes.Note
 import com.qndzia.tapformelody.songlist.Song
 import com.qndzia.tapformelody.songlist.defaultSongList
 
 import kotlinx.coroutines.*
-import java.io.InputStream
-import kotlin.math.E
 
 //lateinit var soundPool: SoundPool
 
@@ -61,11 +55,14 @@ class PlayAndRecordViewModel(
 
     private var blockAdding = true
 
-    private var _showSaveDialog = MutableLiveData<Boolean>()
-    val showSaveDialog: LiveData<Boolean> = _showSaveDialog
+    private var _navigateToSaveFragment = MutableLiveData<Boolean>()
+    val navigateToSaveFragment: LiveData<Boolean> = _navigateToSaveFragment
 
     private var _showMenu = MutableLiveData<Boolean>()
     val showMenu: LiveData<Boolean> = _showMenu
+
+    private var _saveToDbProcessOn = MutableLiveData<Boolean>()
+    val saveToDbProcessOn : LiveData<Boolean> = _saveToDbProcessOn
 
 //    val assetManager = AssetManager.AssetInputStream()
 
@@ -91,7 +88,7 @@ class PlayAndRecordViewModel(
     init {
         _isRecording.value = false
         _myMelody.value = ""
-        _showSaveDialog.value = false
+        _navigateToSaveFragment.value = false
         _noteListSize.value = 0
 
 
@@ -128,7 +125,7 @@ class PlayAndRecordViewModel(
             .build()
 
         var soundPool = SoundPool.Builder()
-            .setMaxStreams(20)
+            .setMaxStreams(30)
             .setAudioAttributes(audioAttributes)
             .build()
 
@@ -202,11 +199,11 @@ class PlayAndRecordViewModel(
         }
     }
 
-    private fun deleteAll() {
-        dbScope.launch {
-            database.clear()
-        }
-    }
+//    private fun deleteAll() {
+//        dbScope.launch {
+//            database.clear()
+//        }
+//    }
 
 
     private fun keyPressed(note: Note, sound: Int) {
@@ -237,8 +234,29 @@ class PlayAndRecordViewModel(
         }
     }
 
+//    fun updateTitleOfYourMelody(newTitle: String){
+//
+//
+//    }
+
+    fun saveInDb(newTitle: String) {
+        _mySuperMelody.value?.title = newTitle
+        Log.d("TAG", "melody name is now ${mySuperMelody.value?.title}")
+        _mySuperMelody.value?.let {
+
+            database.insert(it) }
+    }
+
+    fun turnOffSaving() {
+        _saveToDbProcessOn.value = false
+        uiScope.launch {
+            val list = database.getAll()
+            Log.d("TAG", list.toString())
+        }
+    }
+
     fun onRecordPressed() {
-        deleteAll()
+//        deleteAll()
         saveMelody()
 
         if (_isRecording.value == true) {
@@ -246,12 +264,13 @@ class PlayAndRecordViewModel(
             blockAdding = true
 
 
-            val toast = Toast.makeText(
-                getApplication(), "REC is OFF",
-                Toast.LENGTH_SHORT
-            )
-            toast.setGravity(Gravity.TOP, 0, 80)
-            toast.show()
+//            val toast = Toast.makeText(
+//                getApplication(), "REC is OFF",
+//                Toast.LENGTH_SHORT
+//            )
+//            toast.setGravity(Gravity.TOP, 0, 80)
+//            toast.show()
+
         } else {
             _isRecording.value = true
             _myMelody.value = ""
@@ -261,12 +280,12 @@ class PlayAndRecordViewModel(
             //creating melody to save and compare
             _mySuperMelody.value = Melody(melody = listOf())
 
-            val toast = Toast.makeText(
-                getApplication(), "REC is ON!!!",
-                Toast.LENGTH_SHORT
-            )
-            toast.setGravity(Gravity.TOP, 0, 80)
-            toast.show()
+//            val toast = Toast.makeText(
+//                getApplication(), "REC is ON!!!",
+//                Toast.LENGTH_SHORT
+//            )
+//            toast.setGravity(Gravity.TOP, 0, 80)
+//            toast.show()
 
         }
     }
@@ -332,15 +351,15 @@ class PlayAndRecordViewModel(
 
     fun onSavePressed() {
 
-        val test = isSongMatched(
-            Melody(title = "dupa", melody = listOf(Note.D, Note.A, Note.C, Note.C, Note.C)),
-            defaultSongList[0].melody
-        )
-        Log.d("test", test.toString())
+//        val test = isSongMatched(
+//            Melody(title = "dupa", melody = listOf(Note.D, Note.A, Note.C, Note.C, Note.C)),
+//            defaultSongList[0].melody
+//        )
+//        Log.d("test", test.toString())
 
 
         if (noteList.isNotEmpty() && isRecording.value == false) {
-            _showSaveDialog.value = true
+            _navigateToSaveFragment.value = true
         } else if (isRecording.value == true) {
             Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
         } else {
@@ -348,8 +367,8 @@ class PlayAndRecordViewModel(
         }
     }
 
-    fun hideSaveDialog() {
-        _showSaveDialog.value = false
+    fun onNavigatingToSaveFragmentFinished() {
+        _navigateToSaveFragment.value = false
     }
 
     fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {

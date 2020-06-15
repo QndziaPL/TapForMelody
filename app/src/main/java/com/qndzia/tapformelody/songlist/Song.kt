@@ -9,7 +9,7 @@ class Song(
     val title: String,
     val author: String,
     val melody: Melody,
-    val mp3: Int = R.raw.c,
+    val mp3: Int = R.raw.miejsce_na_melodyjke,
     val link: String
 ) {
 
@@ -33,7 +33,7 @@ val defaultSongList = mutableListOf(
             Note.G, Note.A, Note.H,Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A,
             Note.H, Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A, Note.C, Note.C,
             Note.C, Note.C, Note.C, Note.C, Note.H, Note.H, Note.H, Note.A, Note.G, Note.A, Note.H))
-        , link = "https://www.youtube.com/watch?v=olkNnmhMj7Y"
+        , link = "https://www.youtube.com/watch?v=olkNnmhMj7Y", mp3 = R.raw.wszystko_czego_dzis_chce
     ),
 
     Song(
@@ -79,8 +79,12 @@ val defaultSongList = mutableListOf(
         Note.F, Note.E, Note.E, Note.D, Note.C, Note.C, Note.G, Note.G, Note.A, Note.A, Note.G, Note.F, Note.F,
     Note.E, Note.E, Note.D, Note.D, Note.C)),
     link = "https://www.youtube.com/watch?v=zE0Fwm7gv1c"
-    )
+    ),
 
+    Song("Somewhere Over The Rainbow", "Judy Garland",
+    Melody(melody = listOf(Note.C, Note.C2, Note.H, Note.G, Note.A, Note.H, Note.C2, Note.C, Note.A, Note.G, Note.F, Note.F,
+    Note.E, Note.C, Note.D, Note.E, Note.F, Note.D, Note.H, Note.C, Note.D, Note.E, Note.C)),
+    link = "https://www.youtube.com/watch?v=PSZxmZmBfnU")
 
 
 )

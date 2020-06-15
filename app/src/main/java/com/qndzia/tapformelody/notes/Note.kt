@@ -1,8 +1,10 @@
 package com.qndzia.tapformelody.notes
 
+import android.os.Parcelable
 import android.util.Log
 import androidx.room.TypeConverters
 import com.qndzia.tapformelody.R
+import kotlinx.android.parcel.Parcelize
 
 //@TypeConverters(Converters::class)
 //enum class Note(val noteName: String, val sound: Int, val id: Int
@@ -38,10 +40,11 @@ import com.qndzia.tapformelody.R
 //}
 
 //@TypeConverters(Converters::class)
+@Parcelize
 data class Note(
     val noteName: String, val sound: Int, val id: Int
 //                , val soundPool: Int
-) {
+) : Parcelable {
 
     companion object {
         val C = Note("C", R.raw.c, 1)

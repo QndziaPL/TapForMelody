@@ -1,11 +1,14 @@
 package com.qndzia.tapformelody.database
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.qndzia.tapformelody.notes.Note
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "recorded_melody_table")
 data class Melody(
     @PrimaryKey(autoGenerate = true)
@@ -20,8 +23,7 @@ data class Melody(
     ,
 //    @TypeConverters(NoteListConverter::class)
     @ColumnInfo(name = "melody")
-    var melody: List<Note>)
-{
+    var melody: List<Note>) : Parcelable {
     override fun toString(): String {
         return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
     }
