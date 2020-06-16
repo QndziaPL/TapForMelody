@@ -16,7 +16,10 @@ class SaveViewModel(
     dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
 
-    //    private val dblist: LiveData<List<Melody>>
+//for test only if db works and im able to read from
+//    val dblist: LiveData<List<Melody>>
+
+
     val database = dataSource
 
     private var viewModelJob = Job()
@@ -31,6 +34,8 @@ class SaveViewModel(
 
     init {
         _melody.value = myMelody
+
+        //tests only
 //        dblist = database.getAll()
 
     }

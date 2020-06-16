@@ -62,15 +62,23 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="c d e f g a h c" />
 
-            <TextView
-                android:id="@+id/texttestdbsize"
+            <ScrollView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/recMelodyTitle"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/yourMelody"
-                tools:text="list of db elements" />
+                app:layout_constraintTop_toBottomOf="@+id/yourMelody">
+
+                <TextView
+                    android:id="@+id/texttestdbsize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="list of db elements" />
+            </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

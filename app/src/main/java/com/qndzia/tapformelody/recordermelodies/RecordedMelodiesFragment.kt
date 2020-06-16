@@ -50,12 +50,8 @@ class RecordedMelodiesFragment() : Fragment() {
         // tu nie jestem pewien \/ \/ \/ \/ \/ \/
         binding.recordedMelodiesRecyclerView.adapter = adapter
 
-        Log.d("tag","recmelfrag: ${adapter.data}")
-
-//        adapter.data = viewModel.fakeList
 
 
-        // wrzucilem na razie fake
         viewModel.melodies.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.data = it

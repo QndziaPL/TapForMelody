@@ -125,11 +125,13 @@ class PlayAndRecord : Fragment() {
         viewModel.navigateToSaveFragment.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
+
                     findNavController().navigate(PlayAndRecordDirections.actionPlayAndRecordToSaveFragment(
                         viewModel.myMelody.value!!,
                         viewModel.mySuperMelody.value!!
                     ))
                     viewModel.onNavigatingToSaveFragmentFinished()
+
                 }
             })
 
@@ -208,44 +210,10 @@ class PlayAndRecord : Fragment() {
                 }
             })
 
-//        viewModel.saveToDbProcessOn.observe(viewLifecycleOwner,
-//            Observer {
-//                if (it) {
-//                    viewModel.saveInDb(arguments.melodyTitle)
-//                    viewModel.turnOffSaving()
-//
-//                }
-//            })
-
-
-
 
         return binding.root
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
-        val inflater = MenuInflater(context)
-        inflater.inflate(R.menu.main_menu, menu)
-    }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean {
-        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
-        return when (item.itemId) {
-            R.id.labelsOn -> {
-                viewModel.labelsOnOff()
-                Log.d("labelsclicked", "menuclicked")
-
-                true
-            }
-
-            else -> super.onContextItemSelected(item)
-        }
-
-    }
 
 }

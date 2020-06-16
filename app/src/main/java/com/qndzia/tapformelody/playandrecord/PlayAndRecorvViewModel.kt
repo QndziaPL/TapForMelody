@@ -60,11 +60,9 @@ class PlayAndRecordViewModel(
     private var _navigateToSaveFragment = MutableLiveData<Boolean>()
     val navigateToSaveFragment: LiveData<Boolean> = _navigateToSaveFragment
 
+
     private var _showMenu = MutableLiveData<Boolean>()
     val showMenu: LiveData<Boolean> = _showMenu
-
-    private var _saveToDbProcessOn = MutableLiveData<Boolean>()
-    val saveToDbProcessOn : LiveData<Boolean> = _saveToDbProcessOn
 
 //    val assetManager = AssetManager.AssetInputStream()
 
@@ -197,20 +195,6 @@ class PlayAndRecordViewModel(
 //        Toast.makeText(getApplication(), "status klawiszy: ${labelsOnLiveData.value}", Toast.LENGTH_LONG).show()
     }
 
-    private fun saveMelody() {
-        dbScope.launch {
-//            val melody: Melody =
-//                Melody(title = "test1", melody = listOf(Note.C, Note.D, Note.E, Note.D, Note.C))
-//            val melody2: Melody =
-//                Melody(title = "test2", melody = listOf(Note.G, Note.A, Note.H, Note.D, Note.G))
-//            database.insert(melody)
-//            database.insert(melody2)
-//            Log.d("savemelody", melody.toString())
-//            Log.d("listInDb", savedMelodies.value.toString())
-        }
-    }
-
-
 
 
     private fun keyPressed(note: Note, sound: Int) {
@@ -218,9 +202,6 @@ class PlayAndRecordViewModel(
         uiScope.launch {
             soundPool.play(sound, 1F, 1F, 1, 0, 1F)
         }
-
-//        Toast.makeText(getApplication(), "db: ${database.getAll().value!!.size}", Toast.LENGTH_LONG).show()
-
 
 
         if (!blockAdding) {
@@ -245,21 +226,9 @@ class PlayAndRecordViewModel(
     }
 
 
-//    fun saveInDb(newTitle: String) {
-//        _mySuperMelody.value?.title = newTitle
-//        Log.d("TAG", "melody name is now ${mySuperMelody.value?.title}")
-//        _mySuperMelody.value?.let {
-//
-//            database.insert(it) }
-//    }
-//
-//    fun turnOffSaving() {
-//        _saveToDbProcessOn.value = false
-//    }
-
     fun onRecordPressed() {
 //        deleteAll()
-        saveMelody()
+//        saveMelody()
 
         if (_isRecording.value == true) {
             _isRecording.value = false
@@ -272,7 +241,10 @@ class PlayAndRecordViewModel(
             _noteListSize.value = noteList.size
             blockAdding = false
             //creating melody to save and compare
-            _mySuperMelody.value = Melody(melody = listOf())
+
+            // commented it right now for tests
+            //checking if to methods below are enough
+//            _mySuperMelody.value = Melody(melody = listOf())
 
         }
     }
@@ -345,13 +317,29 @@ class PlayAndRecordViewModel(
 //        Log.d("test", test.toString())
 
 
+//        Toast.makeText(getApplication(), "noteList size: ${noteList.size}\n " +
+//                "is recording: ${_isRecording.value}", Toast.LENGTH_LONG).show()
+//
+//        Toast.makeText(getApplication(), "myMelody: ${myMelody.value}\n" +
+//                "mySuperMelody: ${mySuperMelody.value}", Toast.LENGTH_LONG).show()
+
+Log.d("tag", "mymelodyvalue: ${myMelody.value}\n" +
+        "mysupermelodyvalue: ${mySuperMelody.value}")
+
+
         if (noteList.isNotEmpty() && isRecording.value == false) {
+
             _navigateToSaveFragment.value = true
+            Toast.makeText(getApplication(), "notelistisnotempty: ${noteList.isNotEmpty()} && isrecording.value = ${isRecording.value}",
+            Toast.LENGTH_LONG).show()
+
         } else if (isRecording.value == true) {
             Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
         } else {
             Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
         }
+
+        Toast.makeText(getApplication(), "NavtoSaveFrag: ${_navigateToSaveFragment.value}", Toast.LENGTH_LONG).show()
     }
 
     fun onNavigatingToSaveFragmentFinished() {

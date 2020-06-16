@@ -48,9 +48,10 @@ class SaveFragment : Fragment() {
         viewModel.onSavePressed.observe(viewLifecycleOwner, Observer {
             if (it) {
                 viewModel.assignMelodyValues(recMelodyTitle.text.toString())
-//                viewModel.doneSaving()
+
 
                 findNavController().navigate(SaveFragmentDirections.actionSaveFragmentToPlayAndRecord())
+                viewModel.doneSaving()
 
             }
         })
