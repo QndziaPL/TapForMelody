@@ -3,13 +3,17 @@ package com.qndzia.tapformelody.recordermelodies
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
+import com.qndzia.tapformelody.notes.Note
+import kotlinx.android.synthetic.main.recorded_melodies_view_holder.view.*
 
 
-class RecordedMelodiesAdapter2 : RecyclerView.Adapter<ViewHolder>() {
+class RecordedMelodiesAdapter2(var dbOperations: DatabaseOperations) : RecyclerView.Adapter<ViewHolder>() {
 
     var data = listOf<Melody>()
         set(value) {
@@ -22,6 +26,9 @@ class RecordedMelodiesAdapter2 : RecyclerView.Adapter<ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
         holder.bind(item)
+        holder.deleteButton.setOnClickListener {
+            dbOperations.delete(item)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,19 +36,37 @@ class RecordedMelodiesAdapter2 : RecyclerView.Adapter<ViewHolder>() {
     }
 
 
+
+
+}
+
+interface DatabaseOperations{
+    fun delete(melody: Melody)
+//    fun deleteAll()
 }
 
 
 class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    // może tutaj dodać database i usuwać potem w bindzie poszczególne melodie?
+
     val melodyTitle: TextView = itemView.findViewById(R.id.recMelodyTitle)
     val timeRecorded: TextView = itemView.findViewById(R.id.melodyRecordTime)
+    val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
+
+
 
     fun bind(item: Melody) {
         val res = itemView.context.resources
 
         melodyTitle.text = item.title
         timeRecorded.text = item.timeOfRecord.toString()
+
+        deleteButton.setOnClickListener {
+
+            Toast.makeText(itemView.context, "[need to implement deleting items from adapter]", Toast.LENGTH_SHORT).show()
+
+        }
 
 //        qualityImage.setImageResource(when (item.sleepQuality) {
 //            0 -> R.drawable.ic_sleep_0
@@ -64,4 +89,6 @@ class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(i
             return ViewHolder(view)
         }
     }
+
+
 }

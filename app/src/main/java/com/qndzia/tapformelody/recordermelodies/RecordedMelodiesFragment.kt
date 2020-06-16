@@ -19,8 +19,8 @@ import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentRecordedMelodiesBinding
 import kotlinx.android.synthetic.main.fragment_recorded_melodies.*
 
-
-class RecordedMelodiesFragment() : Fragment() {
+private lateinit var viewModel: RecordedMelodiesViewModel
+class RecordedMelodiesFragment() : Fragment(), DatabaseOperations {
 
 
     override fun onCreateView(
@@ -29,8 +29,10 @@ class RecordedMelodiesFragment() : Fragment() {
     ): View? {
 
 
-        val binding: FragmentRecordedMelodiesBinding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_recorded_melodies, container, false)
+//        val binding: FragmentRecordedMelodiesBinding = DataBindingUtil.inflate(
+//            inflater, R.layout.fragment_recorded_melodies, container, false)
+
+        val binding = FragmentRecordedMelodiesBinding.inflate(inflater)
 
         val application = requireNotNull(this.activity).application
 
@@ -38,23 +40,28 @@ class RecordedMelodiesFragment() : Fragment() {
 
         val viewModelFactory = RecordedMelodiesViewModelFactory(dataSource, application)
 
-        val viewModel = ViewModelProvider(requireActivity(), viewModelFactory)
+        viewModel = ViewModelProvider(requireActivity(), viewModelFactory)
             .get(RecordedMelodiesViewModel::class.java)
 
 
 
         binding.viewModel = viewModel
 
-        val adapter = RecordedMelodiesAdapter2()
+        val adapter = RecordedMelodiesAdapter2(this)
+
+        binding.recordedMelodiesRecyclerView.layoutManager = LinearLayoutManager(context)
 
         // tu nie jestem pewien \/ \/ \/ \/ \/ \/
         binding.recordedMelodiesRecyclerView.adapter = adapter
 
 
 
-        viewModel.melodies.observe(viewLifecycleOwner, Observer {
+
+
+        viewModel.list.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.data = it
+
             }
         })
 
@@ -62,6 +69,11 @@ class RecordedMelodiesFragment() : Fragment() {
         return binding.root
     }
 
+
+
+    override fun delete(melody: Melody) {
+        viewModel.deleteMelody(melody)
+    }
 
 
 }

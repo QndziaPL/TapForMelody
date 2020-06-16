@@ -12,8 +12,8 @@ interface MelodyDao {
     @Insert
     fun insert(melody: Melody)
 
-//    @Delete
-//    fun delete(melody: Melody)
+    @Delete
+    fun delete(melody: Melody)
 
     @Query("SELECT * from recorded_melody_table WHERE melodyId = :id")
     fun get(id: Long): Melody
@@ -21,7 +21,7 @@ interface MelodyDao {
     @Query("DELETE FROM recorded_melody_table")
     fun clear()
 
-    @Query("SELECT * FROM recorded_melody_table")
+    @Query("SELECT * FROM recorded_melody_table ORDER BY melodyId DESC")
     fun getAll(): LiveData<List<Melody>>
 
 //    @Query("SELECT * FROM recorded_melody_table ORDER BY melodyId DESC")

@@ -1,6 +1,7 @@
 package com.qndzia.tapformelody.recordermelodies
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,33 +12,42 @@ import com.qndzia.tapformelody.notes.Note
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
-private lateinit var fakeList: LiveData<List<Melody>>
 
 class RecordedMelodiesViewModel(
     datasource: MelodyDao,
     application: Application
-) : ViewModel() {
+) : ViewModel()
+//    , DatabaseOperations
+{
+
 
     val database = datasource
+    var list: LiveData<List<Melody>>
 
-//    val fakeList=  listOf(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-
-
+    init {
+        list = datasource.getAll()
+    }
 
 
     private var viewModelJob = Job()
 
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val uiScope = CoroutineScope(Dispatchers.IO + viewModelJob)
 
-   val melodies = database.getAll()
+    val melodies = database.getAll()
 
+    fun deleteMelody(melody: Melody) {
+        uiScope.launch {
+            database.delete(melody)
+        }
+    }
 
-
-
-
-
-
+    fun deleteAllMelodies() {
+        uiScope.launch {
+            database.clear()
+        }
+    }
 
 
 }

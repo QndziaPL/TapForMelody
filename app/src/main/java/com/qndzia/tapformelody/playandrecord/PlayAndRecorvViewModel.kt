@@ -89,9 +89,20 @@ class PlayAndRecordViewModel(
 
         dbScope.launch {
             database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            Log.d("database", "db: ${database.getAll().value}")
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+
 
         }
+
+
 
 
 
@@ -330,8 +341,7 @@ Log.d("tag", "mymelodyvalue: ${myMelody.value}\n" +
         if (noteList.isNotEmpty() && isRecording.value == false) {
 
             _navigateToSaveFragment.value = true
-            Toast.makeText(getApplication(), "notelistisnotempty: ${noteList.isNotEmpty()} && isrecording.value = ${isRecording.value}",
-            Toast.LENGTH_LONG).show()
+
 
         } else if (isRecording.value == true) {
             Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
@@ -339,7 +349,7 @@ Log.d("tag", "mymelodyvalue: ${myMelody.value}\n" +
             Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
         }
 
-        Toast.makeText(getApplication(), "NavtoSaveFrag: ${_navigateToSaveFragment.value}", Toast.LENGTH_LONG).show()
+
     }
 
     fun onNavigatingToSaveFragmentFinished() {
