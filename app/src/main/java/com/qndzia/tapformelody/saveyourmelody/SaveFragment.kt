@@ -46,7 +46,12 @@ class SaveFragment : Fragment() {
 
         viewModel.onSavePressed.observe(viewLifecycleOwner, Observer {
             if (it) {
-                viewModel.assignMelodyValues(recMelodyTitle.text.toString())
+
+                val newTitle = if (recMelodyTitle.text.toString() == "") "yourMelody" else recMelodyTitle.text.toString()
+                viewModel.assignMelodyValues(newTitle)
+
+
+//                viewModel.assignMelodyValues(recMelodyTitle.text.toString())
 
 
                 findNavController().navigate(SaveFragmentDirections.actionSaveFragmentToPlayAndRecord())

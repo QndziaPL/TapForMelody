@@ -87,20 +87,20 @@ class PlayAndRecordViewModel(
 
     init {
 
-        dbScope.launch {
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-
-
-        }
+//        dbScope.launch {
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+//
+//
+//        }
 
 
 
