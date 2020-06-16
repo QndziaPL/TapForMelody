@@ -23,8 +23,10 @@ import kotlinx.coroutines.*
 
 class PlayAndRecordViewModel(
     private val labelsOn: Boolean,
-    val database: MelodyDao, application: Application
+    dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
+
+    val database = dataSource
 
     private var _labelsOnLiveData = MutableLiveData<Boolean>()
     val labelsOnLiveData: LiveData<Boolean> = _labelsOnLiveData
@@ -66,8 +68,8 @@ class PlayAndRecordViewModel(
 
 //    val assetManager = AssetManager.AssetInputStream()
 
-    //live data z listą melodii z rooma
-    val savedMelodies = database.getAll()
+//    //live data z listą melodii z rooma
+//    val savedMelodies = database.getAll()
 
     private var soundC: Int
     private var soundCsharp: Int
@@ -86,6 +88,15 @@ class PlayAndRecordViewModel(
     private val listOfPoolSounds = mutableListOf<Int>()
 
     init {
+
+        dbScope.launch {
+            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
+            Log.d("database", "db: ${database.getAll().value}")
+
+        }
+
+
+
         _isRecording.value = false
         _myMelody.value = ""
         _navigateToSaveFragment.value = false
@@ -199,11 +210,7 @@ class PlayAndRecordViewModel(
         }
     }
 
-//    private fun deleteAll() {
-//        dbScope.launch {
-//            database.clear()
-//        }
-//    }
+
 
 
     private fun keyPressed(note: Note, sound: Int) {
@@ -211,6 +218,9 @@ class PlayAndRecordViewModel(
         uiScope.launch {
             soundPool.play(sound, 1F, 1F, 1, 0, 1F)
         }
+
+//        Toast.makeText(getApplication(), "db: ${database.getAll().value!!.size}", Toast.LENGTH_LONG).show()
+
 
 
         if (!blockAdding) {
@@ -234,26 +244,18 @@ class PlayAndRecordViewModel(
         }
     }
 
-//    fun updateTitleOfYourMelody(newTitle: String){
+
+//    fun saveInDb(newTitle: String) {
+//        _mySuperMelody.value?.title = newTitle
+//        Log.d("TAG", "melody name is now ${mySuperMelody.value?.title}")
+//        _mySuperMelody.value?.let {
 //
-//
+//            database.insert(it) }
 //    }
-
-    fun saveInDb(newTitle: String) {
-        _mySuperMelody.value?.title = newTitle
-        Log.d("TAG", "melody name is now ${mySuperMelody.value?.title}")
-        _mySuperMelody.value?.let {
-
-            database.insert(it) }
-    }
-
-    fun turnOffSaving() {
-        _saveToDbProcessOn.value = false
-        uiScope.launch {
-            val list = database.getAll()
-            Log.d("TAG", list.toString())
-        }
-    }
+//
+//    fun turnOffSaving() {
+//        _saveToDbProcessOn.value = false
+//    }
 
     fun onRecordPressed() {
 //        deleteAll()
@@ -263,14 +265,6 @@ class PlayAndRecordViewModel(
             _isRecording.value = false
             blockAdding = true
 
-
-//            val toast = Toast.makeText(
-//                getApplication(), "REC is OFF",
-//                Toast.LENGTH_SHORT
-//            )
-//            toast.setGravity(Gravity.TOP, 0, 80)
-//            toast.show()
-
         } else {
             _isRecording.value = true
             _myMelody.value = ""
@@ -279,13 +273,6 @@ class PlayAndRecordViewModel(
             blockAdding = false
             //creating melody to save and compare
             _mySuperMelody.value = Melody(melody = listOf())
-
-//            val toast = Toast.makeText(
-//                getApplication(), "REC is ON!!!",
-//                Toast.LENGTH_SHORT
-//            )
-//            toast.setGravity(Gravity.TOP, 0, 80)
-//            toast.show()
 
         }
     }

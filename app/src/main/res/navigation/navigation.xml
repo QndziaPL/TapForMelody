@@ -53,5 +53,6 @@
     <fragment
         android:id="@+id/recordedMelodiesFragment"
         android:name="com.qndzia.tapformelody.recordermelodies.RecordedMelodiesFragment"
-        android:label="RecordedMelodiesFragment" />
+        android:label="RecordedMelodiesFragment"
+        tools:layout="@layout/fragment_recorded_melodies"/>
 </navigation>

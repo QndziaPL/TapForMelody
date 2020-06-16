@@ -133,10 +133,10 @@ class PlayAndRecord : Fragment() {
                 }
             })
 
-        viewModel.savedMelodies.observe(viewLifecycleOwner,
-            Observer {
-//            Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
-            })
+//        viewModel.savedMelodies.observe(viewLifecycleOwner,
+//            Observer {
+////            Toast.makeText(context, it.toString(), Toast.LENGTH_LONG).show()
+//            })
 
         viewModel.showMenu.observe(viewLifecycleOwner,
             Observer {
@@ -208,14 +208,14 @@ class PlayAndRecord : Fragment() {
                 }
             })
 
-        viewModel.saveToDbProcessOn.observe(viewLifecycleOwner,
-            Observer {
-                if (it) {
-                    viewModel.saveInDb(arguments.melodyTitle)
-                    viewModel.turnOffSaving()
-
-                }
-            })
+//        viewModel.saveToDbProcessOn.observe(viewLifecycleOwner,
+//            Observer {
+//                if (it) {
+//                    viewModel.saveInDb(arguments.melodyTitle)
+//                    viewModel.turnOffSaving()
+//
+//                }
+//            })
 
 
 

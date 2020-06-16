@@ -13,7 +13,6 @@ class RecordedMelodiesViewModelFactory(
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RecordedMelodiesViewModel::class.java)) {
             return RecordedMelodiesViewModel(dataSource, application) as T
-
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -11,7 +11,7 @@ class RecordedMelodiesAdapter (private val recordedMelodies: List<Melody>) :
     RecyclerView.Adapter<RecordedMelodiesAdapter.RecordedMelodiesViewHolder>() {
 
     class RecordedMelodiesViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-        RecyclerView.ViewHolder(inflater.inflate(R.layout.song_viewholder, parent, false)) {
+        RecyclerView.ViewHolder(inflater.inflate(R.layout.recorded_melodies_view_holder, parent, false)) {
 
         val melodyTitle: TextView = itemView.findViewById(R.id.recMelodyTitle)
         val timeRecorded: TextView = itemView.findViewById(R.id.melodyRecordTime)
