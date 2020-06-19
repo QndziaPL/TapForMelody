@@ -359,7 +359,7 @@ class PlayAndRecordViewModel(
         _navigateToSaveFragment.value = false
     }
 
-    fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
+    private fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
 
         var yourStringMelody = ""
         yourMelody?.melody?.forEach {
@@ -375,7 +375,7 @@ class PlayAndRecordViewModel(
         return libraryStringMelody.contains(yourStringMelody)
     }
 
-    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
+    private fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
         var matchList = mutableListOf<Song>()
         library.forEach {
             if (isSongMatched(yourMelody, it.melody)) {

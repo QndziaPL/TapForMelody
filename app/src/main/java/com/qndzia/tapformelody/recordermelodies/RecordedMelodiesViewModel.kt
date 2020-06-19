@@ -1,11 +1,13 @@
 package com.qndzia.tapformelody.recordermelodies
 
+import android.app.Activity
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.qndzia.tapformelody.MainActivity
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
 import com.qndzia.tapformelody.notes.Note
@@ -21,6 +23,17 @@ class RecordedMelodiesViewModel(
 ) : ViewModel()
 //    , DatabaseOperations
 {
+
+    private var _onBackPressed = MutableLiveData<Boolean>()
+    var onBackPressed: LiveData<Boolean> = _onBackPressed
+
+    fun goBack() {
+        _onBackPressed.value = true
+    }
+
+    fun onFinishedNavBack() {
+        _onBackPressed.value = false
+    }
 
 
     val database = datasource
@@ -48,6 +61,8 @@ class RecordedMelodiesViewModel(
             database.clear()
         }
     }
+
+
 
 
 }

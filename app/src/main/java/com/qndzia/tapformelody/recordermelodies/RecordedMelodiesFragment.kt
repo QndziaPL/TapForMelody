@@ -63,6 +63,13 @@ class RecordedMelodiesFragment() : Fragment(), DatabaseOperations, TakeMelodyToM
             }
         })
 
+        viewModel.onBackPressed.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                findNavController().navigate(RecordedMelodiesFragmentDirections.actionRecordedMelodiesFragmentToPlayAndRecord())
+                viewModel.onFinishedNavBack()
+            }
+        })
+
 
         return binding.root
     }
