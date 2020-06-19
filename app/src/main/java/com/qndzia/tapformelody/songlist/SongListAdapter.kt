@@ -12,8 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.qndzia.tapformelody.R
+import com.qndzia.tapformelody.recordermelodies.TakeMelodyToMainScreen
 
-class SongListAdapter(private val librarySongList: List<Song>) :
+class SongListAdapter(private val librarySongList: List<Song>,
+var takeMelodyToMainScreen: TakeMelodyToMainScreen) :
     RecyclerView.Adapter<SongListAdapter.SongListViewHolder>() {
 
     class SongListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -44,13 +46,17 @@ class SongListAdapter(private val librarySongList: List<Song>) :
 
         holder.playMelody.setOnClickListener {
 
-            mediaPlayer.start()
+            val melodyToSend = song.melody
+            melodyToSend.title = song.title
+            takeMelodyToMainScreen.takeMelody(melodyToSend)
 
-            Toast.makeText(
-                holder.songAuthor.context,
-                "Not everything recorder yet. Work in progress!!!",
-                Toast.LENGTH_LONG
-            ).show()
+//            mediaPlayer.start()
+//
+//            Toast.makeText(
+//                holder.songAuthor.context,
+//                "Not everything recorder yet. Work in progress!!!",
+//                Toast.LENGTH_LONG
+//            ).show()
         }
         holder.playYoutube.setOnClickListener {
             val webIntent = Intent(

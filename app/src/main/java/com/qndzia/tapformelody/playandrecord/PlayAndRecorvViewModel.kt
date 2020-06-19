@@ -132,7 +132,7 @@ class PlayAndRecordViewModel(
             .build()
 
         var soundPool = SoundPool.Builder()
-            .setMaxStreams(30)
+            .setMaxStreams(50)
             .setAudioAttributes(audioAttributes)
             .build()
 
@@ -348,8 +348,7 @@ class PlayAndRecordViewModel(
 
     fun loadRecordedMelody(melody: Melody, recOrLib: String) {
         if (recOrLib == "recorded") {
-            _myMelody.value = "your melody of title:\n\"${melody.title}\""
-
+            _myMelody.value = "\"${melody.title}\""
         }
         _mySuperMelody.value = melody
         noteList.clear()

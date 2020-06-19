@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.qndzia.tapformelody.R
+import com.qndzia.tapformelody.database.Melody
+import com.qndzia.tapformelody.recordermelodies.TakeMelodyToMainScreen
 
 
-class SongListFragment : Fragment() {
+class SongListFragment : Fragment(), TakeMelodyToMainScreen {
         private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: RecyclerView.Adapter<*>
     private lateinit var viewManager: RecyclerView.LayoutManager
@@ -29,7 +32,7 @@ class SongListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewManager = LinearLayoutManager(activity)
-        viewAdapter = SongListAdapter(defaultSongList)
+        viewAdapter = SongListAdapter(defaultSongList, this)
 
         recyclerView = requireActivity().findViewById(R.id.songListRecyclerView)
 
@@ -37,6 +40,10 @@ class SongListFragment : Fragment() {
             layoutManager = viewManager
             adapter = viewAdapter
         }
+    }
+
+    override fun takeMelody(melody: Melody) {
+        findNavController().navigate(SongListFragmentDirections.actionSongListFragmentToPlayAndRecord(melodySavedOrFromLibrary = melody))
     }
 
 }

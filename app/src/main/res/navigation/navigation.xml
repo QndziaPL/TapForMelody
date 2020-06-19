@@ -42,7 +42,15 @@
         android:id="@+id/songListFragment"
         android:name="com.qndzia.tapformelody.songlist.SongListFragment"
         android:label="fragment_song_list"
-        tools:layout="@layout/fragment_song_list" />
+        tools:layout="@layout/fragment_song_list" >
+        <action
+            android:id="@+id/action_songListFragment_to_playAndRecord"
+            app:destination="@id/playAndRecord" >
+            <argument
+                android:name="blockSave"
+                android:defaultValue="true" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/saveFragment"
         android:name="com.qndzia.tapformelody.saveyourmelody.SaveFragment"
