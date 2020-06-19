@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -20,7 +21,7 @@ import com.qndzia.tapformelody.databinding.FragmentRecordedMelodiesBinding
 import kotlinx.android.synthetic.main.fragment_recorded_melodies.*
 
 private lateinit var viewModel: RecordedMelodiesViewModel
-class RecordedMelodiesFragment() : Fragment(), DatabaseOperations {
+class RecordedMelodiesFragment() : Fragment(), DatabaseOperations, TakeMelodyToMainScreen {
 
 
     override fun onCreateView(
@@ -47,15 +48,12 @@ class RecordedMelodiesFragment() : Fragment(), DatabaseOperations {
 
         binding.viewModel = viewModel
 
-        val adapter = RecordedMelodiesAdapter2(this)
+        val adapter = RecordedMelodiesAdapter2(this, this)
 
         binding.recordedMelodiesRecyclerView.layoutManager = LinearLayoutManager(context)
 
-        // tu nie jestem pewien \/ \/ \/ \/ \/ \/
+
         binding.recordedMelodiesRecyclerView.adapter = adapter
-
-
-
 
 
         viewModel.list.observe(viewLifecycleOwner, Observer {
@@ -75,5 +73,7 @@ class RecordedMelodiesFragment() : Fragment(), DatabaseOperations {
         viewModel.deleteMelody(melody)
     }
 
-
+    override fun takeMelody(melody: Melody) {
+        findNavController().navigate(RecordedMelodiesFragmentDirections.actionRecordedMelodiesFragmentToPlayAndRecord(melodySavedOrFromLibrary = melody))
+    }
 }

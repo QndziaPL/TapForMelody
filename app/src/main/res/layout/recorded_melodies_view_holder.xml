@@ -33,8 +33,17 @@
         android:id="@+id/deleteButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/ic_delete"
+        app:layout_constraintBaseline_toBaselineOf="@+id/playRecordedButton"
+        app:layout_constraintEnd_toStartOf="@+id/playRecordedButton" />
+
+    <Button
+        android:id="@+id/playRecordedButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/ic_play"
         app:layout_constraintBottom_toBottomOf="@+id/melodyRecordTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/recMelodyTitle" />

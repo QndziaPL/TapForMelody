@@ -55,6 +55,7 @@ class SaveViewModel(
     fun assignMelodyValues(title: String) {
         var melodyToSave = _melody.value
         melodyToSave!!.title = title
+        melodyToSave.timeOfRecord = System.currentTimeMillis()
         triggerSaveCoroutineFun(melodyToSave)
 
     }

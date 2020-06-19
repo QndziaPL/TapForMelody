@@ -126,10 +126,12 @@ class PlayAndRecord : Fragment() {
             Observer {
                 if (it) {
 
-                    findNavController().navigate(PlayAndRecordDirections.actionPlayAndRecordToSaveFragment(
-                        viewModel.myMelody.value!!,
-                        viewModel.mySuperMelody.value!!
-                    ))
+                    findNavController().navigate(
+                        PlayAndRecordDirections.actionPlayAndRecordToSaveFragment(
+                            viewModel.myMelody.value!!,
+                            viewModel.mySuperMelody.value!!
+                        )
+                    )
                     viewModel.onNavigatingToSaveFragmentFinished()
 
                 }
@@ -214,6 +216,15 @@ class PlayAndRecord : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        val arguments = PlayAndRecordArgs.fromBundle(requireArguments())
+
+        if (arguments.melodySavedOrFromLibrary != null) {
+            viewModel.loadRecordedMelody(arguments.melodySavedOrFromLibrary, "recorded")
+        }
+    }
 
 
 }

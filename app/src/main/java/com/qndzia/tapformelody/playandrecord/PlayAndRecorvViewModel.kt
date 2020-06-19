@@ -22,6 +22,7 @@ import kotlinx.coroutines.*
 
 
 class PlayAndRecordViewModel(
+//    private val melodySavedOrFromLibrary: Melody,
     private val labelsOn: Boolean,
     dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
@@ -86,24 +87,6 @@ class PlayAndRecordViewModel(
     private val listOfPoolSounds = mutableListOf<Int>()
 
     init {
-
-//        dbScope.launch {
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//            database.insert(Melody(title = "chuj", melody = listOf(Note.C, Note.D, Note.E)))
-//
-//
-//        }
-
-
-
 
 
         _isRecording.value = false
@@ -203,7 +186,6 @@ class PlayAndRecordViewModel(
 
     fun c2KeyPressed() {
         keyPressed(Note.C2, soundC2)
-//        Toast.makeText(getApplication(), "status klawiszy: ${labelsOnLiveData.value}", Toast.LENGTH_LONG).show()
     }
 
 
@@ -349,7 +331,16 @@ Log.d("tag", "mymelodyvalue: ${myMelody.value}\n" +
             Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
         }
 
+    }
 
+    fun loadRecordedMelody(melody: Melody, recOrLib: String){
+        if (recOrLib == "recorded"){
+            _myMelody.value = "your melody of title:\n\"${melody.title}\""
+
+        }
+        _mySuperMelody.value = melody
+        noteList.clear()
+        noteList.addAll(melody.melody)
     }
 
     fun onNavigatingToSaveFragmentFinished() {
