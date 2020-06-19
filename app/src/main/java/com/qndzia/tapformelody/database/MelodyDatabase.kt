@@ -1,8 +1,6 @@
 package com.qndzia.tapformelody.database
 
 import android.content.Context
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.room.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -55,32 +53,4 @@ class NoteListConverter {
         return gson.fromJson(value, type)
     }
 }
-
-//class Converters {
-//    @TypeConverter
-//    fun fromNote(value: Note): Int {
-//        return value.id
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    @TypeConverter
-//    fun toNote(value: Int): Note {
-//        val filter = listOf(
-//            Note.C, Note.Csharp, Note.D, Note.Dsharp,
-//            Note.E, Note.F, Note.Fsharp, Note.G, Note.Gsharp, Note.A,
-//            Note.Asharp, Note.H, Note.C2
-//        ).filter { it.id == value }
-//        return filter[0]
-//    }
-//}
-//
-//class ListOfNoteSConverters{
-//    @TypeConverter
-//    fun fromList(list: List<Note>) : {
-//        val newList = list.map { it.id }
-//        return newList
-//
-//
-//    }
-//}
 

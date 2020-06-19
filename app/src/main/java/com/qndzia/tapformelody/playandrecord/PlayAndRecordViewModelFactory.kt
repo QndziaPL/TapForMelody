@@ -3,7 +3,6 @@ package com.qndzia.tapformelody.playandrecord
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
 
 class PlayAndRecordViewModelFactory(

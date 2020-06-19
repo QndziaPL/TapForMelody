@@ -21,7 +21,7 @@ class RecordedMelodiesAdapter (private val recordedMelodies: List<Melody>) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecordedMelodiesAdapter.RecordedMelodiesViewHolder {
+    ): RecordedMelodiesViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return RecordedMelodiesViewHolder(inflater, parent)
     }

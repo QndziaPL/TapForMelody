@@ -18,12 +18,10 @@ import com.qndzia.tapformelody.songlist.defaultSongList
 
 import kotlinx.coroutines.*
 
-//lateinit var soundPool: SoundPool
-
 
 class PlayAndRecordViewModel(
 //    private val melodySavedOrFromLibrary: Melody,
-    private val labelsOn: Boolean,
+    labelsOn: Boolean,
     dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
 
@@ -35,8 +33,6 @@ class PlayAndRecordViewModel(
     private var viewModelJob = Job()
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    private val dbScope = CoroutineScope(Dispatchers.Default + viewModelJob)
 
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
@@ -56,6 +52,7 @@ class PlayAndRecordViewModel(
     private var _mySuperMelody = MutableLiveData<Melody>()
     val mySuperMelody: LiveData<Melody> = _mySuperMelody
 
+    // it should be false only while recording - otherwise block adding new notes to current melody
     private var blockAdding = true
 
     private var _navigateToSaveFragment = MutableLiveData<Boolean>()
@@ -68,10 +65,6 @@ class PlayAndRecordViewModel(
     private var _preventSavingRecordedOnceAgain = MutableLiveData<Boolean>()
     val preventSavingRecordedOnceAgain: LiveData<Boolean> = _preventSavingRecordedOnceAgain
 
-//    val assetManager = AssetManager.AssetInputStream()
-
-//    //live data z listą melodii z rooma
-//    val savedMelodies = database.getAll()
 
     private var soundC: Int
     private var soundCsharp: Int
@@ -91,13 +84,11 @@ class PlayAndRecordViewModel(
 
     init {
 
-
         _isRecording.value = false
         _myMelody.value = ""
         _navigateToSaveFragment.value = false
         _noteListSize.value = 0
         _preventSavingRecordedOnceAgain.value = false
-
 
 
         soundC = soundPool.load(getApplication(), R.raw.c, 1)
@@ -135,8 +126,6 @@ class PlayAndRecordViewModel(
             .setMaxStreams(50)
             .setAudioAttributes(audioAttributes)
             .build()
-
-
     }
 
 
@@ -227,8 +216,6 @@ class PlayAndRecordViewModel(
 
 
     fun onRecordPressed() {
-//        deleteAll()
-//        saveMelody()
         _preventSavingRecordedOnceAgain.value = false
 
         if (_isRecording.value == true) {
@@ -241,11 +228,6 @@ class PlayAndRecordViewModel(
             noteList.clear()
             _noteListSize.value = noteList.size
             blockAdding = false
-            //creating melody to save and compare
-
-            // commented it right now for tests
-            //checking if to methods below are enough
-//            _mySuperMelody.value = Melody(melody = listOf())
 
         }
     }
@@ -311,19 +293,6 @@ class PlayAndRecordViewModel(
 
     fun onSavePressed() {
 
-//        val test = isSongMatched(
-//            Melody(title = "dupa", melody = listOf(Note.D, Note.A, Note.C, Note.C, Note.C)),
-//            defaultSongList[0].melody
-//        )
-//        Log.d("test", test.toString())
-
-
-//        Toast.makeText(getApplication(), "noteList size: ${noteList.size}\n " +
-//                "is recording: ${_isRecording.value}", Toast.LENGTH_LONG).show()
-//
-//        Toast.makeText(getApplication(), "myMelody: ${myMelody.value}\n" +
-//                "mySuperMelody: ${mySuperMelody.value}", Toast.LENGTH_LONG).show()
-
        if (_preventSavingRecordedOnceAgain.value == false) {
 
            if (noteList.isNotEmpty() && isRecording.value == false) {
@@ -340,8 +309,6 @@ class PlayAndRecordViewModel(
            Toast.makeText(getApplication(), "Bro, You already have it!\n" +
                    "Record something new :)", Toast.LENGTH_LONG).show()
        }
-
-
 
 
     }
@@ -376,7 +343,7 @@ class PlayAndRecordViewModel(
     }
 
     private fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
-        var matchList = mutableListOf<Song>()
+        val matchList = mutableListOf<Song>()
         library.forEach {
             if (isSongMatched(yourMelody, it.melody)) {
                 Log.d("match", "${it.title} matches!!!")

@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:textColor="@color/colorTextDark"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -25,6 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:textColor="@color/colorTextDark"
         app:layout_constraintStart_toStartOf="@+id/recMelodyTitle"
         app:layout_constraintTop_toBottomOf="@+id/recMelodyTitle"
         tools:text="song author" />

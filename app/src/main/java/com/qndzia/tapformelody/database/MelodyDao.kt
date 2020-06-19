@@ -24,15 +24,7 @@ interface MelodyDao {
     @Query("SELECT * FROM recorded_melody_table ORDER BY melodyId DESC")
     fun getAll(): LiveData<List<Melody>>
 
-//    @Query("SELECT * FROM recorded_melody_table ORDER BY melodyId DESC")
-//    fun getAll(): LiveData<List<Melody>>
-
     @Query("SELECT * FROM recorded_melody_table ORDER BY melodyId DESC LIMIT 1")
     fun getMostFreshOne() : Melody?
-
-//    @Query("SELECT * FROM recorded_melody_table ORDER BY melodyId DESC")
-//    fun getAll(): LiveData<List<Melody>>
-
-
 
 }

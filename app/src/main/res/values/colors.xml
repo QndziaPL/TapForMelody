@@ -6,4 +6,5 @@
     <color name="colorBlackKeysLabel">#D3D3D3</color>
     <color name="colorWhiteKeysLabel">#000000</color>
     <color name="songListRecyclerViewBackgroundColor">#000000</color>
+    <color name="colorTextDark">#000000</color>
 </resources>
