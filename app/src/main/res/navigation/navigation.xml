@@ -33,6 +33,10 @@
             app:argType="com.qndzia.tapformelody.database.Melody"
             app:nullable="true"
             android:defaultValue="@null" />
+        <argument
+            android:name="blockSave"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <fragment
         android:id="@+id/songListFragment"
@@ -52,7 +56,11 @@
             app:argType="com.qndzia.tapformelody.database.Melody" />
         <action
             android:id="@+id/action_saveFragment_to_playAndRecord"
-            app:destination="@id/playAndRecord" />
+            app:destination="@id/playAndRecord" >
+            <argument
+                android:name="blockSave"
+                android:defaultValue="true" />
+        </action>
 
     </fragment>
     <fragment

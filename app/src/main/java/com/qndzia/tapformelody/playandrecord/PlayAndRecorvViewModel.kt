@@ -65,6 +65,9 @@ class PlayAndRecordViewModel(
     private var _showMenu = MutableLiveData<Boolean>()
     val showMenu: LiveData<Boolean> = _showMenu
 
+    private var _preventSavingRecordedOnceAgain = MutableLiveData<Boolean>()
+    val preventSavingRecordedOnceAgain: LiveData<Boolean> = _preventSavingRecordedOnceAgain
+
 //    val assetManager = AssetManager.AssetInputStream()
 
 //    //live data z listą melodii z rooma
@@ -93,6 +96,7 @@ class PlayAndRecordViewModel(
         _myMelody.value = ""
         _navigateToSaveFragment.value = false
         _noteListSize.value = 0
+        _preventSavingRecordedOnceAgain.value = false
 
 
 
@@ -189,7 +193,6 @@ class PlayAndRecordViewModel(
     }
 
 
-
     private fun keyPressed(note: Note, sound: Int) {
 
         uiScope.launch {
@@ -218,10 +221,15 @@ class PlayAndRecordViewModel(
         }
     }
 
+    fun preventSaving() {
+        _preventSavingRecordedOnceAgain.value = true
+    }
+
 
     fun onRecordPressed() {
 //        deleteAll()
 //        saveMelody()
+        _preventSavingRecordedOnceAgain.value = false
 
         if (_isRecording.value == true) {
             _isRecording.value = false
@@ -316,25 +324,30 @@ class PlayAndRecordViewModel(
 //        Toast.makeText(getApplication(), "myMelody: ${myMelody.value}\n" +
 //                "mySuperMelody: ${mySuperMelody.value}", Toast.LENGTH_LONG).show()
 
-Log.d("tag", "mymelodyvalue: ${myMelody.value}\n" +
-        "mysupermelodyvalue: ${mySuperMelody.value}")
+       if (_preventSavingRecordedOnceAgain.value == false) {
+
+           if (noteList.isNotEmpty() && isRecording.value == false) {
+
+               _navigateToSaveFragment.value = true
 
 
-        if (noteList.isNotEmpty() && isRecording.value == false) {
+           } else if (isRecording.value == true) {
+               Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
+           } else {
+               Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
+           }
+       }else{
+           Toast.makeText(getApplication(), "Bro, You already have it!\n" +
+                   "Record something new :)", Toast.LENGTH_LONG).show()
+       }
 
-            _navigateToSaveFragment.value = true
 
 
-        } else if (isRecording.value == true) {
-            Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
-        }
 
     }
 
-    fun loadRecordedMelody(melody: Melody, recOrLib: String){
-        if (recOrLib == "recorded"){
+    fun loadRecordedMelody(melody: Melody, recOrLib: String) {
+        if (recOrLib == "recorded") {
             _myMelody.value = "your melody of title:\n\"${melody.title}\""
 
         }

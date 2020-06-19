@@ -213,6 +213,8 @@ class PlayAndRecord : Fragment() {
             })
 
 
+
+
         return binding.root
     }
 
@@ -223,8 +225,15 @@ class PlayAndRecord : Fragment() {
 
         if (arguments.melodySavedOrFromLibrary != null) {
             viewModel.loadRecordedMelody(arguments.melodySavedOrFromLibrary, "recorded")
+            viewModel.preventSaving()
         }
+
+        if (arguments.blockSave) viewModel.preventSaving()
     }
 
 
+}
+
+interface BlockSavingAgain{
+    fun block()
 }

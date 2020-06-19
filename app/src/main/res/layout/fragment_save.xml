@@ -21,15 +21,16 @@
 
             <EditText
                 android:id="@+id/recMelodyTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:gravity="center_horizontal"
                 android:hint="your melody title"
                 android:inputType="textPersonName"
                 android:textColorHint="@color/colorBlackKeysLabel"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/yourMelody"
+                app:layout_constraintStart_toStartOf="@+id/yourMelody"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.39" />
 
@@ -54,7 +55,7 @@
                 android:gravity="center_horizontal"
                 android:text="@{`melody: ` + viewModel.myStringMelody}"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="24sp"
+                android:textSize="36sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/recMelodyTitle"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,23 +63,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="c d e f g a h c" />
 
-            <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/recMelodyTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/yourMelody">
-
-                <TextView
-                    android:id="@+id/texttestdbsize"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:text="list of db elements" />
-            </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
