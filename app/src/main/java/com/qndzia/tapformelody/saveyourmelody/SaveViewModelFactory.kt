@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
-import com.qndzia.tapformelody.playandrecord.PlayAndRecordViewModel
 
 class SaveViewModelFactory(private val myStringMelody: String,
 private val myMelody: Melody,

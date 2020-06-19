@@ -22,7 +22,6 @@ class SaveFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
 
         val binding = FragmentSaveBinding.inflate(inflater)
 
@@ -50,21 +49,11 @@ class SaveFragment : Fragment() {
                 val newTitle = if (recMelodyTitle.text.toString() == "") "yourMelody" else recMelodyTitle.text.toString()
                 viewModel.assignMelodyValues(newTitle)
 
-
-//                viewModel.assignMelodyValues(recMelodyTitle.text.toString())
-
-
                 findNavController().navigate(SaveFragmentDirections.actionSaveFragmentToPlayAndRecord())
                 viewModel.doneSaving()
 
             }
         })
-
-//        viewModel.dblist.observe(viewLifecycleOwner,
-//        Observer {
-//            texttestdbsize.text = viewModel.dblist.value.toString()
-//        })
-
 
 
         return binding.root

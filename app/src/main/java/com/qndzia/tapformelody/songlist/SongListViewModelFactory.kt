@@ -2,7 +2,6 @@ package com.qndzia.tapformelody.songlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.qndzia.tapformelody.recordermelodies.RecordedMelodiesViewModel
 
 class SongListViewModelFactory : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")

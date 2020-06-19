@@ -2,20 +2,18 @@ package com.qndzia.tapformelody.songlist
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.recordermelodies.TakeMelodyToMainScreen
 
 class SongListAdapter(private val librarySongList: List<Song>,
-var takeMelodyToMainScreen: TakeMelodyToMainScreen) :
+                      private var takeMelodyToMainScreen: TakeMelodyToMainScreen) :
     RecyclerView.Adapter<SongListAdapter.SongListViewHolder>() {
 
     class SongListViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
@@ -31,7 +29,7 @@ var takeMelodyToMainScreen: TakeMelodyToMainScreen) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): SongListAdapter.SongListViewHolder {
+    ): SongListViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return SongListViewHolder(inflater, parent)
     }
@@ -42,21 +40,12 @@ var takeMelodyToMainScreen: TakeMelodyToMainScreen) :
         holder.songTitle.text = song.title
         holder.songAuthor.text = song.author
 
-        val mediaPlayer = MediaPlayer.create(holder.songAuthor.context, song.mp3)
-
         holder.playMelody.setOnClickListener {
 
             val melodyToSend = song.melody
             melodyToSend.title = song.title
             takeMelodyToMainScreen.takeMelody(melodyToSend)
 
-//            mediaPlayer.start()
-//
-//            Toast.makeText(
-//                holder.songAuthor.context,
-//                "Not everything recorder yet. Work in progress!!!",
-//                Toast.LENGTH_LONG
-//            ).show()
         }
         holder.playYoutube.setOnClickListener {
             val webIntent = Intent(

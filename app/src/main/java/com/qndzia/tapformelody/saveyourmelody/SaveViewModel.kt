@@ -1,23 +1,17 @@
 package com.qndzia.tapformelody.saveyourmelody
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
-import com.qndzia.tapformelody.database.MelodyDatabase
 import kotlinx.coroutines.*
 
 class SaveViewModel(
     val myStringMelody: String, myMelody: Melody,
     dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
-
-//for test only if db works and im able to read from
-//    val dblist: LiveData<List<Melody>>
 
 
     val database = dataSource
@@ -35,16 +29,13 @@ class SaveViewModel(
     init {
         _melody.value = myMelody
 
-        //tests only
-//        dblist = database.getAll()
-
     }
 
     fun onSavePressed() {
         _onSavePressed.value = true
     }
 
-    fun triggerSaveCoroutineFun(melody: Melody) {
+    private fun triggerSaveCoroutineFun(melody: Melody) {
         dbScope.launch {
             saveInDb(melody)
 
@@ -53,7 +44,7 @@ class SaveViewModel(
 
 
     fun assignMelodyValues(title: String) {
-        var melodyToSave = _melody.value
+        val melodyToSave = _melody.value
         melodyToSave!!.title = title
         melodyToSave.timeOfRecord = System.currentTimeMillis()
         triggerSaveCoroutineFun(melodyToSave)
@@ -64,37 +55,7 @@ class SaveViewModel(
         withContext(Dispatchers.IO) {
             database.insert(melody)
         }
-
-
     }
-
-/*
-poprzednia wersja \/ \/ \/
-
-
- */
-//    fun saveInDb(title: String) {
-//
-//        dbScope.launch {
-//
-//            var melodyToSave = _melody.value
-//            if (melodyToSave != null) {
-//                melodyToSave.title = title
-//                database.insert(melodyToSave)
-//
-//
-//            } else {
-//                Toast.makeText(
-//                    getApplication(),
-//                    "unable to insert $melodyToSave to db",
-//                    Toast.LENGTH_LONG
-//                ).show()
-//            }
-//
-//        }
-//        doneSaving()
-//
-//    }
 
     fun doneSaving() {
         _onSavePressed.value = false

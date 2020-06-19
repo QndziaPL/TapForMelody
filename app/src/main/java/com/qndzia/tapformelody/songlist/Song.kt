@@ -1,30 +1,19 @@
 package com.qndzia.tapformelody.songlist
 
-import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.notes.Note
-import kotlin.math.E
 
 class Song(
     val title: String,
     val author: String,
     val melody: Melody,
-    val mp3: Int = R.raw.miejsce_na_melodyjke,
     val link: String
 ) {
-
-
-
-    fun play() {
-
-    }
 
     override fun toString(): String {
         return "\nTitle=[$title], Author=[$author]"
     }
 }
-
-
 
 val defaultSongList = mutableListOf(
     Song(
@@ -33,7 +22,7 @@ val defaultSongList = mutableListOf(
             Note.G, Note.A, Note.H,Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A,
             Note.H, Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A, Note.C, Note.C,
             Note.C, Note.C, Note.C, Note.C, Note.H, Note.H, Note.H, Note.A, Note.G, Note.A, Note.H))
-        , link = "https://www.youtube.com/watch?v=olkNnmhMj7Y", mp3 = R.raw.wszystko_czego_dzis_chce
+        , link = "https://www.youtube.com/watch?v=olkNnmhMj7Y"
     ),
 
     Song(
