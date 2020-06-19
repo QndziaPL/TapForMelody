@@ -1,4 +1,4 @@
-package com.qndzia.tapformelody.recordermelodies
+package com.qndzia.tapformelody.recordedmelodies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

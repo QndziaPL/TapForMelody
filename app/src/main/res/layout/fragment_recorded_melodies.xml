@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.qndzia.tapformelody.recordermelodies.RecordedMelodiesViewModel" />
+            type="com.qndzia.tapformelody.recordedmelodies.RecordedMelodiesViewModel" />
 
     </data>
 

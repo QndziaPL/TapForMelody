@@ -1,21 +1,14 @@
-package com.qndzia.tapformelody.recordermelodies
+package com.qndzia.tapformelody.recordedmelodies
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.internal.bind.util.ISO8601Utils.format
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
-import com.qndzia.tapformelody.notes.Note
-import kotlinx.android.synthetic.main.recorded_melodies_view_holder.view.*
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.time.hours
 
 
 class RecordedMelodiesAdapter2(var dbOperations: DatabaseOperations,
@@ -56,8 +49,8 @@ interface TakeMelodyToMainScreen{
 }
 
 class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val melodyTitle: TextView = itemView.findViewById(R.id.recMelodyTitle)
-    val timeRecorded: TextView = itemView.findViewById(R.id.melodyRecordTime)
+    private val melodyTitle: TextView = itemView.findViewById(R.id.recMelodyTitle)
+    private val timeRecorded: TextView = itemView.findViewById(R.id.melodyRecordTime)
     val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
     val playRecordedButton: Button = itemView.findViewById(R.id.playRecordedButton)
 

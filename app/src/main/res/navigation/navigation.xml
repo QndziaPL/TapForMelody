@@ -73,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/recordedMelodiesFragment"
-        android:name="com.qndzia.tapformelody.recordermelodies.RecordedMelodiesFragment"
+        android:name="com.qndzia.tapformelody.recordedmelodies.RecordedMelodiesFragment"
         android:label="RecordedMelodiesFragment"
         tools:layout="@layout/fragment_recorded_melodies">
         <action

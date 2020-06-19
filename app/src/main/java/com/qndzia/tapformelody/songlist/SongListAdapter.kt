@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.qndzia.tapformelody.R
-import com.qndzia.tapformelody.recordermelodies.TakeMelodyToMainScreen
+import com.qndzia.tapformelody.recordedmelodies.TakeMelodyToMainScreen
 
 class SongListAdapter(private val librarySongList: List<Song>,
                       private var takeMelodyToMainScreen: TakeMelodyToMainScreen) :
