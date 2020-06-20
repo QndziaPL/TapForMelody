@@ -39,6 +39,8 @@ class SongListFragment : Fragment(), TakeMelodyToMainScreen {
 
         binding.songListRecyclerView.adapter = adapter
 
+        binding.songListSizeTextView.text = "Total list of songs: ${defaultSongList.size}"
+
         viewModel.onBackPressed.observe(viewLifecycleOwner, Observer {
             if (it) {
                 findNavController().navigate(SongListFragmentDirections.actionSongListFragmentToPlayAndRecord())

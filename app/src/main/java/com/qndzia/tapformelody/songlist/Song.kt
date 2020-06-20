@@ -27,8 +27,8 @@ val defaultSongList = mutableListOf(
         "Wszystko czego dzis chcę", "Izabela Trojanowska",
         Melody(melody = listOf(
             Note.G, Note.A, Note.H,Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A,
-            Note.H, Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A, Note.C, Note.C,
-            Note.C, Note.C, Note.C, Note.C, Note.H, Note.H, Note.H, Note.A, Note.G, Note.A, Note.H))
+            Note.H, Note.A, Note.G, Note.H, Note.A, Note.A, Note.A, Note.D, Note.A, Note.C2, Note.C2,
+            Note.C2, Note.C2, Note.C2, Note.C2, Note.H, Note.H, Note.H, Note.A, Note.G, Note.A))
         , link = "https://www.youtube.com/watch?v=olkNnmhMj7Y"
     ),
 
@@ -37,14 +37,14 @@ val defaultSongList = mutableListOf(
         Melody(melody = listOf(
             Note.H, Note.E, Note.G, Note.Fsharp, Note.E, Note.H, Note.A, Note.Fsharp, Note.E, Note.G,
             Note.Fsharp, Note.Dsharp, Note.F, Note.H, Note.H, Note.E, Note.G, Note.Fsharp, Note.E,
-            Note.H, Note.D, Note.Csharp, Note.C, Note.Gsharp, Note.C, Note.H, Note.Asharp,
+            Note.H, Note.D, Note.Csharp, Note.C2, Note.Gsharp, Note.C2, Note.H, Note.Asharp,
             Note.Asharp, Note.G, Note.E
         )), link = "https://www.youtube.com/watch?v=GTXBLyp7_Dw"
     ),
 
     Song("Happy Birthday To You", "Traditional",
         Melody(melody = listOf(Note.D, Note.D, Note.E, Note.D, Note.G, Note.Fsharp, Note.D, Note.D, Note.E, Note.D,
-    Note.A, Note.G, Note.D, Note.D, Note.D, Note.H, Note.G, Note.Fsharp, Note.E, Note.C, Note.C,
+    Note.A, Note.G, Note.D, Note.D, Note.D, Note.H, Note.G, Note.Fsharp, Note.E, Note.C2, Note.C2,
     Note.H, Note.G, Note.A, Note.G)),
         link = "https://www.youtube.com/watch?v=qCJSNMqub8g"
     ),
@@ -59,12 +59,12 @@ val defaultSongList = mutableListOf(
         Melody(melody = listOf(Note.A, Note.D, Note.Csharp, Note.D, Note.E, Note.D, Note.D, Note.C, Note.E,
         Note.G, Note.F, Note.C, Note.G, Note.A, Note.G, Note.F, Note.A, Note.G, Note.F, Note.D, Note.Csharp,
         Note.A, Note.D, Note.Csharp, Note.D, Note.E, Note.D, Note.C, Note.C, Note.E, Note.G, Note.Asharp,
-        Note.A, Note.G, Note.F, Note.A, Note.A, Note.G, Note.F, Note.A)),
+        Note.A, Note.G, Note.F, Note.A, Note.A, Note.G, Note.F, Note.D)),
     link = "https://www.youtube.com/watch?v=CduA0TULnow"
     ),
 
     Song("Usta Mariana", "Andrzej Rosiewicz",
-    Melody(melody = listOf(Note.C, Note.Asharp, Note.Gsharp, Note.G, Note.F, Note.Dsharp, Note.F, Note.G, Note.C,
+    Melody(melody = listOf(Note.C2, Note.Asharp, Note.Gsharp, Note.G, Note.F, Note.Dsharp, Note.F, Note.G, Note.C,
     Note.C, Note.C, Note.Dsharp, Note.F, Note.Asharp, Note.C, Note.Csharp, Note.C, Note.Asharp, Note.Gsharp, Note.F)),
     link = "https://www.youtube.com/watch?v=bluD4WhrffU"
     ),
@@ -100,9 +100,9 @@ val defaultSongList = mutableListOf(
     ),
 
     Song("Let It Be", "The Beatles",
-    Melody(melody = listOf(Note.G, Note.G, Note.G, Note.G, Note.A, Note.E, Note.G, Note.G, Note.C, Note.D, Note.D, Note.E, Note.E, Note.D, Note.D,
-    Note.C, Note.C, Note.E, Note.E, Note.F, Note.E, Note.E, Note.D, Note.E, Note.D, Note.D, Note.C, Note.E, Note.D, Note.C, Note.E, Note.G,
-    Note.A, Note.G, Note.G, Note.E, Note.D, Note.C, Note.A, Note.G, Note.E, Note.E, Note.E, Note.F, Note.E, Note.E, Note.D, Note.E, Note.D, Note.D, Note.C)),
+    Melody(melody = listOf( Note.G, Note.G, Note.A, Note.E, Note.G, Note.G, Note.C, Note.D,  Note.E, Note.E, Note.E, Note.D, Note.D,
+    Note.C, Note.C, Note.E, Note.E, Note.F, Note.E, Note.E, Note.D, Note.E, Note.D, Note.D, Note.C, Note.E, Note.D, Note.C, Note.C, Note.E, Note.G,
+    Note.A, Note.G, Note.G, Note.G,  Note.D, Note.C, Note.C, Note.A,  Note.E, Note.E, Note.E, Note.F, Note.E, Note.E, Note.D, Note.E, Note.D, Note.D, Note.C)),
     link = "https://www.youtube.com/watch?v=QDYfEBY9NM4"
     ),
 
@@ -116,8 +116,9 @@ val defaultSongList = mutableListOf(
     ),
 
     Song("Sweet Dreams Are Made Of This", "Eurythmics",
-    Melody(melody = listOf(Note.C, Note.C, Note.C, Note.C, Note.Dsharp, Note.Dsharp, Note.C, Note.C, Note.Gsharp, Note.Gsharp, Note.Gsharp, Note.C, Note.G,
-    Note.G, Note.G, Note.C, Note.Dsharp, Note.Dsharp, Note.C, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.C,
+    Melody(melody = listOf(Note.C2, Note.C2, Note.C, Note.C, Note.Dsharp, Note.Dsharp, Note.C, Note.C, Note.Gsharp, Note.Gsharp, Note.Gsharp, Note.C2, Note.G,
+    Note.G, Note.G, Note.C2,Note.C2, Note.C2, Note.C, Note.C, Note.Dsharp, Note.Dsharp, Note.C, Note.C, Note.Gsharp, Note.Gsharp, Note.Gsharp, Note.C2, Note.G,
+        Note.G, Note.G, Note.C2, Note.Dsharp, Note.Dsharp, Note.C, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.C,
     Note.Dsharp, Note.F, Note.Dsharp, Note.D, Note.Dsharp, Note.Dsharp, Note.C, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.D, Note.Dsharp, Note.C, Note.Dsharp,
     Note.C, Note.Dsharp, Note.Dsharp, Note.F, Note.Dsharp, Note.D)),
     link = "https://www.youtube.com/watch?v=qeMFqkcPYcg"
@@ -154,3 +155,5 @@ val defaultSongList = mutableListOf(
 
 
 )
+// order alfabetical
+    .sortedBy { it.title }
