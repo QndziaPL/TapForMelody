@@ -107,14 +107,49 @@ val defaultSongList = mutableListOf(
     ),
 
     Song("I Just Called To Say I Love You", "Stevie Wonder",
-    Melody(melody = listOf(Note.Csharp, Note.Csharp, Note.Gsharp, Note.Gsharp, Note.Csharp, Note.Csharp, Note.Gsharp, Note.Gsharp, Note.Csharp, Note.Csharp,
-    Note.Gsharp, Note.Gsharp, Note.Csharp, Note.Gsharp, Note.C, Note.Csharp, Note.Csharp, Note.Gsharp, Note.C, Note.Csharp, Note.Csharp, Note.Gsharp,
+    Melody(melody = listOf(Note.Gsharp, Note.C, Note.Csharp, Note.Csharp, Note.Gsharp, Note.C, Note.Csharp, Note.Csharp, Note.Gsharp,
     Note.C, Note.Csharp, Note.C, Note.Csharp, Note.Dsharp, Note.F, Note.Dsharp, Note.Csharp, Note.C, Note.Asharp, Note.Asharp, Note.D, Note.Dsharp, Note.Dsharp,
     Note.Asharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Asharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Csharp, Note.Csharp, Note.Dsharp, Note.F, Note.Dsharp,
     Note.Csharp, Note.C, Note.Asharp, Note.Csharp, Note.Csharp, Note.Asharp, Note.Csharp, Note.C, Note.Asharp, Note.C, Note.Csharp, Note.Csharp, Note.Csharp,
     Note.Asharp, Note.Csharp, Note.C, Note.Asharp, Note.Gsharp, Note.Asharp, Note.F)),
-    link = "https://www.youtube.com/watch?v=1bGOgY1CmiU")
+    link = "https://www.youtube.com/watch?v=1bGOgY1CmiU"
+    ),
 
+    Song("Sweet Dreams Are Made Of This", "Eurythmics",
+    Melody(melody = listOf(Note.C, Note.C, Note.C, Note.C, Note.Dsharp, Note.Dsharp, Note.C, Note.C, Note.Gsharp, Note.Gsharp, Note.Gsharp, Note.C, Note.G,
+    Note.G, Note.G, Note.C, Note.Dsharp, Note.Dsharp, Note.C, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.C,
+    Note.Dsharp, Note.F, Note.Dsharp, Note.D, Note.Dsharp, Note.Dsharp, Note.C, Note.Dsharp, Note.Dsharp, Note.Dsharp, Note.D, Note.Dsharp, Note.C, Note.Dsharp,
+    Note.C, Note.Dsharp, Note.Dsharp, Note.F, Note.Dsharp, Note.D)),
+    link = "https://www.youtube.com/watch?v=qeMFqkcPYcg"
+    ),
+
+    Song("Katyusha", "Matvey Blanter",
+    Melody(melody = listOf(Note.Fsharp, Note.Gsharp, Note.A, Note.Fsharp, Note.A, Note.A, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.Csharp, Note.Gsharp, Note.A,
+    Note.H, Note.Gsharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.Csharp, Note.Fsharp, Note.E, Note.Fsharp, Note.E, Note.D, Note.D, Note.Csharp, Note.H,
+    Note.Csharp, Note.Fsharp, Note.D, Note.H, Note.Csharp, Note.A, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp)),
+    link = "https://www.youtube.com/watch?v=IGTRetzZFs0"
+    ),
+
+    Song("Spring (The Four Seasons)", "Antonio Vivaldi",
+    Melody(melody = listOf(Note.C, Note.E, Note.E, Note.E, Note.D, Note.C, Note.G, Note.G, Note.F, Note.E, Note.E, Note.E, Note.D, Note.C, Note.G, Note.G,
+    Note.F, Note.E, Note.F, Note.G, Note.F, Note.E, Note.D, Note.C, Note.G, Note.F, Note.E, Note.F, Note.G, Note.A, Note.G, Note.C, Note.G, Note.F, Note.E,
+    Note.F, Note.G, Note.A, Note.G, Note.C, Note.A, Note.G, Note.F, Note.E, Note.D, Note.C, Note.D, Note.C)),
+    link = "https://youtu.be/h_qsTFO3xuY"
+    ),
+
+    Song("In The Hall of the Mountain King", "Edvard Grieg",
+    Melody(melody = listOf(Note.C, Note.D, Note.Dsharp, Note.F, Note.G, Note.Dsharp, Note.G, Note.Fsharp, Note.D, Note.Fsharp, Note.F, Note.Csharp, Note.F,
+    Note.C, Note.D, Note.Dsharp, Note.F, Note.G, Note.Dsharp, Note.G, Note.C2, Note.Asharp, Note.G, Note.Dsharp, Note.G, Note.Asharp, Note.C, Note.D, Note.Dsharp,
+        Note.F, Note.G, Note.Dsharp, Note.G, Note.Fsharp, Note.D, Note.Fsharp, Note.F, Note.Csharp, Note.F, Note.C, Note.D, Note.Dsharp, Note.F, Note.G, Note.Dsharp,
+        Note.G, Note.C2, Note.H, Note.G, Note.H, Note.D, Note.C)),
+        link = "https://www.youtube.com/watch?v=lQ2ZEQEyUT0"
+    ),
+
+    Song("Game of Thrones Theme", "Ramin Djawadi",
+    Melody(melody = listOf(Note.C2, Note.F, Note.Gsharp, Note.Asharp, Note.C2, Note.F, Note.Gsharp, Note.Asharp, Note.G, Note.C, Note.Asharp, Note.Dsharp, Note.G,
+    Note.Gsharp, Note.Asharp, Note.Dsharp, Note.Gsharp, Note.G, Note.F)),
+    link = "https://www.youtube.com/watch?v=AdQ3JDLlmPI"
+    )
 
 
 
