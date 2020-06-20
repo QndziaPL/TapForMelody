@@ -22,12 +22,20 @@ data class Melody(
     ,
 //    @TypeConverters(NoteListConverter::class)
     @ColumnInfo(name = "melody")
-    var melody: List<Note>) : Parcelable {
+    var melody: List<Note>
+) : Parcelable {
     override fun toString(): String {
 
-
-        return "${melody.forEach { it.noteName + " "}}"
-//        return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
+//        return "${melody.forEach { it.noteName + " "}}"
+        return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
     }
+
+
+}
+
+fun melodyToString(melody: Melody): String {
+    var str = ""
+    melody.melody.forEach { str += it.noteName + " - "}
+    return str
 }
 

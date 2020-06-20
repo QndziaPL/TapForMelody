@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.ShowingNotesDialogFragment
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.databinding.FragmentSongListBinding
@@ -42,7 +43,7 @@ class SongListFragment : Fragment(), TakeMelodyToMainScreen , ShowMelodyNotesDia
 
         binding.songListRecyclerView.adapter = adapter
 
-        binding.songListSizeTextView.text = "Total list of songs: ${defaultSongList.size}"
+        binding.songListSizeTextView.text = getString(R.string.total_list_of_songs) + defaultSongList.size
 
         viewModel.onBackPressed.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -64,8 +65,7 @@ class SongListFragment : Fragment(), TakeMelodyToMainScreen , ShowMelodyNotesDia
 
     override fun showMelodyDialog(melody: Melody) {
         val showDialog = ShowingNotesDialogFragment(melody)
-//        val fragmentManager = SongListFragment() as Fragment
-//        showDialog.show(fragmentManager.parentFragmentManager, "note_dialog")
+
         showDialog.show(requireActivity().supportFragmentManager, "note_dialog")
     }
 

@@ -10,12 +10,14 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.qndzia.tapformelody.R
+import com.qndzia.tapformelody.recordedmelodies.ShowMelodyNotesDialogInterface
 import com.qndzia.tapformelody.recordedmelodies.TakeMelodyToMainScreen
 import com.qndzia.tapformelody.songlist.Song
 import com.qndzia.tapformelody.songlist.SongListAdapter
 
 class MatchedListAdapter(private val librarySongList: List<Song>,
-                         private var takeMelodyToMainScreen: TakeMelodyToMainScreen
+                         private var takeMelodyToMainScreen: TakeMelodyToMainScreen,
+                         private var showMelodyNotesDialogInterface: ShowMelodyNotesDialogInterface
 ) :
     RecyclerView.Adapter<MatchedListAdapter.SongListViewHolder>() {
 
@@ -42,6 +44,10 @@ class MatchedListAdapter(private val librarySongList: List<Song>,
         val song: Song = librarySongList[position]
         holder.songTitle.text = song.title
         holder.songAuthor.text = song.author
+
+        holder.itemView.setOnClickListener {
+            showMelodyNotesDialogInterface.showMelodyDialog(song.melody)
+        }
 
         holder.playMelody.setOnClickListener {
 

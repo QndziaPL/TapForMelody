@@ -9,14 +9,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qndzia.tapformelody.ShowingNotesDialogFragment
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.databinding.FragmentMatchedListBinding
+import com.qndzia.tapformelody.recordedmelodies.ShowMelodyNotesDialogInterface
 import com.qndzia.tapformelody.recordedmelodies.TakeMelodyToMainScreen
 
 
 private lateinit var viewModel: MatchedListViewModel
 
-class MatchedListFragment : Fragment(), TakeMelodyToMainScreen{
+class MatchedListFragment : Fragment(), TakeMelodyToMainScreen, ShowMelodyNotesDialogInterface{
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,7 @@ class MatchedListFragment : Fragment(), TakeMelodyToMainScreen{
 
        binding.viewModel = viewModel
 
-        val adapter = MatchedListAdapter(arguments.matchedList.songList, this)
+        val adapter = MatchedListAdapter(arguments.matchedList.songList, this, this)
 
         binding.songListRecyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -50,6 +52,12 @@ class MatchedListFragment : Fragment(), TakeMelodyToMainScreen{
         })
 
         return binding.root
+    }
+
+    override fun showMelodyDialog(melody: Melody) {
+        val showDialog = ShowingNotesDialogFragment(melody)
+
+        showDialog.show(requireActivity().supportFragmentManager, "note_dialog")
     }
 
     override fun takeMelody(melody: Melody) {

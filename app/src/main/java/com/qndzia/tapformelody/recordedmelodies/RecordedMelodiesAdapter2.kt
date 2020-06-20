@@ -12,7 +12,9 @@ import java.text.SimpleDateFormat
 
 
 class RecordedMelodiesAdapter2(var dbOperations: DatabaseOperations,
-                               var takeMelodyToMainScreen: TakeMelodyToMainScreen) : RecyclerView.Adapter<ViewHolder>() {
+                               var takeMelodyToMainScreen: TakeMelodyToMainScreen,
+                               private var showMelodyNotesDialogInterface: ShowMelodyNotesDialogInterface
+) : RecyclerView.Adapter<ViewHolder>() {
 
     var data = listOf<Melody>()
         set(value) {
@@ -30,6 +32,9 @@ class RecordedMelodiesAdapter2(var dbOperations: DatabaseOperations,
         }
         holder.playRecordedButton.setOnClickListener {
             takeMelodyToMainScreen.takeMelody(item)
+        }
+        holder.itemView.setOnClickListener {
+            showMelodyNotesDialogInterface.showMelodyDialog(item)
         }
     }
 

@@ -9,33 +9,40 @@ import android.view.Window
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qndzia.tapformelody.database.Melody
+import com.qndzia.tapformelody.database.melodyToString
 import kotlinx.android.synthetic.main.dialog_showing_notes.*
 
 class ShowingNotesDialogFragment(val melody: Melody) : DialogFragment() {
 
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
-            val builder = AlertDialog.Builder(it)
-//            val builder = AlertDialog.Builder(it)
-            val inflater = requireActivity().layoutInflater
-
-
-            builder.setView(inflater.inflate(R.layout.dialog_showing_notes, null))
-            view?.setOnClickListener {
-                dialog?.dismiss()
-            }
-            builder.create()
-        } ?: throw IllegalStateException("Activity cannot be null")
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Inflate the layout to use as dialog or embedded fragment
+        return inflater.inflate(R.layout.dialog_showing_notes, container, false)
     }
+
+    override fun onStart() {
+        super.onStart()
+        val dialog: Dialog = dialog!!
+        dialog.let {
+            val width = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            it.window!!.setLayout(width, height)
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        songNotesTextView.text = melody.melody.toString()
+        songNotesTextView.text = melodyToString(melody)
+
+        view.setOnClickListener {
+            dialog!!.dismiss()
+        }
 
     }
-
-
 
 }
