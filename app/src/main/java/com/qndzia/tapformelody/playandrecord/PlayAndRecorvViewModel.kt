@@ -276,7 +276,6 @@ class PlayAndRecordViewModel(
 
     fun onSearchPressed() {
         val osp = matchSongs(mySuperMelody.value, defaultSongList)
-        Log.d("onsearchpressed", osp.toString())
         if (osp.isNotEmpty()) {
             _showSnackbarWithMatchingSongs.value = true
 

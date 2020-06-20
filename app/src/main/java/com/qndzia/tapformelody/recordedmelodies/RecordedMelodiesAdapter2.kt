@@ -48,6 +48,10 @@ interface TakeMelodyToMainScreen{
     fun takeMelody(melody: Melody)
 }
 
+interface ShowMelodyNotesDialogInterface{
+    fun showMelodyDialog(melody: Melody)
+}
+
 class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val melodyTitle: TextView = itemView.findViewById(R.id.recMelodyTitle)
     private val timeRecorded: TextView = itemView.findViewById(R.id.melodyRecordTime)

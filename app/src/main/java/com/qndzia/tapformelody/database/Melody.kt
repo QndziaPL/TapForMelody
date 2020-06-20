@@ -24,7 +24,10 @@ data class Melody(
     @ColumnInfo(name = "melody")
     var melody: List<Note>) : Parcelable {
     override fun toString(): String {
-        return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
+
+
+        return "${melody.forEach { it.noteName + " "}}"
+//        return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
     }
 }
 

@@ -59,8 +59,6 @@ class MatchedListAdapter(private val librarySongList: List<Song>,
             try {
                 holder.songAuthor.context.startActivity(webIntent)
             } catch (e: ActivityNotFoundException) {
-
-                Log.e("TAG", e.toString())
             }
         }
     }
