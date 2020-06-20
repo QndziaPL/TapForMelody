@@ -37,6 +37,9 @@
             android:name="blockSave"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_playAndRecord_to_matchedListFragment"
+            app:destination="@id/matchedListFragment" />
     </fragment>
     <fragment
         android:id="@+id/songListFragment"
@@ -79,5 +82,16 @@
         <action
             android:id="@+id/action_recordedMelodiesFragment_to_playAndRecord"
             app:destination="@id/playAndRecord" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchedListFragment"
+        android:name="com.qndzia.tapformelody.matchedlist.MatchedListFragment"
+        android:label="MatchedListFragment" >
+        <action
+            android:id="@+id/action_matchedListFragment_to_playAndRecord"
+            app:destination="@id/playAndRecord" />
+        <argument
+            android:name="matchedList"
+            app:argType="com.qndzia.tapformelody.songlist.SongList" />
     </fragment>
 </navigation>

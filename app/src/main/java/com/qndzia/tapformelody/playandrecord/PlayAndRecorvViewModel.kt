@@ -5,10 +5,12 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.android.material.snackbar.Snackbar
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
@@ -64,6 +66,9 @@ class PlayAndRecordViewModel(
 
     private var _preventSavingRecordedOnceAgain = MutableLiveData<Boolean>()
     val preventSavingRecordedOnceAgain: LiveData<Boolean> = _preventSavingRecordedOnceAgain
+
+    private var _showSnackbarWithMatchingSongs = MutableLiveData<Boolean>()
+    val showSnackbarWithMatchingSongs: LiveData<Boolean> = _showSnackbarWithMatchingSongs
 
 
     private var soundC: Int
@@ -264,13 +269,26 @@ class PlayAndRecordViewModel(
         }
     }
 
+
+    fun stopShowingSearchSnackbar() {
+        _showSnackbarWithMatchingSongs.value = false
+    }
+
     fun onSearchPressed() {
         val osp = matchSongs(mySuperMelody.value, defaultSongList)
         Log.d("onsearchpressed", osp.toString())
-        Toast.makeText(
-            getApplication(), "Your melody matches ${osp.size} songs.\n" +
-                    "List: $osp", Toast.LENGTH_LONG
-        ).show()
+        if (osp.isNotEmpty()) {
+            _showSnackbarWithMatchingSongs.value = true
+
+        }else{
+            Toast.makeText(getApplication(), "sorry, can't recognize your melody :(", Toast.LENGTH_LONG).show()
+        }
+
+
+//        Toast.makeText(
+//            getApplication(), "Your melody matches ${osp.size} songs.\n" +
+//                    "List: $osp", Toast.LENGTH_LONG
+//        ).show()
 
     }
 
@@ -293,22 +311,24 @@ class PlayAndRecordViewModel(
 
     fun onSavePressed() {
 
-       if (_preventSavingRecordedOnceAgain.value == false) {
+        if (_preventSavingRecordedOnceAgain.value == false) {
 
-           if (noteList.isNotEmpty() && isRecording.value == false) {
+            if (noteList.isNotEmpty() && isRecording.value == false) {
 
-               _navigateToSaveFragment.value = true
+                _navigateToSaveFragment.value = true
 
 
-           } else if (isRecording.value == true) {
-               Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
-           } else {
-               Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
-           }
-       }else{
-           Toast.makeText(getApplication(), "Bro, You already have it!\n" +
-                   "Record something new :)", Toast.LENGTH_LONG).show()
-       }
+            } else if (isRecording.value == true) {
+                Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(
+                getApplication(), "Bro, You already have it!\n" +
+                        "Record something new :)", Toast.LENGTH_LONG
+            ).show()
+        }
 
 
     }
@@ -342,7 +362,7 @@ class PlayAndRecordViewModel(
         return libraryStringMelody.contains(yourStringMelody)
     }
 
-    private fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
+    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
         val matchList = mutableListOf<Song>()
         library.forEach {
             if (isSongMatched(yourMelody, it.melody)) {

@@ -1,14 +1,20 @@
 package com.qndzia.tapformelody.songlist
 
+import android.os.Parcelable
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.notes.Note
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+class SongList(val songList: List<Song>) : Parcelable
+
+@Parcelize
 class Song(
     val title: String,
     val author: String,
     val melody: Melody,
     val link: String
-) {
+) : Parcelable {
 
     override fun toString(): String {
         return "\nTitle=[$title], Author=[$author]"
