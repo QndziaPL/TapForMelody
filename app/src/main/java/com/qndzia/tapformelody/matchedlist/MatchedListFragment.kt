@@ -11,9 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.databinding.FragmentMatchedListBinding
-import com.qndzia.tapformelody.playandrecord.PlayAndRecordArgs
 import com.qndzia.tapformelody.recordedmelodies.TakeMelodyToMainScreen
-import com.qndzia.tapformelody.songlist.*
 
 
 private lateinit var viewModel: MatchedListViewModel

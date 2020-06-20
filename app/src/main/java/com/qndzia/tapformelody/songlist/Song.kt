@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.notes.Note
 import kotlinx.android.parcel.Parcelize
+import kotlin.math.E
 
 @Parcelize
 class SongList(val songList: List<Song>) : Parcelable
@@ -79,7 +80,42 @@ val defaultSongList = mutableListOf(
     Song("Somewhere Over The Rainbow", "Judy Garland",
     Melody(melody = listOf(Note.C, Note.C2, Note.H, Note.G, Note.A, Note.H, Note.C2, Note.C, Note.A, Note.G, Note.F, Note.F,
     Note.E, Note.C, Note.D, Note.E, Note.F, Note.D, Note.H, Note.C, Note.D, Note.E, Note.C)),
-    link = "https://www.youtube.com/watch?v=PSZxmZmBfnU")
+    link = "https://www.youtube.com/watch?v=PSZxmZmBfnU"
+    ),
+
+    Song("Swan Lake Theme", "Pyotr Tchaikovsky",
+    Melody(melody = listOf(Note.C2, Note.F, Note.G, Note.Gsharp, Note.Asharp, Note.C2, Note.Gsharp, Note.C2, Note.Gsharp, Note.C2, Note.F,
+    Note.Gsharp, Note.F, Note.Csharp, Note.Gsharp, Note.F, Note.Asharp, Note.Gsharp, Note.G, Note.C2, Note.F, Note.G, Note.Gsharp,
+        Note.Asharp, Note.C2, Note.Gsharp, Note.C2, Note.Gsharp, Note.C2, Note.F, Note.Gsharp, Note.F, Note.Csharp, Note.Gsharp, Note.F)),
+    link = "https://www.youtube.com/watch?v=9cNQFB0TDfY"
+    ),
+
+    Song("Bad Romance", "Lady Gaga",
+    Melody(melody = listOf(Note.Dsharp, Note.F, Note.G, Note.Dsharp, Note.Gsharp, Note.G, Note.Gsharp, Note.G, Note.F, Note.D, Note.Dsharp, Note.F,
+    Note.G, Note.G, Note.G, Note.G, Note.F, Note.Dsharp, Note.Dsharp, Note.F, Note.G, Note.Dsharp, Note.Gsharp, Note.G, Note.Gsharp, Note.G,
+    Note.F, Note.D, Note.Dsharp, Note.F, Note.G, Note.G, Note.G, Note.G, Note.F, Note.Dsharp, Note.C, Note.C, Note.G, Note.G, Note.Gsharp, Note.G,
+    Note.C, Note.C, Note.G, Note.G, Note.Gsharp, Note.G, Note.C, Note.C, Note.G, Note.G, Note.Gsharp, Note.G, Note.Dsharp, Note.Dsharp, Note.C,
+    Note.Dsharp, Note.C, Note.Dsharp)),
+    link = "https://www.youtube.com/watch?v=qrO4YZeyl0I"
+    ),
+
+    Song("Let It Be", "The Beatles",
+    Melody(melody = listOf(Note.G, Note.G, Note.G, Note.G, Note.A, Note.E, Note.G, Note.G, Note.C, Note.D, Note.D, Note.E, Note.E, Note.D, Note.D,
+    Note.C, Note.C, Note.E, Note.E, Note.F, Note.E, Note.E, Note.D, Note.E, Note.D, Note.D, Note.C, Note.E, Note.D, Note.C, Note.E, Note.G,
+    Note.A, Note.G, Note.G, Note.E, Note.D, Note.C, Note.A, Note.G, Note.E, Note.E, Note.E, Note.F, Note.E, Note.E, Note.D, Note.E, Note.D, Note.D, Note.C)),
+    link = "https://www.youtube.com/watch?v=QDYfEBY9NM4"
+    ),
+
+    Song("I Just Called To Say I Love You", "Stevie Wonder",
+    Melody(melody = listOf(Note.Csharp, Note.Csharp, Note.Gsharp, Note.Gsharp, Note.Csharp, Note.Csharp, Note.Gsharp, Note.Gsharp, Note.Csharp, Note.Csharp,
+    Note.Gsharp, Note.Gsharp, Note.Csharp, Note.Gsharp, Note.C, Note.Csharp, Note.Csharp, Note.Gsharp, Note.C, Note.Csharp, Note.Csharp, Note.Gsharp,
+    Note.C, Note.Csharp, Note.C, Note.Csharp, Note.Dsharp, Note.F, Note.Dsharp, Note.Csharp, Note.C, Note.Asharp, Note.Asharp, Note.D, Note.Dsharp, Note.Dsharp,
+    Note.Asharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Asharp, Note.D, Note.Dsharp, Note.Dsharp, Note.Csharp, Note.Csharp, Note.Dsharp, Note.F, Note.Dsharp,
+    Note.Csharp, Note.C, Note.Asharp, Note.Csharp, Note.Csharp, Note.Asharp, Note.Csharp, Note.C, Note.Asharp, Note.C, Note.Csharp, Note.Csharp, Note.Csharp,
+    Note.Asharp, Note.Csharp, Note.C, Note.Asharp, Note.Gsharp, Note.Asharp, Note.F)),
+    link = "https://www.youtube.com/watch?v=1bGOgY1CmiU")
+
+
 
 
 )
