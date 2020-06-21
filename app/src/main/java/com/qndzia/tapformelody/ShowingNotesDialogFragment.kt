@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.melodyToString

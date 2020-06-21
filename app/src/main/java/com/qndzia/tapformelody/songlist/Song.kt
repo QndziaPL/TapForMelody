@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.notes.Note
 import kotlinx.android.parcel.Parcelize
-import kotlin.math.E
 
 @Parcelize
 class SongList(val songList: List<Song>) : Parcelable
@@ -184,7 +183,35 @@ val defaultSongList = mutableListOf(
     Note.Csharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.A, Note.H, Note.G, Note.G, Note.H, Note.D, Note.Fsharp, Note.E, Note.A, Note.G, Note.Fsharp, Note.E,
     Note.G, Note.Fsharp, Note.E, Note.D, Note.Csharp, Note.H, Note.G, Note.G, Note.H, Note.D, Note.Fsharp, Note.E, Note.A, Note.G, Note.Fsharp, Note.E,
     Note.G, Note.Fsharp, Note.E, Note.Dsharp, Note.H)),
-    link = "https://www.youtube.com/watch?v=hCuMWrfXG4E")
+    link = "https://www.youtube.com/watch?v=hCuMWrfXG4E"
+    ),
+
+    Song("The Winner Takes It All", "ABBA",
+    Melody(melody = listOf(Note.C, Note.D, Note.E, Note.F, Note.A, Note.A, Note.Asharp, Note.C, Note.D, Note.D, Note.C, Note.C2, Note.Asharp, Note.A, Note.G, Note.Asharp,
+    Note.C2, Note.Asharp, Note.A, Note.G, Note.Asharp, Note.C, Note.C, Note.Asharp, Note.Asharp, Note.A, Note.A, Note.C, Note.C, Note.G, Note.G, Note.F, Note.F,
+    Note.D, Note.D, Note.C2, Note.C2, Note.Asharp, Note.Asharp, Note.Asharp, Note.Asharp, Note.A, Note.G, Note.A, Note.Asharp)),
+    link = "https://www.youtube.com/watch?v=iyIOl-s7JTU"
+    ),
+
+    Song("Sound Of Silence", "Simon & Garfunkel",
+    Melody(melody = listOf(Note.D, Note.D, Note.F, Note.F, Note.A, Note.A, Note.G, Note.C, Note.C, Note.E, Note.E, Note.G, Note.G, Note.F, Note.F, Note.F, Note.F,
+    Note.A, Note.A, Note.C2, Note.C2, Note.D, Note.D, Note.C, Note.F, Note.F, Note.A, Note.A, Note.C2, Note.C2, Note.D, Note.D, Note.C, Note.F, Note.F, Note.D, Note.D,
+    Note.D, Note.E, Note.F, Note.F, Note.E, Note.D, Note.C, Note.D, Note.C, Note.A, Note.F, Note.F, Note.F, Note.C2, Note.E, Note.F, Note.D)),
+    link = "https://www.youtube.com/watch?v=l0q7MLPo-u8"
+    ),
+
+    Song("Kiss From A Rose", "Seal",
+    Melody(melody = listOf(Note.G, Note.A, Note.Asharp, Note.C2, Note.Asharp, Note.A, Note.G, Note.F, Note.G, Note.G, Note.F, Note.G, Note.A, Note.Asharp, Note.C2,
+    Note.Asharp, Note.A, Note.F, Note.A, Note.G)),
+    link = "https://www.youtube.com/watch?v=AMD2TwRvuoU"
+    ),
+
+    Song("Don't Speak", "No Doubt",
+    Melody(melody = listOf(Note.F, Note.Gsharp, Note.C, Note.Csharp, Note.F, Note.G, Note.F, Note.Gsharp, Note.G, Note.C, Note.E, Note.G, Note.F, Note.G, Note.F,
+    Note.C, Note.C, Note.E, Note.G, Note.E, Note.F, Note.F, Note.Gsharp, Note.Csharp, Note.F, Note.G, Note.F, Note.Gsharp, Note.G, Note.C, Note.E, Note.G, Note.F,
+    Note.G, Note.Gsharp, Note.C2, Note.C2, Note.Asharp, Note.Asharp, Note.Gsharp, Note.Gsharp)),
+    link = "https://www.youtube.com/watch?v=ONg4SK39-Kg"
+    )
 
 
 )
