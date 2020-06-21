@@ -150,8 +150,24 @@ val defaultSongList = mutableListOf(
     Melody(melody = listOf(Note.C2, Note.F, Note.Gsharp, Note.Asharp, Note.C2, Note.F, Note.Gsharp, Note.Asharp, Note.G, Note.C, Note.Asharp, Note.Dsharp, Note.G,
     Note.Gsharp, Note.Asharp, Note.Dsharp, Note.Gsharp, Note.G, Note.F)),
     link = "https://www.youtube.com/watch?v=AdQ3JDLlmPI"
-    )
+    ),
 
+    Song("Cambio Dolor", "Natalia Oreiro",
+    Melody(melody = listOf(Note.A, Note.F, Note.E, Note.D, Note.D, Note.G, Note.A, Note.Asharp, Note.G, Note.A, Note.Asharp, Note.Asharp, Note.Asharp, Note.Asharp,
+    Note.Asharp, Note.Asharp, Note.C2, Note.Asharp, Note.Asharp, Note.A, Note.A, Note.G, Note.A, Note.A, Note.F, Note.E, Note.D)),
+    link = "https://www.youtube.com/watch?v=G6OYDUomYwI"
+    ),
+
+    Song("My Heart Will Go On", "Celine Dion",
+    Melody(melody = listOf(Note.E, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E, Note.Fsharp, Note.H, Note.A, Note.Gsharp, Note.E, Note.Csharp, Note.A,
+    Note.H
+    , Note.E, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E, Note.Fsharp, Note.H, Note.Gsharp, Note.H, Note.Csharp, Note.H, Note.Fsharp,
+    Note.E, Note.E, Note.E, Note.E, Note.Dsharp, Note.E, Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.Gsharp, Note.Fsharp, Note.E, Note.E, Note.E, Note.E,
+    Note.Dsharp, Note.E, Note.E, Note.H, Note.E, Note.Fsharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E,
+    Note.Dsharp, Note.E, Note.E, Note.H, Note.E, Note.Fsharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp,
+    Note.E, Note.Dsharp, Note.E, Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.Gsharp, Note.Fsharp)),
+    link = "https://www.youtube.com/watch?v=EcU0qbV70rU"
+    )
 
 
 )
