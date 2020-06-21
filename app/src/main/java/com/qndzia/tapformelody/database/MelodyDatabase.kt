@@ -1,11 +1,13 @@
 package com.qndzia.tapformelody.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
+import androidx.room.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.qndzia.tapformelody.notes.Note
 
 @Database(entities = [Melody::class], version = 1, exportSchema = false)
+@TypeConverters(NoteListConverter::class)
 abstract class MelodyDatabase : RoomDatabase() {
 
     abstract val melodyDao: MelodyDao
@@ -34,3 +36,21 @@ abstract class MelodyDatabase : RoomDatabase() {
         }
     }
 }
+
+class NoteListConverter {
+
+    @TypeConverter
+    fun fromNoteList(value: List<Note>): String {
+        val gson = Gson()
+        val type = object : TypeToken<List<Note>>() {}.type
+        return gson.toJson(value, type)
+    }
+
+    @TypeConverter
+    fun toNoteList(value: String): List<Note> {
+        val gson = Gson()
+        val type = object : TypeToken<List<Note>>() {}.type
+        return gson.fromJson(value, type)
+    }
+}
+

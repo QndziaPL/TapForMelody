@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/labelsOn"
+        android:checkable="false"
+        android:title="Show/hide key labels"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/songLibrary"
+        android:title="Open Song Library" />
+    <item
+        android:id="@+id/recordedMelodies"
+        android:title="Recorded Melodies" />
+</menu>

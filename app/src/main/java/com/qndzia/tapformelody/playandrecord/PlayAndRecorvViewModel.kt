@@ -1,21 +1,46 @@
 package com.qndzia.tapformelody.playandrecord
 
 import android.app.Application
-import android.media.MediaPlayer
-import android.os.Handler
+import android.media.AudioAttributes
+import android.media.SoundPool
+import android.util.Log
 import android.view.Gravity
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
+import com.google.android.material.snackbar.Snackbar
+import com.qndzia.tapformelody.R
+import com.qndzia.tapformelody.database.Melody
+import com.qndzia.tapformelody.database.MelodyDao
 import com.qndzia.tapformelody.notes.Note
+import com.qndzia.tapformelody.songlist.Song
+import com.qndzia.tapformelody.songlist.defaultSongList
+
+import kotlinx.coroutines.*
 
 
-class PlayAndRecordViewModel(application: Application) : AndroidViewModel(application) {
+class PlayAndRecordViewModel(
+//    private val melodySavedOrFromLibrary: Melody,
+    labelsOn: Boolean,
+    dataSource: MelodyDao, application: Application
+) : AndroidViewModel(application) {
+
+    val database = dataSource
+
+    private var _labelsOnLiveData = MutableLiveData<Boolean>()
+    val labelsOnLiveData: LiveData<Boolean> = _labelsOnLiveData
+
+    private var viewModelJob = Job()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private var _isRecording = MutableLiveData<Boolean>()
     val isRecording: LiveData<Boolean> = _isRecording
+
+    private var _isPlaying = MutableLiveData<Boolean>()
+    val isPlaying: LiveData<Boolean> = _isPlaying
 
     private var _myMelody = MutableLiveData<String>()
     val myMelody: LiveData<String> = _myMelody
@@ -25,70 +50,149 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
 
     private val noteList = mutableListOf<Note>()
 
+    // melody you will record, compare and potentially save in room if u want
+    private var _mySuperMelody = MutableLiveData<Melody>()
+    val mySuperMelody: LiveData<Melody> = _mySuperMelody
+
+    // it should be false only while recording - otherwise block adding new notes to current melody
     private var blockAdding = true
 
-    private var _showSaveDialog = MutableLiveData<Boolean>()
-    val showSaveDialog: LiveData<Boolean> = _showSaveDialog
+    private var _navigateToSaveFragment = MutableLiveData<Boolean>()
+    val navigateToSaveFragment: LiveData<Boolean> = _navigateToSaveFragment
+
+
+    private var _showMenu = MutableLiveData<Boolean>()
+    val showMenu: LiveData<Boolean> = _showMenu
+
+    private var _preventSavingRecordedOnceAgain = MutableLiveData<Boolean>()
+    val preventSavingRecordedOnceAgain: LiveData<Boolean> = _preventSavingRecordedOnceAgain
+
+    private var _showSnackbarWithMatchingSongs = MutableLiveData<Boolean>()
+    val showSnackbarWithMatchingSongs: LiveData<Boolean> = _showSnackbarWithMatchingSongs
+
+
+    private var soundC: Int
+    private var soundCsharp: Int
+    private var soundD: Int
+    private var soundDsharp: Int
+    private var soundE: Int
+    private var soundF: Int
+    private var soundFsharp: Int
+    private var soundG: Int
+    private var soundGsharp: Int
+    private var soundA: Int
+    private var soundAsharp: Int
+    private var soundH: Int
+    private var soundC2: Int
+
+    private val listOfPoolSounds = mutableListOf<Int>()
+
+    init {
+
+        _isRecording.value = false
+        _myMelody.value = ""
+        _navigateToSaveFragment.value = false
+        _noteListSize.value = 0
+        _preventSavingRecordedOnceAgain.value = false
+
+
+        soundC = soundPool.load(getApplication(), R.raw.c, 1)
+        soundCsharp = soundPool.load(getApplication(), R.raw.csharp, 1)
+        soundD = soundPool.load(getApplication(), R.raw.d, 1)
+        soundDsharp = soundPool.load(getApplication(), R.raw.dsharp, 1)
+        soundE = soundPool.load(getApplication(), R.raw.e, 1)
+        soundF = soundPool.load(getApplication(), R.raw.f, 1)
+        soundFsharp = soundPool.load(getApplication(), R.raw.fsharp, 1)
+        soundG = soundPool.load(getApplication(), R.raw.g, 1)
+        soundGsharp = soundPool.load(getApplication(), R.raw.gsharp, 1)
+        soundA = soundPool.load(getApplication(), R.raw.a, 1)
+        soundAsharp = soundPool.load(getApplication(), R.raw.asharp, 1)
+        soundH = soundPool.load(getApplication(), R.raw.h, 1)
+        soundC2 = soundPool.load(getApplication(), R.raw.c2, 1)
+
+        listOfPoolSounds.addAll(
+            0, listOf(
+                soundC, soundCsharp, soundD, soundDsharp, soundE, soundF, soundFsharp, soundG,
+                soundGsharp, soundA, soundAsharp, soundH, soundC2
+            )
+        )
+
+        _labelsOnLiveData.value = labelsOn
+
+    }
+
+    companion object {
+        var audioAttributes = AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .build()
+
+        var soundPool = SoundPool.Builder()
+            .setMaxStreams(50)
+            .setAudioAttributes(audioAttributes)
+            .build()
+    }
 
 
     fun cKeyPressed() {
-        keyPressed(Note.C)
+        keyPressed(Note.C, soundC)
     }
 
     fun cSharpKeyPressed() {
-        keyPressed(Note.Csharp)
+        keyPressed(Note.Csharp, soundCsharp)
     }
 
     fun dKeyPressed() {
-        keyPressed(Note.D)
+        keyPressed(Note.D, soundD)
     }
 
     fun dSharpKeyPressed() {
-        keyPressed(Note.Dsharp)
+        keyPressed(Note.Dsharp, soundDsharp)
     }
 
     fun eKeyPressed() {
-        keyPressed(Note.E)
+        keyPressed(Note.E, soundE)
     }
 
     fun fKeyPressed() {
-        keyPressed(Note.F)
+        keyPressed(Note.F, soundF)
     }
 
     fun fSharpKeyPressed() {
-        keyPressed(Note.Fsharp)
+        keyPressed(Note.Fsharp, soundFsharp)
     }
 
     fun gKeyPressed() {
-        keyPressed(Note.G)
+        keyPressed(Note.G, soundG)
     }
 
     fun gSharpKeyPressed() {
-        keyPressed(Note.Gsharp)
+        keyPressed(Note.Gsharp, soundGsharp)
     }
 
     fun aKeyPressed() {
-        keyPressed(Note.A)
+        keyPressed(Note.A, soundA)
     }
 
     fun aSharpKeyPressed() {
-        keyPressed(Note.Asharp)
+        keyPressed(Note.Asharp, soundAsharp)
     }
 
     fun hKeyPressed() {
-        keyPressed(Note.H)
+        keyPressed(Note.H, soundH)
     }
 
     fun c2KeyPressed() {
-        keyPressed(Note.C2)
+        keyPressed(Note.C2, soundC2)
     }
 
-    private fun keyPressed(note: Note) {
-        val mediaPlayer = MediaPlayer.create(getApplication(), note.sound)
-        mediaPlayer.start()
-        Handler().postDelayed({
-            mediaPlayer.release()
-        }, 1000)
+
+    private fun keyPressed(note: Note, sound: Int) {
+
+        uiScope.launch {
+            soundPool.play(sound, 1F, 1F, 1, 0, 1F)
+        }
+
 
         if (!blockAdding) {
 
@@ -111,70 +215,163 @@ class PlayAndRecordViewModel(application: Application) : AndroidViewModel(applic
         }
     }
 
+    fun preventSaving() {
+        _preventSavingRecordedOnceAgain.value = true
+    }
+
+
     fun onRecordPressed() {
+        _preventSavingRecordedOnceAgain.value = false
 
         if (_isRecording.value == true) {
             _isRecording.value = false
             blockAdding = true
-            val toast = Toast.makeText(
-                getApplication(), "REC is OFF",
-                Toast.LENGTH_SHORT
-            )
-            toast.setGravity(Gravity.TOP, 0, 80)
-            toast.show()
-        } else {
-            val toast = Toast.makeText(
-                getApplication(), "REC is ON!!!",
-                Toast.LENGTH_SHORT
-            )
-            toast.setGravity(Gravity.TOP, 0, 80)
-            toast.show()
 
+        } else {
             _isRecording.value = true
             _myMelody.value = ""
             noteList.clear()
+            _noteListSize.value = noteList.size
             blockAdding = false
+
         }
     }
 
-    // trzeba bęedzie rozwiązać problem z nowymi instancjami mediaPlayera
-    // podobnie z opcją samego grania, nie tylko z zapisem
+    fun onMelodyFinishedRecording() {
+        //assigns played notes to your Melody object
+        _mySuperMelody.value = Melody(melody = noteList)
+
+    }
+
+    fun onMelodyStartedRecording() {
+        //clear previous record
+        _mySuperMelody.value = Melody(melody = listOf())
+    }
+
+
     fun onPlayPressed() {
         if (noteList.isNotEmpty()) {
             Toast.makeText(getApplication(), "Your melody is playing", Toast.LENGTH_SHORT).show()
-            noteList.forEach {
-                Thread.sleep(300)
-                val mediaPlayer = MediaPlayer.create(getApplication(), it.sound)
-                mediaPlayer.start()
-                Handler().postDelayed({
-                    mediaPlayer.release()
-                }, 300)
-            }
+            uiScope.launch {
+                noteList.forEach {
+
+                    delay(300)
+                    val sound = listOfPoolSounds[(it.id - 1)]
+                    soundPool.play(sound, 1F, 1F, 1, 0, 1F)
+
+                }
+            }.apply { _isPlaying.value = isActive }
+                .invokeOnCompletion { _isPlaying.value = false }
+
+
         } else {
             Toast.makeText(getApplication(), "Record something first", Toast.LENGTH_SHORT).show()
         }
     }
 
-    fun onSavePressed() {
-        if (noteList.isNotEmpty() && isRecording.value == false) {
-            _showSaveDialog.value = true
-        } else if (isRecording.value == true) {
-            Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
+
+    fun stopShowingSearchSnackbar() {
+        _showSnackbarWithMatchingSongs.value = false
+    }
+
+    fun onSearchPressed() {
+        val osp = matchSongs(mySuperMelody.value, defaultSongList)
+        if (osp.isNotEmpty()) {
+            _showSnackbarWithMatchingSongs.value = true
+
+        }else{
+            Toast.makeText(getApplication(), "sorry, can't recognize your melody :(", Toast.LENGTH_LONG).show()
         }
+
+
+//        Toast.makeText(
+//            getApplication(), "Your melody matches ${osp.size} songs.\n" +
+//                    "List: $osp", Toast.LENGTH_LONG
+//        ).show()
+
     }
 
-    fun hideSaveDialog() {
-        _showSaveDialog.value = false
+    fun onMenuPressed() {
+        _showMenu.value = true
+        Log.d("showmenu", "onMenuPressed: ${showMenu.value}")
+
+    }
+
+    fun turnOffMenuNavigation() {
+        _showMenu.value = false
+        Log.d("showmenu", "turnOffMenuNavigation: ${showMenu.value}")
+
+    }
+
+    fun labelsOnOff() {
+        _labelsOnLiveData.value = _labelsOnLiveData.value != true
     }
 
 
-    init {
-        _isRecording.value = false
-        _myMelody.value = ""
-        _showSaveDialog.value = false
+    fun onSavePressed() {
 
+        if (_preventSavingRecordedOnceAgain.value == false) {
+
+            if (noteList.isNotEmpty() && isRecording.value == false) {
+
+                _navigateToSaveFragment.value = true
+
+
+            } else if (isRecording.value == true) {
+                Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(getApplication(), "Nothing to save", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(
+                getApplication(), "Bro, You already have it!\n" +
+                        "Record something new :)", Toast.LENGTH_LONG
+            ).show()
+        }
+
+
+    }
+
+    fun loadRecordedMelody(melody: Melody, recOrLib: String) {
+        if (recOrLib == "recorded") {
+            _myMelody.value = "\"${melody.title}\""
+        }
+        _mySuperMelody.value = melody
+        noteList.clear()
+        noteList.addAll(melody.melody)
+        _noteListSize.value = noteList.size
+    }
+
+    fun onNavigatingToSaveFragmentFinished() {
+        _navigateToSaveFragment.value = false
+    }
+
+    private fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
+
+        var yourStringMelody = ""
+        yourMelody?.melody?.forEach {
+            yourStringMelody += it.toStringFromList()
+        }
+
+        var libraryStringMelody = ""
+        libraryMelody.melody.forEach {
+            libraryStringMelody += it.toStringFromList()
+        }
+
+        Log.d("toStringMatchingResults", "your: $yourStringMelody libr: $libraryStringMelody")
+        return libraryStringMelody.contains(yourStringMelody)
+    }
+
+    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
+        val matchList = mutableListOf<Song>()
+        library.forEach {
+            if (isSongMatched(yourMelody, it.melody)) {
+                Log.d("match", "${it.title} matches!!!")
+                matchList.add(it)
+            }
+
+        }
+        return matchList
     }
 
 
