@@ -7,4 +7,14 @@
     <color name="colorWhiteKeysLabel">#000000</color>
     <color name="songListRecyclerViewBackgroundColor">#000000</color>
     <color name="colorTextDark">#000000</color>
+    <color name="backgroundWhileRecording">#FF0000</color>
+    <color name="backgroundWhileNotRecording">#546E7A</color>
+    <color name="recButtonBackgroundWhileRecording">#FFFFFF</color>
+    <color name="recButtonBackgroundWhileNotRecording">#FF0000</color>
+    <color name="whiteKeysColor">#FFFFFF</color>
+    <color name="notesPlayedColor">#FFFFFF</color>
+
+
+
+
 </resources>

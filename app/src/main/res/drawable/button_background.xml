@@ -6,7 +6,7 @@
         android:bottomRightRadius="10dp"
         />
     <solid
-        android:color="#FFFFFF"
+        android:color="@color/whiteKeysColor"
         />
     <stroke
         android:width="2dp"

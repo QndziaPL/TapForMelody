@@ -49,20 +49,29 @@ class PlayAndRecord : Fragment() {
                 if (it) {
                     viewModel.onMelodyStartedRecording()
                     recordButton.text = getString(R.string.rec_button_text)
-                    notesPlayed.setTextColor(Color.RED)
+
+                    recordButton.setBackgroundResource(R.drawable.ic_record_on)
+
+                    notesPlayed.setTextColor(resources.getColor(R.color.notesPlayedColor))
+
                     playButton.visibility = View.INVISIBLE
                     saveButton.visibility = View.INVISIBLE
                     menuButton.visibility = View.INVISIBLE
                     searchButton.visibility = View.INVISIBLE
+                    buttonsAndNotesLayout.setBackgroundResource(R.color.backgroundWhileRecording)
+
 
                 } else {
                     viewModel.onMelodyFinishedRecording()
                     recordButton.text = ""
-                    notesPlayed.setTextColor(Color.BLACK)
+                    recordButton.setBackgroundResource(R.drawable.ic_record)
+                    notesPlayed.setTextColor(resources.getColor(R.color.notesPlayedColor))
                     playButton.visibility = View.VISIBLE
                     saveButton.visibility = View.VISIBLE
                     menuButton.visibility = View.VISIBLE
                     searchButton.visibility = View.VISIBLE
+                    buttonsAndNotesLayout.setBackgroundResource(R.color.backgroundWhileNotRecording)
+
 
                     if (viewModel.noteListSize.value == 0) {
                         searchButton.visibility = View.INVISIBLE
@@ -73,13 +82,11 @@ class PlayAndRecord : Fragment() {
         viewModel.isPlaying.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
-                    playButton.isClickable = false
                     menuButton.isClickable = false
                     saveButton.isClickable = false
                     recordButton.isClickable = false
                     searchButton.isClickable = false
                 } else {
-                    playButton.isClickable = true
                     menuButton.isClickable = true
                     saveButton.isClickable = true
                     recordButton.isClickable = true
@@ -206,6 +213,15 @@ class PlayAndRecord : Fragment() {
                     }
                     .show()
                 viewModel.stopShowingSearchSnackbar()
+            }
+        })
+
+        viewModel.onStopPressed.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                playButton.setBackgroundResource(R.drawable.ic_play)
+            }else{
+                playButton.setBackgroundResource(R.drawable.ic_stop)
+
             }
         })
 

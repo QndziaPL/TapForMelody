@@ -65,6 +65,10 @@ class PlayAndRecordViewModel(
     private var _showSnackbarWithMatchingSongs = MutableLiveData<Boolean>()
     val showSnackbarWithMatchingSongs: LiveData<Boolean> = _showSnackbarWithMatchingSongs
 
+    private var _onStopPressed = MutableLiveData<Boolean>()
+    val onStopPressed: LiveData<Boolean> = _onStopPressed
+
+
     private var soundC: Int
     private var soundCsharp: Int
     private var soundD: Int
@@ -88,6 +92,7 @@ class PlayAndRecordViewModel(
         _navigateToSaveFragment.value = false
         _noteListSize.value = 0
         _preventSavingRecordedOnceAgain.value = false
+        _onStopPressed.value = true
 
 
         soundC = soundPool.load(getApplication(), R.raw.c, 1)
@@ -240,19 +245,39 @@ class PlayAndRecordViewModel(
         _mySuperMelody.value = Melody(melody = listOf())
     }
 
+
+//    fun onStopPressed() {
+//        _onStopPressed.value = true
+//        uiScope.launch {
+//            delay(400)
+//            _onStopPressed.value = false
+//        }
+//    }
+
+
     fun onPlayPressed() {
+
         if (noteList.isNotEmpty()) {
             Toast.makeText(getApplication(), "Your melody is playing", Toast.LENGTH_SHORT).show()
-            uiScope.launch {
-                noteList.forEach {
+            _onStopPressed.value = _onStopPressed.value != true
 
+            uiScope.launch {
+
+                noteList.forEach {
+                    if (_onStopPressed.value == true){
+                        this.cancel()
+                        _isPlaying.value = false
+
+                    }
                     delay(300)
                     val sound = listOfPoolSounds[(it.id - 1)]
                     soundPool.play(sound, 1F, 1F, 1, 0, 1F)
-
                 }
+
             }.apply { _isPlaying.value = isActive }
                 .invokeOnCompletion { _isPlaying.value = false }
+
+
 
 
         } else {
