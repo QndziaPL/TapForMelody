@@ -17,18 +17,21 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/backgroundWhileNotRecording">
 
             <EditText
                 android:id="@+id/recMelodyTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:background="@null"
                 android:ems="10"
                 android:gravity="center_horizontal"
-                android:hint="your melody title"
+                android:hint="@string/melody_title_hint"
                 android:inputType="textPersonName"
-                android:textColor="@color/colorTextDark"
-                android:textColorHint="@color/colorBlackKeysLabel"
+                android:textColor="@color/notesPlayedColor"
+                android:textColorHint="@color/notesPlayedColor"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/yourMelody"
                 app:layout_constraintStart_toStartOf="@+id/yourMelody"
@@ -37,13 +40,11 @@
 
             <Button
                 android:id="@+id/saveButton"
-                android:layout_width="100dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/search_button_background"
-                android:drawableRight="@drawable/ic_save"
+                android:background="@drawable/ic_save"
                 android:onClick="@{() -> viewModel.onSavePressed()}"
-                android:text="save"
                 android:textColor="@color/colorTextDark"
                 app:layout_constraintEnd_toEndOf="@+id/recMelodyTitle"
                 app:layout_constraintTop_toBottomOf="@+id/recMelodyTitle" />
@@ -58,8 +59,8 @@
                 android:layout_marginBottom="16dp"
                 android:gravity="center_horizontal"
                 android:text="@{`melody: ` + viewModel.myStringMelody}"
-                android:textColor="@color/colorTextDark"
-                android:textSize="36sp"
+                android:textColor="@color/notesPlayedColor"
+                android:textSize="40dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/recMelodyTitle"
                 app:layout_constraintEnd_toEndOf="parent"

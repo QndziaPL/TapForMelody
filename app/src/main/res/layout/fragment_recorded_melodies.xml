@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.qndzia.tapformelody.recordedmelodies.RecordedMelodiesViewModel" />
@@ -31,8 +33,8 @@
                 android:layout_marginStart="8dp"
                 android:background="@drawable/ic_back"
                 android:backgroundTint="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:onClick="@{() -> viewModel.goBack()}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +42,7 @@
                 android:id="@+id/headerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recorded melodies"
+                android:text="@string/recorded_melodies"
                 android:textColor="@color/colorTextDark"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -49,18 +51,27 @@
 
             <Button
                 android:id="@+id/deleteAllButton"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_width="70dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/holo_red_dark"
-                android:drawableLeft="@drawable/ic_deleteall"
+                android:background="@color/warmRedColor"
                 android:onClick="@{() -> viewModel.deleteAllMelodies()}"
-                android:text="delete all"
-                android:textColor="@color/colorTextDark"
-                android:textSize="12sp"
+                android:text="@string/delete_all"
+                android:textColor="@color/notesPlayedColor"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Switch
+                android:id="@+id/deleteSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{() -> viewModel.onSwitchClicked()}"
+                app:layout_constraintBottom_toBottomOf="@+id/deleteAllButton"
+                app:layout_constraintEnd_toStartOf="@+id/deleteAllButton"
+                app:layout_constraintTop_toTopOf="@+id/deleteAllButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

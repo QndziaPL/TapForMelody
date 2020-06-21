@@ -245,20 +245,14 @@ class PlayAndRecordViewModel(
         _mySuperMelody.value = Melody(melody = listOf())
     }
 
-
-//    fun onStopPressed() {
-//        _onStopPressed.value = true
-//        uiScope.launch {
-//            delay(400)
-//            _onStopPressed.value = false
-//        }
-//    }
-
+    fun stopPlayingOnNavigating() {
+        _onStopPressed.value = true
+        _isPlaying.value = false
+    }
 
     fun onPlayPressed() {
 
         if (noteList.isNotEmpty()) {
-            Toast.makeText(getApplication(), "Your melody is playing", Toast.LENGTH_SHORT).show()
             _onStopPressed.value = _onStopPressed.value != true
 
             uiScope.launch {
@@ -275,10 +269,10 @@ class PlayAndRecordViewModel(
                 }
 
             }.apply { _isPlaying.value = isActive }
-                .invokeOnCompletion { _isPlaying.value = false }
-
-
-
+                .invokeOnCompletion {
+                    _isPlaying.value = false
+                    _onStopPressed.value = true
+                }
 
         } else {
             Toast.makeText(getApplication(), "Record something first", Toast.LENGTH_SHORT).show()

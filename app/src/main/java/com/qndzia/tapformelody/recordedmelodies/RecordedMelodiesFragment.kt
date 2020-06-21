@@ -9,13 +9,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.ShowingNotesDialogFragment
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentRecordedMelodiesBinding
+import kotlinx.android.synthetic.main.fragment_recorded_melodies.*
 
 private lateinit var viewModel: RecordedMelodiesViewModel
-class RecordedMelodiesFragment : Fragment(), DatabaseOperations, TakeMelodyToMainScreen, ShowMelodyNotesDialogInterface {
+
+class RecordedMelodiesFragment : Fragment(), DatabaseOperations, TakeMelodyToMainScreen,
+    ShowMelodyNotesDialogInterface {
 
 
     override fun onCreateView(
@@ -60,9 +64,22 @@ class RecordedMelodiesFragment : Fragment(), DatabaseOperations, TakeMelodyToMai
             }
         })
 
+        viewModel.isDeleteButtonReady.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                deleteSwitch.isChecked = true
+                deleteAllButton.isEnabled = true
+                deleteAllButton.setBackgroundResource(R.color.warmRedColor)
+            } else {
+                deleteSwitch.isChecked = false
+                deleteAllButton.isEnabled = false
+                deleteAllButton.setBackgroundResource(R.color.greyColor)
+            }
+        })
+
 
         return binding.root
     }
+
 
     override fun showMelodyDialog(melody: Melody) {
         val showDialog = ShowingNotesDialogFragment(melody)
@@ -76,6 +93,10 @@ class RecordedMelodiesFragment : Fragment(), DatabaseOperations, TakeMelodyToMai
     }
 
     override fun takeMelody(melody: Melody) {
-        findNavController().navigate(RecordedMelodiesFragmentDirections.actionRecordedMelodiesFragmentToPlayAndRecord(melodySavedOrFromLibrary = melody))
+        findNavController().navigate(
+            RecordedMelodiesFragmentDirections.actionRecordedMelodiesFragmentToPlayAndRecord(
+                melodySavedOrFromLibrary = melody
+            )
+        )
     }
 }

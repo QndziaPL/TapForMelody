@@ -13,11 +13,17 @@ import kotlinx.coroutines.launch
 
 class RecordedMelodiesViewModel(
     datasource: MelodyDao
-) : ViewModel()
-{
+) : ViewModel() {
 
     private var _onBackPressed = MutableLiveData<Boolean>()
     var onBackPressed: LiveData<Boolean> = _onBackPressed
+
+    private var _isDeleteButtonReady = MutableLiveData<Boolean>()
+    var isDeleteButtonReady: LiveData<Boolean> = _isDeleteButtonReady
+
+    init {
+        _isDeleteButtonReady.value = false
+    }
 
     fun goBack() {
         _onBackPressed.value = true
@@ -46,5 +52,11 @@ class RecordedMelodiesViewModel(
             database.clear()
         }
     }
+
+    fun onSwitchClicked() {
+    _isDeleteButtonReady.value = _isDeleteButtonReady.value != true
+
+    }
+
 
 }

@@ -1,6 +1,5 @@
 package com.qndzia.tapformelody.playandrecord
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.PopupMenu
@@ -49,17 +48,13 @@ class PlayAndRecord : Fragment() {
                 if (it) {
                     viewModel.onMelodyStartedRecording()
                     recordButton.text = getString(R.string.rec_button_text)
-
                     recordButton.setBackgroundResource(R.drawable.ic_record_on)
-
                     notesPlayed.setTextColor(resources.getColor(R.color.notesPlayedColor))
-
                     playButton.visibility = View.INVISIBLE
                     saveButton.visibility = View.INVISIBLE
                     menuButton.visibility = View.INVISIBLE
                     searchButton.visibility = View.INVISIBLE
-                    buttonsAndNotesLayout.setBackgroundResource(R.color.backgroundWhileRecording)
-
+                    buttonsAndNotesLayout.setBackgroundResource(R.color.warmRedColor)
 
                 } else {
                     viewModel.onMelodyFinishedRecording()
@@ -71,7 +66,6 @@ class PlayAndRecord : Fragment() {
                     menuButton.visibility = View.VISIBLE
                     searchButton.visibility = View.VISIBLE
                     buttonsAndNotesLayout.setBackgroundResource(R.color.backgroundWhileNotRecording)
-
 
                     if (viewModel.noteListSize.value == 0) {
                         searchButton.visibility = View.INVISIBLE
@@ -219,13 +213,18 @@ class PlayAndRecord : Fragment() {
         viewModel.onStopPressed.observe(viewLifecycleOwner, Observer {
             if (it) {
                 playButton.setBackgroundResource(R.drawable.ic_play)
-            }else{
+            } else {
                 playButton.setBackgroundResource(R.drawable.ic_stop)
 
             }
         })
 
         return binding.root
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopPlayingOnNavigating()
     }
 
     override fun onResume() {
