@@ -339,6 +339,7 @@ class PlayAndRecordViewModel(
         _mySuperMelody.value = melody
         noteList.clear()
         noteList.addAll(melody.melody)
+        _noteListSize.value = noteList.size
     }
 
     fun onNavigatingToSaveFragmentFinished() {

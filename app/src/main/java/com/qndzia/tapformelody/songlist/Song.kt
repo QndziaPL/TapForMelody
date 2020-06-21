@@ -167,7 +167,24 @@ val defaultSongList = mutableListOf(
     Note.Dsharp, Note.E, Note.E, Note.H, Note.E, Note.Fsharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp,
     Note.E, Note.Dsharp, Note.E, Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.Gsharp, Note.Fsharp)),
     link = "https://www.youtube.com/watch?v=EcU0qbV70rU"
-    )
+    ),
+
+    Song("Billie Jean", "Michael Jackson",
+    Melody(melody = listOf(Note.Fsharp, Note.Csharp, Note.E, Note.Fsharp, Note.E, Note.Csharp, Note.H, Note.Csharp, Note.Fsharp, Note.Csharp, Note.E, Note.Fsharp,
+        Note.E, Note.Csharp, Note.H, Note.Csharp, Note.H, Note.Fsharp, Note.A, Note.H, Note.A, Note.Fsharp, Note.E, Note.Fsharp, Note.H, Note.Fsharp, Note.A, Note.H,
+        Note.A, Note.Fsharp, Note.E, Note.Fsharp, Note.Fsharp, Note.Csharp, Note.E, Note.Fsharp, Note.E, Note.Csharp, Note.H, Note.Csharp,Note.Fsharp, Note.Csharp,
+        Note.E, Note.Fsharp, Note.E, Note.Csharp, Note.H, Note.Csharp    )),
+    link = "https://www.youtube.com/watch?v=Zi_XLOBDo_Y"
+    ),
+
+    Song("Uptown Girl", "Billy Joel",
+    Melody(melody = listOf(Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.E, Note.Dsharp, Note.Csharp, Note.H, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp,
+    Note.Fsharp, Note.E, Note.E, Note.E, Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.E, Note.Dsharp, Note.Csharp, Note.Csharp, Note.H, Note.Gsharp, Note.H,
+    Note.A, Note.Gsharp, Note.A, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.E, Note.E, Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.E, Note.Dsharp, Note.Csharp,
+    Note.Csharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.A, Note.H, Note.G, Note.G, Note.H, Note.D, Note.Fsharp, Note.E, Note.A, Note.G, Note.Fsharp, Note.E,
+    Note.G, Note.Fsharp, Note.E, Note.D, Note.Csharp, Note.H, Note.G, Note.G, Note.H, Note.D, Note.Fsharp, Note.E, Note.A, Note.G, Note.Fsharp, Note.E,
+    Note.G, Note.Fsharp, Note.E, Note.Dsharp, Note.H)),
+    link = "https://www.youtube.com/watch?v=hCuMWrfXG4E")
 
 
 )

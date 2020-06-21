@@ -11,8 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.qndzia.tapformelody.R
+import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentPlayAndRecordBinding
+import com.qndzia.tapformelody.notes.Note
 import com.qndzia.tapformelody.songlist.SongList
 import com.qndzia.tapformelody.songlist.defaultSongList
 import kotlinx.android.synthetic.main.fragment_play_and_record.*
@@ -72,6 +74,9 @@ class PlayAndRecord : Fragment() {
                         searchButton.visibility = View.INVISIBLE
 
                     }
+//                    else if (viewModel.mySuperMelody.value != Melody(melody = listOf())){
+//                        searchButton.visibility = View.VISIBLE
+//                    }
 
 
                 }
