@@ -8,7 +8,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Note(
     val noteName: String, val sound: Int, val id: Int
-//                , val soundPool: Int
 ) : Parcelable {
 
     companion object {
@@ -34,6 +33,5 @@ data class Note(
     fun toStringFromList(): String {
         return noteName
     }
-
 
 }

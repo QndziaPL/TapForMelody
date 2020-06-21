@@ -11,19 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.qndzia.tapformelody.R
-import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentPlayAndRecordBinding
-import com.qndzia.tapformelody.notes.Note
 import com.qndzia.tapformelody.songlist.SongList
 import com.qndzia.tapformelody.songlist.defaultSongList
 import kotlinx.android.synthetic.main.fragment_play_and_record.*
 
-
 private lateinit var viewModel: PlayAndRecordViewModel
 
 class PlayAndRecord : Fragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +44,6 @@ class PlayAndRecord : Fragment() {
 
         binding.viewModel = viewModel
 
-
-
         viewModel.isRecording.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
@@ -61,7 +55,6 @@ class PlayAndRecord : Fragment() {
                     menuButton.visibility = View.INVISIBLE
                     searchButton.visibility = View.INVISIBLE
 
-
                 } else {
                     viewModel.onMelodyFinishedRecording()
                     recordButton.text = ""
@@ -70,15 +63,10 @@ class PlayAndRecord : Fragment() {
                     saveButton.visibility = View.VISIBLE
                     menuButton.visibility = View.VISIBLE
                     searchButton.visibility = View.VISIBLE
+
                     if (viewModel.noteListSize.value == 0) {
                         searchButton.visibility = View.INVISIBLE
-
                     }
-//                    else if (viewModel.mySuperMelody.value != Melody(melody = listOf())){
-//                        searchButton.visibility = View.VISIBLE
-//                    }
-
-
                 }
             })
 
@@ -96,11 +84,8 @@ class PlayAndRecord : Fragment() {
                     saveButton.isClickable = true
                     recordButton.isClickable = true
                     searchButton.isClickable = true
-
                 }
             })
-
-
 
         viewModel.myMelody.observe(viewLifecycleOwner,
             Observer { notesPlayed.text = viewModel.myMelody.value })
@@ -115,20 +100,16 @@ class PlayAndRecord : Fragment() {
                     ).show()
                 } else if (it == 0) {
                     searchButton.visibility = View.INVISIBLE
-
                 } else {
                     if (viewModel.isRecording.value == false) {
                         searchButton.visibility = View.VISIBLE
-
                     }
                 }
-
             })
 
         viewModel.navigateToSaveFragment.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
-
                     findNavController().navigate(
                         PlayAndRecordDirections.actionPlayAndRecordToSaveFragment(
                             viewModel.myMelody.value!!,
@@ -136,7 +117,6 @@ class PlayAndRecord : Fragment() {
                         )
                     )
                     viewModel.onNavigatingToSaveFragmentFinished()
-
                 }
             })
 
@@ -144,7 +124,6 @@ class PlayAndRecord : Fragment() {
         viewModel.showMenu.observe(viewLifecycleOwner,
             Observer {
                 if (it) {
-
                     val popup = PopupMenu(activity, menuButton)
                     val menuInflater: MenuInflater = popup.menuInflater
                     menuInflater.inflate(R.menu.main_menu, popup.menu)
@@ -168,11 +147,9 @@ class PlayAndRecord : Fragment() {
                         }
                         true
                     }
-
                     popup.setOnDismissListener {
                         viewModel.turnOffMenuNavigation()
                     }
-
                 }
             })
 
@@ -192,7 +169,6 @@ class PlayAndRecord : Fragment() {
                     keyAsharpLabel.visibility = View.VISIBLE
                     keyHLabel.visibility = View.VISIBLE
                     keyC2Label.visibility = View.VISIBLE
-
                 } else {
                     keyCLabel.visibility = View.GONE
                     keyCsharpLabel.visibility = View.GONE
@@ -207,24 +183,31 @@ class PlayAndRecord : Fragment() {
                     keyAsharpLabel.visibility = View.GONE
                     keyHLabel.visibility = View.GONE
                     keyC2Label.visibility = View.GONE
-
                 }
             })
 
         viewModel.showSnackbarWithMatchingSongs.observe(viewLifecycleOwner, Observer {
-            if (it){
-                Snackbar.make(requireView(), "It's a match! You played something famous!", Snackbar.LENGTH_LONG)
+            if (it) {
+                Snackbar.make(
+                    requireView(),
+                    "It's a match! You played something famous!",
+                    Snackbar.LENGTH_LONG
+                )
                     .setAction("let's check this out") {
-                        val list = viewModel.matchSongs(viewModel.mySuperMelody.value, defaultSongList)
+                        val list =
+                            viewModel.matchSongs(viewModel.mySuperMelody.value, defaultSongList)
                         val songList = SongList(list)
 
-                        findNavController().navigate(PlayAndRecordDirections.actionPlayAndRecordToMatchedListFragment(songList))
+                        findNavController().navigate(
+                            PlayAndRecordDirections.actionPlayAndRecordToMatchedListFragment(
+                                songList
+                            )
+                        )
                     }
                     .show()
                 viewModel.stopShowingSearchSnackbar()
             }
         })
-
 
         return binding.root
     }

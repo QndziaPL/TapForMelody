@@ -17,25 +17,20 @@ data class Melody(
     var title: String = "title",
 
     @ColumnInfo(name = "time_of_record")
-    var timeOfRecord: Long = System.currentTimeMillis()
+    var timeOfRecord: Long = System.currentTimeMillis(),
 
-    ,
-//    @TypeConverters(NoteListConverter::class)
     @ColumnInfo(name = "melody")
     var melody: List<Note>
+
 ) : Parcelable {
     override fun toString(): String {
-
-//        return "${melody.forEach { it.noteName + " "}}"
         return "Melody(melodyId=$melodyId, title='$title', timeOfRecord=$timeOfRecord, melody=$melody)"
     }
-
-
 }
 
 fun melodyToString(melody: Melody): String {
     var str = ""
-    melody.melody.forEach { str += it.noteName + " - "}
+    melody.melody.forEach { str += it.noteName + " - " }
     return str
 }
 

@@ -17,7 +17,6 @@ class ShowingNotesDialogFragment(val melody: Melody) : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout to use as dialog or embedded fragment
         return inflater.inflate(R.layout.dialog_showing_notes, container, false)
     }
 
@@ -31,16 +30,13 @@ class ShowingNotesDialogFragment(val melody: Melody) : DialogFragment() {
         }
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         songNotesTextView.text = melodyToString(melody)
-
         view.setOnClickListener {
             dialog!!.dismiss()
         }
-
     }
 
 }

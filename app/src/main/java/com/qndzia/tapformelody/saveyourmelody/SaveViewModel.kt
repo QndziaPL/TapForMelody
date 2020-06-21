@@ -13,7 +13,6 @@ class SaveViewModel(
     dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
 
-
     val database = dataSource
 
     private var viewModelJob = Job()
@@ -41,7 +40,6 @@ class SaveViewModel(
 
         }
     }
-
 
     fun assignMelodyValues(title: String) {
         val melodyToSave = _melody.value

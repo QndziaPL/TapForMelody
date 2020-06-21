@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentSaveBinding
 import kotlinx.android.synthetic.main.fragment_save.*
-
 
 private lateinit var viewModel: SaveViewModel
 
@@ -45,24 +43,13 @@ class SaveFragment : Fragment() {
 
         viewModel.onSavePressed.observe(viewLifecycleOwner, Observer {
             if (it) {
-
                 val newTitle = if (recMelodyTitle.text.toString() == "") "yourMelody" else recMelodyTitle.text.toString()
                 viewModel.assignMelodyValues(newTitle)
-
                 findNavController().navigate(SaveFragmentDirections.actionSaveFragmentToPlayAndRecord())
                 viewModel.doneSaving()
-
             }
         })
 
-
         return binding.root
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        recMelodyTitle.requestFocus()
-//    }
-
 }

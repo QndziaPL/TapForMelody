@@ -15,10 +15,9 @@ import com.qndzia.tapformelody.databinding.FragmentMatchedListBinding
 import com.qndzia.tapformelody.recordedmelodies.ShowMelodyNotesDialogInterface
 import com.qndzia.tapformelody.recordedmelodies.TakeMelodyToMainScreen
 
-
 private lateinit var viewModel: MatchedListViewModel
 
-class MatchedListFragment : Fragment(), TakeMelodyToMainScreen, ShowMelodyNotesDialogInterface{
+class MatchedListFragment : Fragment(), TakeMelodyToMainScreen, ShowMelodyNotesDialogInterface {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +35,7 @@ class MatchedListFragment : Fragment(), TakeMelodyToMainScreen, ShowMelodyNotesD
             viewModelFactory
         ).get(MatchedListViewModel::class.java)
 
-       binding.viewModel = viewModel
+        binding.viewModel = viewModel
 
         val adapter = MatchedListAdapter(arguments.matchedList.songList, this, this)
 
@@ -56,7 +55,6 @@ class MatchedListFragment : Fragment(), TakeMelodyToMainScreen, ShowMelodyNotesD
 
     override fun showMelodyDialog(melody: Melody) {
         val showDialog = ShowingNotesDialogFragment(melody)
-
         showDialog.show(requireActivity().supportFragmentManager, "note_dialog")
     }
 

@@ -11,9 +11,10 @@ import com.qndzia.tapformelody.database.Melody
 import java.text.SimpleDateFormat
 
 
-class RecordedMelodiesAdapter2(var dbOperations: DatabaseOperations,
-                               var takeMelodyToMainScreen: TakeMelodyToMainScreen,
-                               private var showMelodyNotesDialogInterface: ShowMelodyNotesDialogInterface
+class RecordedMelodiesAdapter2(
+    private var dbOperations: DatabaseOperations,
+    private var takeMelodyToMainScreen: TakeMelodyToMainScreen,
+    private var showMelodyNotesDialogInterface: ShowMelodyNotesDialogInterface
 ) : RecyclerView.Adapter<ViewHolder>() {
 
     var data = listOf<Melody>()

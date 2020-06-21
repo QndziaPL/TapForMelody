@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SongListViewModel : ViewModel(){
+class SongListViewModel : ViewModel() {
 
     private var _onBackPressed = MutableLiveData<Boolean>()
     var onBackPressed: LiveData<Boolean> = _onBackPressed
@@ -16,6 +16,5 @@ class SongListViewModel : ViewModel(){
     fun onFinishedNavBack() {
         _onBackPressed.value = false
     }
-
 
 }

@@ -3,14 +3,11 @@ package com.qndzia.tapformelody.playandrecord
 import android.app.Application
 import android.media.AudioAttributes
 import android.media.SoundPool
-import android.util.Log
 import android.view.Gravity
-import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.android.material.snackbar.Snackbar
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
@@ -22,7 +19,6 @@ import kotlinx.coroutines.*
 
 
 class PlayAndRecordViewModel(
-//    private val melodySavedOrFromLibrary: Melody,
     labelsOn: Boolean,
     dataSource: MelodyDao, application: Application
 ) : AndroidViewModel(application) {
@@ -65,11 +61,9 @@ class PlayAndRecordViewModel(
     val showMenu: LiveData<Boolean> = _showMenu
 
     private var _preventSavingRecordedOnceAgain = MutableLiveData<Boolean>()
-    val preventSavingRecordedOnceAgain: LiveData<Boolean> = _preventSavingRecordedOnceAgain
 
     private var _showSnackbarWithMatchingSongs = MutableLiveData<Boolean>()
     val showSnackbarWithMatchingSongs: LiveData<Boolean> = _showSnackbarWithMatchingSongs
-
 
     private var soundC: Int
     private var soundCsharp: Int
@@ -238,16 +232,13 @@ class PlayAndRecordViewModel(
     }
 
     fun onMelodyFinishedRecording() {
-        //assigns played notes to your Melody object
         _mySuperMelody.value = Melody(melody = noteList)
 
     }
 
     fun onMelodyStartedRecording() {
-        //clear previous record
         _mySuperMelody.value = Melody(melody = listOf())
     }
-
 
     fun onPlayPressed() {
         if (noteList.isNotEmpty()) {
@@ -269,7 +260,6 @@ class PlayAndRecordViewModel(
         }
     }
 
-
     fun stopShowingSearchSnackbar() {
         _showSnackbarWithMatchingSongs.value = false
     }
@@ -279,44 +269,32 @@ class PlayAndRecordViewModel(
         if (osp.isNotEmpty()) {
             _showSnackbarWithMatchingSongs.value = true
 
-        }else{
-            Toast.makeText(getApplication(), "sorry, can't recognize your melody :(", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(
+                getApplication(),
+                "sorry, can't recognize your melody :(",
+                Toast.LENGTH_LONG
+            ).show()
         }
-
-
-//        Toast.makeText(
-//            getApplication(), "Your melody matches ${osp.size} songs.\n" +
-//                    "List: $osp", Toast.LENGTH_LONG
-//        ).show()
-
     }
 
     fun onMenuPressed() {
         _showMenu.value = true
-        Log.d("showmenu", "onMenuPressed: ${showMenu.value}")
-
     }
 
     fun turnOffMenuNavigation() {
         _showMenu.value = false
-        Log.d("showmenu", "turnOffMenuNavigation: ${showMenu.value}")
-
     }
 
     fun labelsOnOff() {
         _labelsOnLiveData.value = _labelsOnLiveData.value != true
     }
 
-
     fun onSavePressed() {
-
         if (_preventSavingRecordedOnceAgain.value == false) {
 
             if (noteList.isNotEmpty() && isRecording.value == false) {
-
                 _navigateToSaveFragment.value = true
-
-
             } else if (isRecording.value == true) {
                 Toast.makeText(getApplication(), "Recording still ON", Toast.LENGTH_SHORT).show()
             } else {
@@ -328,8 +306,6 @@ class PlayAndRecordViewModel(
                         "Record something new :)", Toast.LENGTH_LONG
             ).show()
         }
-
-
     }
 
     fun loadRecordedMelody(melody: Melody, recOrLib: String) {
@@ -347,18 +323,14 @@ class PlayAndRecordViewModel(
     }
 
     private fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
-
         var yourStringMelody = ""
         yourMelody?.melody?.forEach {
             yourStringMelody += it.toStringFromList()
         }
-
         var libraryStringMelody = ""
         libraryMelody.melody.forEach {
             libraryStringMelody += it.toStringFromList()
         }
-
-        Log.d("toStringMatchingResults", "your: $yourStringMelody libr: $libraryStringMelody")
         return libraryStringMelody.contains(yourStringMelody)
     }
 
@@ -366,13 +338,10 @@ class PlayAndRecordViewModel(
         val matchList = mutableListOf<Song>()
         library.forEach {
             if (isSongMatched(yourMelody, it.melody)) {
-                Log.d("match", "${it.title} matches!!!")
                 matchList.add(it)
             }
-
         }
         return matchList
     }
-
 
 }

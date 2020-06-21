@@ -20,7 +20,6 @@ private lateinit var viewModel: SongListViewModel
 
 class SongListFragment : Fragment(), TakeMelodyToMainScreen , ShowMelodyNotesDialogInterface{
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
