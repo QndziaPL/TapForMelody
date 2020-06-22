@@ -5,7 +5,6 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.view.Gravity
 import android.widget.Toast
-import androidx.core.util.toAndroidPair
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -189,16 +188,19 @@ class PlayAndRecordViewModel(
     }
 
     private fun melodyIntervalIndexes(melody: Melody): String {
-        var justmelody = melody.melody
+        val justmelody = melody.melody
         var mii = ""
         var index = 0
         for (note in justmelody) {
             if (index == justmelody.size - 1) break
+
             var note1 = justmelody[index]
             if (note1 == Note.C2) note1 = Note.C
+
             var note2 = justmelody[index + 1]
             if (note2 == Note.C2) note2 = Note.C
-            var pair = Pair(note1, note2)
+
+            val pair = Pair(note1, note2)
 
             when {
                 IntervalEnumNotes.PRYMALUBOKTAWA.set.contains(pair) -> {
@@ -388,30 +390,37 @@ class PlayAndRecordViewModel(
         _navigateToSaveFragment.value = false
     }
 
-    private fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
-        var yourStringMelody = ""
-        yourMelody?.melody?.forEach {
-            yourStringMelody += it.toStringFromList()
-        }
-        var libraryStringMelody = ""
-        libraryMelody.melody.forEach {
-            libraryStringMelody += it.toStringFromList()
-        }
-        return libraryStringMelody.contains(yourStringMelody)
-    }
 
-    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
-        val matchList = mutableListOf<Song>()
-        library.forEach {
-            if (isSongMatched(yourMelody, it.melody)) {
-                matchList.add(it)
-            }
-        }
-        return matchList
-    }
+    // probably i'll delete it forever
+    // old filtering method
+//    private fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
+//        var yourStringMelody = ""
+//        yourMelody?.melody?.forEach {
+//            yourStringMelody += it.toStringFromList()
+//        }
+//        var libraryStringMelody = ""
+//        libraryMelody.melody.forEach {
+//            libraryStringMelody += it.toStringFromList()
+//        }
+//        return libraryStringMelody.contains(yourStringMelody)
+//    }
 
-    /*
-    NEW FEATURE!!! now it filters your melody in ALL KEYS! Doesnt matter what key you started,
+    // probably i'll delete it forever
+    // old filtering method
+//    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
+//        val matchList = mutableListOf<Song>()
+//        library.forEach {
+//            if (isSongMatched(yourMelody, it.melody)) {
+//                matchList.add(it)
+//            }
+//        }
+//        return matchList
+//    }
+
+
+
+    /**
+    NEW FEATURE!!! now it filters your melody in ALL KEYS! Doesn't matter what key you started,
     only intervals matter!!!
 
      */

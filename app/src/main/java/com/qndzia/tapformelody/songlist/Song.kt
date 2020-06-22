@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.notes.Note
 import kotlinx.android.parcel.Parcelize
+import kotlin.math.E
 
 @Parcelize
 class SongList(val songList: List<Song>) : Parcelable
@@ -211,7 +212,28 @@ val defaultSongList = mutableListOf(
     Note.C, Note.C, Note.E, Note.G, Note.E, Note.F, Note.F, Note.Gsharp, Note.Csharp, Note.F, Note.G, Note.F, Note.Gsharp, Note.G, Note.C, Note.E, Note.G, Note.F,
     Note.G, Note.Gsharp, Note.C2, Note.C2, Note.Asharp, Note.Asharp, Note.Gsharp, Note.Gsharp)),
     link = "https://www.youtube.com/watch?v=ONg4SK39-Kg"
-    )
+    ),
+
+    Song("C'est La Vie", "Andrzej Zaucha",
+    Melody(melody = listOf(Note.A, Note.A, Note.G, Note.C, Note.D, Note.E, Note.F, Note.F, Note.E, Note.F, Note.C, Note.D, Note.E, Note.A, Note.A, Note.G, Note.F,
+    Note.E, Note.F, Note.G)),
+    link = "https://www.youtube.com/watch?v=o8x64wd-EU4"
+    ),
+
+    Song("Szczęśliwej Drogi Już Czas", "Ryszard Rynkowski",
+    Melody(melody = listOf(Note.G, Note.A, Note.H, Note.H, Note.H, Note.H, Note.C2, Note.H, Note.A, Note.A, Note.G, Note.A, Note.A, Note.H, Note.A, Note.G, Note.G, Note.E,
+    Note.E, Note.E, Note.G, Note.Fsharp, Note.Fsharp, Note.E, Note.Fsharp, Note.E, Note.E, Note.H, Note.H, Note.H, Note.H, Note.A, Note.G, Note.H, Note.H, Note.C2,
+    Note.H, Note.A, Note.A, Note.G, Note.A, Note.H, Note.A, Note.A, Note.A, Note.G, Note.E, Note.H, Note.A, Note.G, Note.G, Note.H, Note.C2, Note.H, Note.A, Note.A,
+    Note.G, Note.A, Note.A, Note.G, Note.A, Note.G, Note.G, Note.E)),
+    link = "https://www.youtube.com/watch?v=fX_rpjz2o5w"
+    ),
+
+    Song("Pokemon Theme", "Janusz Radek",
+    Melody(melody = listOf(Note.A, Note.A, Note.A, Note.A, Note.A, Note.G, Note.E, Note.C, Note.C, Note.A, Note.A, Note.G, Note.F, Note.G, Note.Asharp, Note.Asharp, Note.Asharp,
+    Note.Asharp, Note.A, Note.A, Note.G, Note.F, Note.A, Note.A, Note.G, Note.F, Note.A, Note.A, Note.C, Note.D, Note.C, Note.A, Note.G, Note.F, Note.D, Note.D, Note.E,
+    Note.F, Note.E, Note.D, Note.C, Note.A, Note.C2, Note.D, Note.D, Note.C, Note.A, Note.G, Note.F, Note.F, Note.G, Note.A, Note.A, Note.G, Note.F, Note.A, Note.A, Note.C2,
+    Note.D)),
+    link = "https://www.youtube.com/watch?v=NJwacipEYX8")
 
 
 )
