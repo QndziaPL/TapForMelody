@@ -5,17 +5,21 @@ import android.media.AudioAttributes
 import android.media.SoundPool
 import android.view.Gravity
 import android.widget.Toast
+import androidx.core.util.toAndroidPair
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
+import com.qndzia.tapformelody.notes.Interval
+import com.qndzia.tapformelody.notes.IntervalEnumNotes
 import com.qndzia.tapformelody.notes.Note
 import com.qndzia.tapformelody.songlist.Song
 import com.qndzia.tapformelody.songlist.defaultSongList
 
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 
 class PlayAndRecordViewModel(
@@ -183,6 +187,57 @@ class PlayAndRecordViewModel(
 
     fun c2KeyPressed() {
         keyPressed(Note.C2, soundC2)
+
+    }
+
+    fun melodyIntervalIndexes(melody: Melody): String {
+        var justmelody = melody.melody
+
+        var mii = ""
+
+        var index = 0
+
+        for (note in justmelody) {
+            if (index == justmelody.size - 1) break
+
+            var note1 = justmelody[index]
+            var note2 = justmelody[index + 1]
+            var pair = Pair(note1, note2)
+
+            when {
+                IntervalEnumNotes.PRYMALUBOKTAWA.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.PRYMALUBOKTAWA.halftoneIndex
+                }
+                IntervalEnumNotes.SEKUNDAMLUBSEPTYMAW.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.SEKUNDAMLUBSEPTYMAW.halftoneIndex
+                }
+                IntervalEnumNotes.SEKUNDAWLUBSEPTYMAM.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.SEKUNDAWLUBSEPTYMAM.halftoneIndex
+                }
+                IntervalEnumNotes.TERCJAMLUBSEKSTAW.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.TERCJAMLUBSEKSTAW.halftoneIndex
+                }
+                IntervalEnumNotes.TERCJAWLUBSEKSTAM.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.TERCJAWLUBSEKSTAM.halftoneIndex
+                }
+                IntervalEnumNotes.KWARTACZLUBKWINTACZ.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.KWARTACZLUBKWINTACZ.halftoneIndex
+                }
+                IntervalEnumNotes.TRYTON.set.contains(pair) -> {
+                    mii += IntervalEnumNotes.TRYTON.halftoneIndex
+                }
+                else -> {
+                    throw Exception("something went wrong with melodyIntervalIndexes function or in IntervalEnumNotes")
+                }
+            }
+
+
+
+            index++
+        }
+
+
+        return mii
     }
 
 
@@ -258,7 +313,7 @@ class PlayAndRecordViewModel(
             uiScope.launch {
 
                 noteList.forEach {
-                    if (_onStopPressed.value == true){
+                    if (_onStopPressed.value == true) {
                         this.cancel()
                         _isPlaying.value = false
 
