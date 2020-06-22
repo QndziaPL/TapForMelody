@@ -36,22 +36,6 @@ data class Note(
 
 }
 
-class Interval {
-    companion object {
-        val prymaLubOktawaCz = setOf(0, 12)
-        val sekundaMLubSeptymaW = setOf(1, 11)
-        val sekundaWLubSeptymaM = setOf(2, 10)
-        val tercjaMLubSekstaW = setOf(3, 9)
-        val tercjaWLubSekstaM = setOf(4, 8)
-        val kwartaCzLubKwintaCz = setOf(5, 7)
-        val tryton = setOf(6)
-
-    }
-}
-
-enum class IntervalEnum(val set: Set<Int>) {
-    PRYMALUBOKTAWA(setOf(0, 12))
-}
 
 enum class IntervalEnumNotes(
     val set: List<Pair<Note, Note>>
@@ -170,19 +154,5 @@ enum class IntervalEnumNotes(
         ),
         6
     )
-
-}
-
-class Corelation(note1: Note, note2: Note) {
-
-}
-
-
-interface Intervals {
-
-}
-
-
-data class NoteInterval(val note1: Note, val note2: Note) {
 
 }

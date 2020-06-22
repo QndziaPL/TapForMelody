@@ -12,7 +12,6 @@ import androidx.lifecycle.MutableLiveData
 import com.qndzia.tapformelody.R
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.database.MelodyDao
-import com.qndzia.tapformelody.notes.Interval
 import com.qndzia.tapformelody.notes.IntervalEnumNotes
 import com.qndzia.tapformelody.notes.Note
 import com.qndzia.tapformelody.songlist.Song
@@ -187,21 +186,18 @@ class PlayAndRecordViewModel(
 
     fun c2KeyPressed() {
         keyPressed(Note.C2, soundC2)
-
     }
 
-    fun melodyIntervalIndexes(melody: Melody): String {
+    private fun melodyIntervalIndexes(melody: Melody): String {
         var justmelody = melody.melody
-
         var mii = ""
-
         var index = 0
-
         for (note in justmelody) {
             if (index == justmelody.size - 1) break
-
             var note1 = justmelody[index]
+            if (note1 == Note.C2) note1 = Note.C
             var note2 = justmelody[index + 1]
+            if (note2 == Note.C2) note2 = Note.C
             var pair = Pair(note1, note2)
 
             when {
@@ -230,12 +226,8 @@ class PlayAndRecordViewModel(
                     throw Exception("something went wrong with melodyIntervalIndexes function or in IntervalEnumNotes")
                 }
             }
-
-
-
             index++
         }
-
 
         return mii
     }
@@ -246,7 +238,6 @@ class PlayAndRecordViewModel(
         uiScope.launch {
             soundPool.play(sound, 1F, 1F, 1, 0, 1F)
         }
-
 
         if (!blockAdding) {
 
@@ -339,7 +330,8 @@ class PlayAndRecordViewModel(
     }
 
     fun onSearchPressed() {
-        val osp = matchSongs(mySuperMelody.value, defaultSongList)
+//        val osp = matchSongs(mySuperMelody.value, defaultSongList)
+        val osp = matchSongsByIntervals(mySuperMelody.value!!, defaultSongList)
         if (osp.isNotEmpty()) {
             _showSnackbarWithMatchingSongs.value = true
 
@@ -414,6 +406,27 @@ class PlayAndRecordViewModel(
             if (isSongMatched(yourMelody, it.melody)) {
                 matchList.add(it)
             }
+        }
+        return matchList
+    }
+
+    /*
+    NEW FEATURE!!! now it filters your melody in ALL KEYS! Doesnt matter what key you started,
+    only intervals matter!!!
+
+     */
+    private fun isSongMatchedByIntervals(yourMelody: Melody?, libraryMelody: Melody) : Boolean {
+        return melodyIntervalIndexes(libraryMelody).contains(melodyIntervalIndexes(yourMelody!!))
+    }
+
+    fun matchSongsByIntervals(yourMelody: Melody, library: List<Song>) : List<Song> {
+        val matchList = mutableListOf<Song>()
+        library.forEach {
+
+            if (isSongMatchedByIntervals(libraryMelody = it.melody, yourMelody = yourMelody)) {
+                matchList.add(it)
+            }
+
         }
         return matchList
     }

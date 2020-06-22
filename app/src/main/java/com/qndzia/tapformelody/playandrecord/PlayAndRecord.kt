@@ -196,7 +196,7 @@ class PlayAndRecord : Fragment() {
                 )
                     .setAction("let's check this out") {
                         val list =
-                            viewModel.matchSongs(viewModel.mySuperMelody.value, defaultSongList)
+                            viewModel.matchSongsByIntervals(viewModel.mySuperMelody.value!!, defaultSongList)
                         val songList = SongList(list)
 
                         findNavController().navigate(
