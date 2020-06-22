@@ -14,14 +14,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@drawable/recycler_view_fragments_background"
         tools:context=".recordedmelodies.RecordedMelodiesFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/song_viewholder_background"
+            android:background="@drawable/recyclerview_fragments_headers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -42,6 +42,7 @@
                 android:id="@+id/headerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> viewModel.goBack()}"
                 android:text="@string/recorded_melodies"
                 android:textColor="@color/colorTextDark"
                 android:textSize="18sp"
@@ -67,7 +68,7 @@
                 android:id="@+id/deleteSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 android:onClick="@{() -> viewModel.onSwitchClicked()}"
                 app:layout_constraintBottom_toBottomOf="@+id/deleteAllButton"
                 app:layout_constraintEnd_toStartOf="@+id/deleteAllButton"
@@ -79,8 +80,6 @@
             android:id="@+id/recordedMelodiesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/songListRecyclerViewBackgroundColor"
-            android:paddingBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

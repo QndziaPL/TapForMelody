@@ -13,15 +13,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
+        android:id="@+id/wholeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/recycler_view_fragments_background"
         tools:context=".MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttonsAndNotesLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/backgroundWhileNotRecording"
             app:layout_constraintBottom_toTopOf="@id/keysLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,6 +108,7 @@
                     android:onClick="@{() -> viewModel.onSearchPressed()}"
                     android:paddingRight="8dp"
                     android:text="search"
+                    android:textColor="@color/backgroundWhileNotRecording"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recordButton"
                     app:layout_constraintStart_toStartOf="@+id/playButton"
@@ -119,7 +121,6 @@
             android:id="@+id/keysLayout"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:background="@color/backgroundWhileNotRecording"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

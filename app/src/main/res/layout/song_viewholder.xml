@@ -7,7 +7,7 @@
     android:layout_marginStart="4dp"
     android:layout_marginTop="4dp"
     android:layout_marginEnd="4dp"
-    android:background="@drawable/song_viewholder_background">
+    android:background="@drawable/song_viewholder_background_borderless">
 
     <TextView
         android:id="@+id/recMelodyTitle"
