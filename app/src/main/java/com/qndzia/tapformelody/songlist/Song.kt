@@ -233,7 +233,27 @@ val defaultSongList = mutableListOf(
     Note.Asharp, Note.A, Note.A, Note.G, Note.F, Note.A, Note.A, Note.G, Note.F, Note.A, Note.A, Note.C, Note.D, Note.C, Note.A, Note.G, Note.F, Note.D, Note.D, Note.E,
     Note.F, Note.E, Note.D, Note.C, Note.A, Note.C2, Note.D, Note.D, Note.C, Note.A, Note.G, Note.F, Note.F, Note.G, Note.A, Note.A, Note.G, Note.F, Note.A, Note.A, Note.C2,
     Note.D)),
-    link = "https://www.youtube.com/watch?v=NJwacipEYX8")
+    link = "https://www.youtube.com/watch?v=NJwacipEYX8"
+    ),
+
+    Song("James Bond 007 Theme", "Monty Norman",
+    Melody(melody = listOf(Note.C, Note.Csharp, Note.D, Note.Csharp, Note.C, Note.Csharp, Note.D, Note.Csharp, Note.C, Note.F, Note.Gsharp, Note.F, Note.Csharp, Note.F,
+    Note.Gsharp, Note.F, Note.D, Note.F, Note.Gsharp, Note.F, Note.Csharp, Note.F, Note.Gsharp, Note.F, Note.C, Note.F, Note.Gsharp, Note.F, Note.Csharp, Note.F,
+        Note.Gsharp, Note.F, Note.D, Note.F, Note.Gsharp, Note.F, Note.Csharp, Note.F, Note.Gsharp, Note.F, Note.F, Note.Gsharp, Note.E, Note.Dsharp, Note.Gsharp, Note.H,
+    Note.C2, Note.Gsharp, Note.G, Note.C, Note.F, Note.D, Note.F, Note.Gsharp, Note.E, Note.Dsharp, Note.Gsharp, Note.H, Note.C2, Note.Gsharp, Note.G, Note.C, Note.E,
+    Note.F, Note.F, Note.F, Note.F, Note.G, Note.F, Note.G, Note.Gsharp, Note.Gsharp, Note.Gsharp, Note.G, Note.F, Note.G, Note.C2, Note.C2, Note.C, Note.C2, Note.C2,
+    Note.C, Note.C2, Note.C2, Note.C2, Note.C2, Note.C2)),
+    link = "https://www.youtube.com/watch?v=SnSJXYv5jKI"
+    ),
+
+    Song("Thriller", "Michael Jackson",
+    Melody(melody = listOf(Note.D, Note.C, Note.D, Note.F, Note.G, Note.D, Note.D, Note.D, Note.C, Note.D, Note.F, Note.G, Note.D, Note.D, Note.C, Note.D, Note.E, Note.F,
+    Note.D, Note.C, Note.A, Note.A, Note.C, Note.D, Note.D, Note.C, Note.D, Note.C, Note.D, Note.F, Note.D, Note.C, Note.A, Note.D, Note.F, Note.A, Note.G, Note.F, Note.D,
+    Note.G, Note.G, Note.G, Note.F, Note.F, Note.E, Note.E, Note.D, Note.D, Note.E, Note.F, Note.D, Note.D, Note.F, Note.A, Note.G, Note.F, Note.D,
+        Note.G, Note.G, Note.G, Note.F, Note.F, Note.E, Note.E, Note.D, Note.D, Note.E, Note.F, Note.F, Note.G, Note.F, Note.A, Note.F, Note.G, Note.A, Note.C2, Note.A,
+    Note.D, Note.C, Note.C2, Note.H, Note.A, Note.F, Note.D, Note.C, Note.D)),
+    link = "https://www.youtube.com/watch?v=ZEHsIcsjtdI"
+    )
 
 
 )

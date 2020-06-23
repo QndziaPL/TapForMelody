@@ -17,17 +17,20 @@
             android:defaultValue="true" />
         <action
             android:id="@+id/action_playAndRecord_to_songListFragment"
-            app:destination="@id/songListFragment" />
+            app:destination="@id/songListFragment"
+            app:popUpTo="@id/playAndRecord" />
         <argument
             android:name="melodyTitle"
             app:argType="string"
             android:defaultValue="title" />
         <action
             android:id="@+id/action_playAndRecord_to_saveFragment"
-            app:destination="@id/saveFragment" />
+            app:destination="@id/saveFragment"
+            app:popUpTo="@id/playAndRecord" />
         <action
             android:id="@+id/action_playAndRecord_to_recordedMelodiesFragment"
-            app:destination="@id/recordedMelodiesFragment" />
+            app:destination="@id/recordedMelodiesFragment"
+            app:popUpTo="@id/playAndRecord" />
         <argument
             android:name="melodySavedOrFromLibrary"
             app:argType="com.qndzia.tapformelody.database.Melody"
@@ -39,7 +42,8 @@
             android:defaultValue="false" />
         <action
             android:id="@+id/action_playAndRecord_to_matchedListFragment"
-            app:destination="@id/matchedListFragment" />
+            app:destination="@id/matchedListFragment"
+            app:popUpTo="@id/playAndRecord" />
     </fragment>
     <fragment
         android:id="@+id/songListFragment"
@@ -48,7 +52,8 @@
         tools:layout="@layout/fragment_song_list" >
         <action
             android:id="@+id/action_songListFragment_to_playAndRecord"
-            app:destination="@id/playAndRecord" >
+            app:destination="@id/playAndRecord"
+            app:popUpTo="@id/songListFragment">
             <argument
                 android:name="blockSave"
                 android:defaultValue="true" />
@@ -67,7 +72,9 @@
             app:argType="com.qndzia.tapformelody.database.Melody" />
         <action
             android:id="@+id/action_saveFragment_to_playAndRecord"
-            app:destination="@id/playAndRecord" >
+            app:destination="@id/playAndRecord"
+            app:popUpTo="@id/saveFragment"
+            app:popUpToInclusive="true">
             <argument
                 android:name="blockSave"
                 android:defaultValue="true" />
@@ -81,15 +88,18 @@
         tools:layout="@layout/fragment_recorded_melodies">
         <action
             android:id="@+id/action_recordedMelodiesFragment_to_playAndRecord"
-            app:destination="@id/playAndRecord" />
+            app:destination="@id/playAndRecord"
+            app:popUpTo="@id/recordedMelodiesFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchedListFragment"
         android:name="com.qndzia.tapformelody.matchedlist.MatchedListFragment"
-        android:label="MatchedListFragment" >
+        android:label="MatchedListFragment"
+        tools:layout="@layout/fragment_matched_list">
         <action
             android:id="@+id/action_matchedListFragment_to_playAndRecord"
-            app:destination="@id/playAndRecord" />
+            app:destination="@id/playAndRecord"
+            app:popUpTo="@id/matchedListFragment" />
         <argument
             android:name="matchedList"
             app:argType="com.qndzia.tapformelody.songlist.SongList" />
