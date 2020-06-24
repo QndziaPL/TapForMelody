@@ -108,7 +108,7 @@
                     android:onClick="@{() -> viewModel.onSearchPressed()}"
                     android:paddingRight="8dp"
                     android:text="search"
-                    android:textColor="@color/backgroundWhileNotRecording"
+                    android:textColor="@color/colorTextDark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/recordButton"
                     app:layout_constraintStart_toStartOf="@+id/playButton"
@@ -452,13 +452,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/buttonLabelsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

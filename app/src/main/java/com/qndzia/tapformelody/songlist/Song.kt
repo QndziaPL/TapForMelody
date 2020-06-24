@@ -160,8 +160,7 @@ val defaultSongList = mutableListOf(
 
     Song("My Heart Will Go On", "Celine Dion",
     Melody(melody = listOf(Note.E, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E, Note.Fsharp, Note.H, Note.A, Note.Gsharp, Note.E, Note.Csharp, Note.A,
-    Note.H
-    , Note.E, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E, Note.Fsharp, Note.H, Note.Gsharp, Note.H, Note.Csharp, Note.H, Note.Fsharp,
+    Note.H, Note.E, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E, Note.Fsharp, Note.H, Note.Gsharp, Note.H, Note.Csharp, Note.H, Note.Fsharp,
     Note.E, Note.E, Note.E, Note.E, Note.Dsharp, Note.E, Note.E, Note.Dsharp, Note.E, Note.Fsharp, Note.Gsharp, Note.Fsharp, Note.E, Note.E, Note.E, Note.E,
     Note.Dsharp, Note.E, Note.E, Note.H, Note.E, Note.Fsharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp, Note.E,
     Note.Dsharp, Note.E, Note.E, Note.H, Note.E, Note.Fsharp, Note.H, Note.H, Note.A, Note.Gsharp, Note.Fsharp, Note.Gsharp, Note.A, Note.Gsharp, Note.Fsharp,
