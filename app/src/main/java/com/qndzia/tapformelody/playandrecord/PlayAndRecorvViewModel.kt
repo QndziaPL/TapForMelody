@@ -391,34 +391,6 @@ class PlayAndRecordViewModel(
     }
 
 
-    // probably i'll delete it forever
-    // old filtering method
-//    private fun isSongMatched(yourMelody: Melody?, libraryMelody: Melody): Boolean {
-//        var yourStringMelody = ""
-//        yourMelody?.melody?.forEach {
-//            yourStringMelody += it.toStringFromList()
-//        }
-//        var libraryStringMelody = ""
-//        libraryMelody.melody.forEach {
-//            libraryStringMelody += it.toStringFromList()
-//        }
-//        return libraryStringMelody.contains(yourStringMelody)
-//    }
-
-    // probably i'll delete it forever
-    // old filtering method
-//    fun matchSongs(yourMelody: Melody?, library: List<Song>): List<Song> {
-//        val matchList = mutableListOf<Song>()
-//        library.forEach {
-//            if (isSongMatched(yourMelody, it.melody)) {
-//                matchList.add(it)
-//            }
-//        }
-//        return matchList
-//    }
-
-
-
     /**
     NEW FEATURE!!! now it filters your melody in ALL KEYS! Doesn't matter what key you started,
     only intervals matter!!!

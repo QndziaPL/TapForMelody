@@ -13,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import com.qndzia.tapformelody.database.MelodyDatabase
 import com.qndzia.tapformelody.databinding.FragmentSaveBinding
 import kotlinx.android.synthetic.main.fragment_save.*
-import kotlinx.android.synthetic.main.save_melody_dialog.*
 
 private lateinit var viewModel: SaveViewModel
 

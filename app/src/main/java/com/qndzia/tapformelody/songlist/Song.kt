@@ -4,7 +4,6 @@ import android.os.Parcelable
 import com.qndzia.tapformelody.database.Melody
 import com.qndzia.tapformelody.notes.Note
 import kotlinx.android.parcel.Parcelize
-import kotlin.math.E
 
 @Parcelize
 class SongList(val songList: List<Song>) : Parcelable

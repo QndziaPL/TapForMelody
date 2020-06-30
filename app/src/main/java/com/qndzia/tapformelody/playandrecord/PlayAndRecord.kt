@@ -55,7 +55,6 @@ class PlayAndRecord : Fragment() {
                     menuButton.visibility = View.INVISIBLE
                     searchButton.visibility = View.INVISIBLE
                     wholeLayout.setBackgroundResource(R.drawable.main_screen_during_record_background)
-//                    wholeLayout.setBackgroundResource(R.color.warmRedColor)
 
                 } else {
                     viewModel.onMelodyFinishedRecording()
@@ -67,7 +66,6 @@ class PlayAndRecord : Fragment() {
                     menuButton.visibility = View.VISIBLE
                     searchButton.visibility = View.VISIBLE
                     wholeLayout.setBackgroundResource(R.drawable.main_screen_background)
-//                    wholeLayout.setBackgroundResource(R.color.backgroundWhileNotRecording)
 
                     if (viewModel.noteListSize.value == 0) {
                         searchButton.visibility = View.INVISIBLE
